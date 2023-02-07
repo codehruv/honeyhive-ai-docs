@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "HoneyHive AI Docs",
   "logo": {
     "dark": "/logo/dark.png",
     "light": "/logo/light.png"
@@ -19,7 +19,7 @@
   ],
   "topbarCtaButton": {
     "name": "Get Started",
-    "url": "https://github.com/mintlify/starter"
+    "url": "https://www.honeyhive.ai"
   },
   "anchors": [
     {
@@ -28,14 +28,14 @@
       "url": "api-reference"
     },
     {
-      "name": "Changelog",
-      "icon": "list",
-      "url": "https://mintlify.com"
-    },
-    {
       "name": "Community",
       "icon": "discord",
       "url": "https://mintlify.com/community"
+    },
+    {
+      "name": "About Us",
+      "icon": "circle-info",
+      "url": "https://honeyhiveai.notion.site/HoneyHive-AI-684f42a078a34c7e8f6d96e1dd75c9cc"
     }
   ],
   "navigation": [

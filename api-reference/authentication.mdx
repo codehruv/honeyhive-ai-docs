@@ -1,22 +1,22 @@
 ---
 title: "Authentication"
-description: "Example overview page before API endpoints"
+description: "Authenticating your requests to the API"
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et eros iaculis tortor dapibus cursus. Curabitur quis sapien nec tortor dictum gravida.
+After signing up on the app, you can find your API key in the [Settings](https://app.honeyhive.ai/settings/account) page.
 
-```bash
-'Authorization': 'Token <team_token>'
-```
 
 ## API Tokens
 
-Nullam convallis mauris at nunc consectetur, ac imperdiet leo rutrum. Maecenas cursus purus a pellentesque blandit. Pellentesque vitae lacinia libero, non mollis metus.
+Please pass the API key as a header with each request as follows:
 
-Nam id ullamcorper urna, at rutrum enim. [Maecenas vulputate](/introduction) vehicula libero, vitae sodales augue pretium nec. Quisque a magna tempor, semper risus vel, fermentum nunc. Pellentesque fermentum interdum ex, eu convallis massa blandit sed. Aliquam bibendum ipsum vel laoreet auctor.
+```bash
+'Authorization': 'Token <YOUR_API_KEY>'
+```
 
-### Permissions
+In case of the Python SDK, you can pass in the api key via the `api_key` parameter.
 
-Etiam lobortis ut odio ut fermentum. Nunc odio velit, sollicitudin at consectetur id, tristique eget turpis. Aliquam at risus vitae dolor sodales venenatis. In hac habitasse platea dictumst.
-
-Aenean consequat diam eget mollis fermentum. [Quisque eu malesuada](/introduction) felis, non dignissim libero.
+```Python
+import honeyhive as hh
+hh.api_key = 'YOUR_API_KEY'
+```
