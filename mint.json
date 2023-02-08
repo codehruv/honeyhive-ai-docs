@@ -2,8 +2,8 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "HoneyHive AI Docs",
   "logo": {
-    "dark": "/logo/dark.png",
-    "light": "/logo/light.png"
+    "dark": "/logo/logo2.png",
+    "light": "/logo/logo2.png"
   },
   "favicon": "/favicon.png",
   "colors": {
@@ -14,12 +14,12 @@
   "topbarLinks": [
     {
       "name": "Documentation",
-      "url": "https://mintlify.com/docs"
+      "url": "https://docs.honeyhive.ai"
     }
   ],
   "topbarCtaButton": {
     "name": "Get Started",
-    "url": "https://www.honeyhive.ai"
+    "url": "https://app.honeyhive.ai"
   },
   "anchors": [
     {
