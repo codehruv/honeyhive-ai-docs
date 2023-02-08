@@ -1,0 +1,48 @@
+---
+title: "Delete Dataset"
+api: "DELETE https://honeyhive.ai:5000/datasets/:name"
+description: "This endpoint deletes the dataset with the specified name."
+---
+
+### Path Parameters
+
+<ParamField path="name" type="string">
+  The name of the dataset to be deleted.
+</ParamField>
+
+### Response
+
+<ResponseField name="data" type="object">
+
+The response object
+
+<Expandable title="Toggle object">
+
+<ResponseField name="deleted" type="boolean">
+  This will be true if the dataset was successfully deleted.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl --location --request DELETE 'https://api.honeyhive.ai/datasets/<name>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Token <token>'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "deleted": true
+}
+
+```
+
+</ResponseExample>

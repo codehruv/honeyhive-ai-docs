@@ -1,0 +1,112 @@
+---
+title: "Get Datasets"
+api: "GET https://honeyhive.ai:5000/datasets"
+description: "This endpoint gets the datasets associated with a task."
+---
+
+### Body
+
+<ParamField body="dataset_id" type="string">
+  Optional parameter to fetch a particular dataset by id.
+</ParamField>
+
+<ParamField body="task" type="string">
+  Optional parameter to fetch datasets associated with a particular task.
+</ParamField>
+
+<ParamField body="prompt" type="string">
+  Optional parameter to fetch datasets associated with a particular prompt.
+</ParamField>
+
+<ParamField body="purpose" type="string">
+  Optional parameter to fetch datasets associated with a particular purpose.
+</ParamField>
+
+### Response
+
+<ResponseField name="data" type="object">
+
+The contents of the dataset list
+
+<Expandable title="Toggle object">
+
+<ResponseField name="object" type="string">
+  This is the data object associated with the dataset.
+</ResponseField>
+
+<ResponseField name="bytes" type="string">
+  This is the size of the dataset in bytes.
+</ResponseField>
+
+<ResponseField name="filename" type="string">
+  This is the filename of the dataset.
+</ResponseField>
+
+<ResponseField name="purpose" type="string">
+  This is the purpose of the dataset. Possible values are 'Training', 'Validation' and 'Test'.
+</ResponseField>
+
+<ResponseField name="description" type="string">
+  This is the description of the dataset.
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  This is the date and time when the dataset was created.
+</ResponseField>
+
+<ResponseField name="id" type="string">
+  This is the unique identifier for the dataset.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl --location --request POST 'https://api.honeyhive.ai/datasets' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Token <token>' \
+--data-raw '{
+    "task": "Email writer"
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "data": [
+    {
+      "_id": "63c83972a8b80c3a04f51a1a",
+      "name": "Email writer fine-tuning",
+      "purpose": "fine-tune",
+      "file": [
+        {
+          "input": "Generate an email on the {topic} topic with a {tone} tone",
+          "output": "\n\nSubject Line: Reimagining {Topic} for a Brighter Future\n\nDear [Recipient],\n\nI am writing today to discuss the exciting possibilities for reimagining {topic}. In this time of great change, our organizations have an opportunity to take a step forward and create a brighter future.\n\nAt [organization], we understand the importance of staying ahead of the curve. We need to be proactive and invest in the future. By reimagining {topic},"
+        },
+        {
+          "input": "Generate an email below with the given topic and tone.\n\nTopic: table tennis\nTone: sporty",
+          "output": "\n\nSubject: Let's Rally - Let's Play Table Tennis!\n\nHey everyone,\n\nWho's ready to up their game in table tennis? Whether you're a novice or an expert, competition or recreation, now is the time to get your table tennis skills up to speed.\n\nTable tennis is a great way to get active and work on your reflexes, agility, and hand-eye coordination. Plus, it's a ton of fun! So let's rally together and get this game going.\n\nIf you're interested in joining me for some friendly table tennis competition, just reply to this email and let me know. I'm always up for a challenge!\n\nSee you on the court!\n\nBest"
+        },
+        {
+          "input": "Generate an email below with the given topic and tone.\n\nTopic: random\nTone: randomy",
+          "output": "\n\nSubject: Randomness Awaits\n\nHey there!\n\nAre you ready to take a dive into the unknown? To embark on a journey of randomness and possibility? If the answer is yes, this email is for you!\n\nFrom humorous stories to unusual games, you never know what randomness will bring. Let's see what happens when you let go and just have fun--you're guaranteed to find something unique.\n\nWe're excited to experience the unknown with you. Join us and learn how to embrace randomness with creative, playful spirit.\n\nLet's get random!\n\nSincerely,\nThe Randomness Team"
+        }
+      ],
+      "bytes": 1930,
+      "description": "Few samples to fine tune over",
+      "created_at": "2023-01-18T18:24:50.191Z",
+      "task": "Email writer",
+      "prompt": "no prompt"
+    },
+    ...
+    ]
+}
+```
+
+</ResponseExample>

@@ -85,6 +85,14 @@
       ]
     },
     {
+      "group": "Datasets",
+      "pages": [
+        "api-reference/datasets/get",
+        "api-reference/datasets/post",
+        "api-reference/datasets/delete"
+      ]
+    },
+    {
       "group": "Fine Tuning",
       "pages": [
         "api-reference/fine-tuning/get",

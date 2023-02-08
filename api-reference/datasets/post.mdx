@@ -1,0 +1,106 @@
+---
+title: "Create Dataset"
+api: "POST https://honeyhive.ai:5000/datasets"
+description: "This endpoint creates a new dataset."
+---
+
+### Body
+
+<ParamField body="name" type="string">
+  The name of the dataset.
+</ParamField>
+
+<ParamField body="purpose" type="string">
+  The purpose of the dataset.
+</ParamField>
+
+<ParamField body="file" type="object">
+  The file containing the dataset.
+</ParamField>
+
+<ParamField body="task" type="string">
+  The task associated with the dataset.
+</ParamField>
+
+<ParamField body="description" type="string">
+  The description of the dataset.
+</ParamField>
+
+### Response
+
+<ResponseField name="data" type="object">
+
+The contents of the dataset
+
+<Expandable title="Toggle object">
+
+<ResponseField name="name" type="string">
+  This is the name of the dataset.
+</ResponseField>
+
+<ResponseField name="purpose" type="string">
+  This is the purpose of the dataset.
+</ResponseField>
+
+<ResponseField name="file" type="object">
+  This is the file containing the dataset.
+</ResponseField>
+
+<ResponseField name="task" type="string">
+  This is the task associated with the dataset.
+</ResponseField>
+
+<ResponseField name="description" type="string">
+  This is the description of the dataset.
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  This is the date and time when the dataset was created.
+</ResponseField>
+
+<ResponseField name="updated_at" type="string">
+  This is the date and time when the dataset was last updated.
+</ResponseField>
+
+<ResponseField name="id" type="string">
+  This is the unique identifier for the dataset.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl --location --request POST 'https://api.honeyhive.ai/datasets' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Token <token>' \
+--data-raw '{
+    "name": "",
+    "purpose": "",
+    "file": {},
+    "task": "",
+    "description": ""
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "name": "",
+    "purpose": "",
+    "file": {},
+    "task": "",
+    "description": "",
+    "created_at": "",
+    "updated_at": "",
+    "id": ""
+}
+
+```
+
+</ResponseExample>
