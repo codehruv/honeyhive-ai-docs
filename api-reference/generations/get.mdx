@@ -1,0 +1,89 @@
+---
+title: "Get Generations"
+api: "GET https://honeyhive.ai:5000/generations"
+description: "This endpoint gets the generations for a given task, prompt and model."
+---
+
+### Body
+
+<ParamField body="task" type="string">
+  The task ID for which to get generations.
+</ParamField>
+
+<ParamField body="prompt" type="string">
+  The prompt ID for which to get generations.
+</ParamField>
+
+<ParamField body="model" type="string">
+  The model ID for which to get generations.
+</ParamField>
+
+<ParamField body="limit" type="integer">
+  The maximum number of generations to return.
+</ParamField>
+
+### Response
+
+<ResponseField name="data" type="array">
+
+The contents of the generation list
+
+<Expandable title="Toggle object">
+
+<ResponseField name="task" type="string">
+  This is the task ID of the generation.
+</ResponseField>
+
+<ResponseField name="prompt" type="string">
+  This is the prompt ID of the generation.
+</ResponseField>
+
+<ResponseField name="model" type="string">
+  This is the model ID of the generation.
+</ResponseField>
+
+<ResponseField name="generated_at" type="string">
+  This is the date and time when the generation was created.
+</ResponseField>
+
+<ResponseField name="id" type="string">
+  This is the unique identifier for the generation.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl --location --request GET 'https://api.honeyhive.ai/generations' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Token <token>' \
+--data-raw '{
+    "task": "<task_id>",
+    "prompt": "<prompt_id>",
+    "model": "<model_id>",
+    "limit": 10
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+[
+  {
+    "task": "<task_id>",
+    "prompt": "<prompt_id>",
+    "model": "<model_id>",
+    "generated_at": "<date_time>",
+    "id": "<generation_id>"
+  },
+  ...
+]
+
+```
+
+</ResponseExample>

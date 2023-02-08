@@ -1,0 +1,106 @@
+---
+title: "Ingest Generations in Bulk"
+api: "POST https://honeyhive.ai:5000/generations/bulk"
+description: "This endpoint ingests generations in bulk."
+---
+
+### Body
+
+<ParamField body="generations" type="array">
+  An array of generations to be ingested.
+</ParamField>
+
+### Response
+
+<ResponseField name="data" type="object">
+
+The contents of the generations
+
+<Expandable title="Toggle object">
+
+<ResponseField name="task_id" type="string">
+  This is the unique identifier of the task.
+</ResponseField>
+
+<ResponseField name="prompt" type="string">
+  This is the prompt used to generate the text.
+</ResponseField>
+
+<ResponseField name="model" type="string">
+  This is the model used to generate the text.
+</ResponseField>
+
+<ResponseField name="text" type="string">
+  This is the generated text.
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  This is the date and time when the generation was created.
+</ResponseField>
+
+<ResponseField name="updated_at" type="string">
+  This is the date and time when the generation was last updated.
+</ResponseField>
+
+<ResponseField name="id" type="string">
+  This is the unique identifier for the generation.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl --location --request POST 'https://api.honeyhive.ai/generations/bulk' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Token <token>' \
+--data-raw '{
+    "generations": [
+        {
+            "task_id": "task_1",
+            "prompt": "This is a prompt",
+            "model": "model_1",
+            "text": "This is generated text"
+        },
+        {
+            "task_id": "task_2",
+            "prompt": "This is another prompt",
+            "model": "model_2",
+            "text": "This is another generated text"
+        }
+    ]
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "data": [
+        {
+            "task_id": "task_1",
+            "prompt": "This is a prompt",
+            "model": "model_1",
+            "text": "This is generated text",
+            "created_at": "2020-08-17T19:12:43.000Z",
+            "updated_at": "2020-08-17T19:12:43.000Z",
+            "id": "5f3a2d6f8f9d9e0017d9f8d7"
+        },
+        {
+            "task_id": "task_2",
+            "prompt": "This is another prompt",
+            "model": "model_2",
+            "text": "This is another generated text",
+            "created_at": "2020-08-17T19:12:43.000Z",
+            "updated_at": "2020-08-17T19:12:43.000Z",
+            "id": "5f3a2d6f8f9d9e0017d9f8d8"
+        }
+    ]
+}
+```
+
+</ResponseExample>

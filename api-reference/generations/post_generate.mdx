@@ -1,0 +1,173 @@
+---
+title: "Generation for Model and Prompt"
+api: "POST https://honeyhive.ai:5000/generate"
+description: "This endpoint generates text using a given model and prompt."
+---
+
+### Body
+
+<ParamField body="model" type="string">
+  The model to use for generating text.
+</ParamField>
+
+<ParamField body="prompt" type="string">
+  The prompt to use for generating text.
+</ParamField>
+
+<ParamField body="hyperparameters" type="object">
+  The hyperparameters to use for generating text.
+
+<Expandable title="Toggle object">
+
+<ParamField body="max_tokens" type="integer">
+  The maximum number of tokens to generate.
+</ParamField>
+
+<ParamField body="temperature" type="float">
+  The temperature to use for generating text.
+</ParamField>
+
+<ParamField body="top_p" type="float">
+  The top_p value to use for generating text.
+</ParamField>
+
+<ParamField body="frequency_penalty" type="float">
+  The frequency penalty to use for generating text.
+</ParamField>
+
+<ParamField body="presence_penalty" type="float">
+  The presence penalty to use for generating text.
+</ParamField>
+
+<ParamField body="stop" type="boolean">
+  Whether to stop generating text after the max_tokens have been generated.
+</ParamField>
+
+<ParamField body="stream" type="boolean">
+  Whether to stream the generated text.
+</ParamField>
+
+</Expandable>
+
+</ParamField>
+
+<ParamField body="task" type="string">
+  The task associated with the generation.
+</ParamField>
+
+<ParamField body="version" type="string">
+  The version of the model used for generation.
+</ParamField>
+
+<ParamField body="source" type="string">
+  The source of the generation.
+</ParamField>
+
+### Response
+
+<ResponseField name="data" type="object">
+
+The contents of the generated text
+
+<Expandable title="Toggle object">
+
+<ResponseField name="timestamp" type="string">
+  This is the date and time when the text was generated.
+</ResponseField>
+
+<ResponseField name="version" type="string">
+  This is the version of the model used for generating text.
+</ResponseField>
+
+<ResponseField name="prompt" type="string">
+  This is the prompt used for generating text.
+</ResponseField>
+
+<ResponseField name="model" type="string">
+  This is the model used for generating text.
+</ResponseField>
+
+<ResponseField name="hyperparameters" type="object">
+  This is the list of hyperparameters used for generating text.
+</ResponseField>
+
+<ResponseField name="task" type="string">
+  This is the task associated with the generation.
+</ResponseField>
+
+<ResponseField name="generation" type="string">
+  This is the generated text.
+</ResponseField>
+
+<ResponseField name="total_tokens" type="integer">
+  This is the total number of tokens generated.
+</ResponseField>
+
+<ResponseField name="completion_tokens" type="integer">
+  This is the number of tokens used for generating the completion.
+</ResponseField>
+
+<ResponseField name="cost" type="float">
+    This is the cost of generating the text.
+</ResponseField>
+
+<ResponseField name="source" type="string">
+  This is the source of the generation.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<ParamField body="error" type="string">
+  The error message.
+</ParamField>
+
+### Example
+
+```bash Example Request
+curl --location --request POST 'https://api.honeyhive.ai/generations' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Token <token>' \
+--data-raw '{
+    "model": "gpt2",
+    "prompt": "The quick brown fox jumps over the lazy dog.",
+    "hyperparameters": {
+        "max_tokens": 10,
+        "temperature": 0.9,
+        "top_p": 0.9,
+        "frequency_penalty": 0.0,
+        "presence_penalty": 0.0,
+        "stop": "###"
+    },
+    "task": "text-generation",
+    "version": "v1.0",
+    "source": "api"
+}'
+```
+
+```bash Example Response
+{
+    "data": {
+        "timestamp": "2021-03-01 15:00:00",
+        "version": "v1.0",
+        "prompt": "The quick brown fox jumps over the lazy dog.",
+        "model": "gpt2",
+        "hyperparameters": {
+            "max_tokens": 10,
+            "temperature": 0.9,
+            "top_p": 0.9,
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "stop": "###"
+        },
+        "task": "text-generation",
+        "generation": "The quick brown fox jumps over the lazy dog. ",
+        "total_tokens": 10,
+        "completion_tokens": 10,
+        "cost": 0.0001,
+        "source": "api"
+    },
+    "error": null
+}
+```
