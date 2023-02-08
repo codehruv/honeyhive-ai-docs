@@ -1,0 +1,70 @@
+---
+title: "Post Metrics"
+api: "POST https://honeyhive.ai:5000/metrics"
+description: "This endpoint adds a metric to the task."
+---
+
+### Body
+
+<ParamField body="task" type="string">
+  Optional parameter to specify the task name.
+</ParamField>
+
+<ParamField body="name" type="string">
+  Name of the metric.
+</ParamField>
+
+<ParamField body="code_snippet" type="string">
+  Code snippet of the metric.
+</ParamField>
+
+### Response
+
+<ResponseField name="data" type="object">
+
+The contents of the metric
+
+<Expandable title="Toggle object">
+
+<ResponseField name="task_name" type="string">
+  This is the name of the task.
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  This is the name of the metric.
+</ResponseField>
+
+<ResponseField name="code_snippet" type="string">
+  This is the code snippet of the metric.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl --location --request POST 'https://api.honeyhive.ai/metrics' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Token <token>' \
+--data-raw '{
+    "task": "",
+    "name": "",
+    "code_snippet": ""
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "acknowledged": true,
+    "inserted_count": 1
+}
+
+```
+
+</ResponseExample>

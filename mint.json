@@ -93,6 +93,13 @@
       ]
     },
     {
+      "group": "Metrics",
+      "pages": [
+        "api-reference/metrics/get",
+        "api-reference/metrics/post"
+      ]
+    },
+    {
       "group": "Fine Tuning",
       "pages": [
         "api-reference/fine-tuning/get",

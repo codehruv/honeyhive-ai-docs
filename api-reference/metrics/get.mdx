@@ -1,0 +1,73 @@
+---
+title: "Get Metrics"
+api: "GET https://honeyhive.ai:5000/metrics"
+description: "This endpoint gets the metrics associated with a particular task."
+---
+
+### Body
+
+<ParamField body="task_name" type="string">
+  Optional parameter to fetch the metrics of a particular task.
+</ParamField>
+
+### Response
+
+<ResponseField name="data" type="array">
+
+The contents of the metrics list
+
+<Expandable title="Toggle object">
+
+<ResponseField name="task_name" type="string">
+  This is the name of the task associated with the metric.
+</ResponseField>
+
+<ResponseField name="metric_name" type="string">
+  This is the name of the metric.
+</ResponseField>
+
+<ResponseField name="metric_type" type="string">
+  This is the type of the metric. Possible values are 'accuracy', 'precision', 'recall', 'f1_score' and 'other'.
+</ResponseField>
+
+<ResponseField name="metric_value" type="string">
+  This is the value of the metric.
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  This is the date and time when the metric was created.
+</ResponseField>
+
+<ResponseField name="updated_at" type="string">
+  This is the date and time when the metric was last updated.
+</ResponseField>
+
+<ResponseField name="id" type="string">
+  This is the unique identifier for the metric.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl --location --request POST 'https://api.honeyhive.ai/metrics' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Token <token>' \
+--data-raw '{
+    "task_name": ""
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+[]
+
+```
+
+</ResponseExample>
