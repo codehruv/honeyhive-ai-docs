@@ -2,14 +2,18 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "HoneyHive AI Docs",
   "logo": {
-    "dark": "/logo/logo2.png",
-    "light": "/logo/logo2.png"
+    "dark": "/logo/dark.png",
+    "light": "/logo/light.png"
   },
-  "favicon": "/favicon.png",
+  "favicon": "/images/favicon.png",
   "colors": {
-    "primary": "#B45309",
-    "light": "#D97706",
-    "dark": "#92400E"
+    "primary": "#b45f06",
+    "light": "#b45f06",
+    "dark": "#f88707",
+    "background": {
+      "light": "#ffffff",
+      "dark": "#0f0f0f"
+    }
   },
   "topbarLinks": [
     {
@@ -19,7 +23,7 @@
   ],
   "topbarCtaButton": {
     "name": "Get Started",
-    "url": "https://app.honeyhive.ai"
+    "url": "https://www.honeyhive.ai"
   },
   "anchors": [
     {
@@ -30,7 +34,7 @@
     {
       "name": "Community",
       "icon": "discord",
-      "url": "https://mintlify.com/community"
+      "url": "https://discord.gg/vqctGpqA97"
     },
     {
       "name": "About Us",
@@ -109,6 +113,6 @@
   ],
   "footerSocials": {
     "twitter": "https://twitter.com/honeyhiveai",
-    "linkedin": "https://www.linkedin.com/company/honeyhive-ai/about/"
+    "linkedin": "https://www.linkedin.com/company/honeyhive-ai/"
   }
 }

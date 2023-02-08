@@ -1,28 +1,28 @@
 ---
 title: "Introduction"
-description: "HoneyHive AI Documentation"
+description: "The Optimization Platform for Foundation Model Applications"
 ---
 
-HoneyHive is a **model evaluation and observability** platform that's built for teams working with foundation models. We help companies **evaluate, deploy, and monitor** models in production.
+HoneyHive is a **model observability and evaluation** platform built for teams using foundation models in production. We help developers **evaluate, deploy, monitor and fine-tune** foundation models for production use-cases, allowing them to continuously improve model performance & align their models with user feedback.
 
-## Core Components
+## Key Concepts
 
 1. **Prompt Deployment** - Manage multiple prompts and models for a particular project and deploy them to production with a single click.
 
-2. **Evaluation** - Compare multiple models and prompts against your datasets and metrics to find the best performing model for your use case.
+2. **Evaluation** - Compare multiple models, prompts and hyperparameter settings against your datasets and metrics to find the best performing model-prompt configurations for your use case.
 
-3. **Data Observability** - Capture user interaction data and model predictions to understand how your model is performing in production.
+3. **Monitoring & Analytics** - Capture your model requests, model predictions and user feedback to analyze how your model is performing in production.
 
-4. **Fine-tuning** - Fine-tune your model with the data you collect from your users.
+4. **Fine-Tuning** - Fine-tune custom models using the data you collect from your users.
 
 ## Getting Started
 
 Our API and SDK are designed to be easy to use and integrate with your existing infrastructure.
 
-1. **Create an account** - Create an account and get your API key.
-2. **Create a project and prompt** - Create a project and prompt to get started.
-4. **Deploy your prompt** - Deploy your prompt from the platform.
-3. **Integrate with your app** - Integrate the deployment and feedback ingestion with your app using our SDK or API.
+1. **Create an account** - Create an account with HoneyHive and get your API key.
+2. **Create a new project and a prompt** - Create a project upon sign-up and add your first prompt to get started.
+3. **Deploy your prompt** - Deploy your prompt to production directly from the platform.
+4. **Integrate our SDK** - Replace your OpenAI requests with our **Generate API** endpoint and instrument your application using our SDK or REST API.
 
 ## Documentation
 
@@ -35,52 +35,13 @@ Our API and SDK are designed to be easy to use and integrate with your existing 
   <Card title="Concepts" icon="sliders" href="/concepts">
     Some basic concepts behind our platform.
   </Card>
-  <Card title="API documentation" icon="heading" href="https://mintlify.com/docs/settings/page">
-    Setting the title and metadata for navigation and SEO
+  <Card title="API documentation" icon="heading" href="/api-reference/authentication">
+    How to use the HoneyHive API and SDK
   </Card>
-  <Card title="Learn More" icon="ellipsis" href="/resources">
-    See more in the resources page
+  <Card title="Platform Features" icon="ellipsis" href="/features">
+    How to use the HoneyHive platform
+  </Card>
+  <Card title="Prompt Engineering Guides" icon="heading" href="/resources">
+    Prompt engineering guides for common use cases
   </Card>
 </CardGroup>
-
-## Customization Checklist
-
-Learn more about you can fully customize the starter template for your own documentation
-
-<AccordionGroup>
-  <Accordion title="Change name">Update the `name` property in `mint.json` to the name of your company or product</Accordion>
-  <Accordion title="Customize the branding">
-    Branding mostly happens in the `mint.json` file. You can learn more about all available [configuration properties](https://mintlify.com/docs/settings/global).
-
-    #### Update the logo
-
-    Update `logo` folder with the light and dark version of your logo (can be svg or png).
-
-    <Note>Make sure that the path matches the values set in `logo` of `mint.json`</Note>
-
-    #### Customize the colors
-
-    Populate the `colors` object with colors that match your brand
-
-    #### Update the favicon
-
-    Change the `favicon.png` with an image of the favicon
-
-    #### Update footer social icons
-
-    Update `footerSocials` with the right `[platform]: [url]` key-value pair
-  </Accordion>
-  <Accordion title="Update the anchors">Update the `anchors` array in `mint.json` with the links that you want to emphasize</Accordion>
-  <Accordion title="Update or remove the API Reference">
-    Either update the pages in `api-reference` or remove it entirely
-
-    <Note>If removing the API Reference, make sure to also remove it from the `anchors` and `navigation` from `mint.json`</Note>
-
-  </Accordion>
-  <Accordion title="Update the topbar navigation items">
-    Update the `topbarCtaButton` and `topbarLinks` properties in `mint.json` to the links that matter most
-
-    <Tip>The `topbarCtaButton` will receive the most number of clicks</Tip>
-
-  </Accordion>
-</AccordionGroup>
