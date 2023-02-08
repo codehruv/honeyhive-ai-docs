@@ -1,0 +1,48 @@
+---
+title: "Delete Task"
+api: "DELETE https://honeyhive.ai:5000/tasks/:name"
+description: "This endpoint deletes the task specified by the name parameter."
+---
+
+### Path Parameters
+
+<ParamField path="name" type="string">
+  The name of the task to be deleted.
+</ParamField>
+
+### Response
+
+<ResponseField name="data" type="object">
+
+The contents of the deleted task
+
+<Expandable title="Toggle object">
+
+<ResponseField name="deleted" type="boolean">
+  This is a boolean indicating whether the task was successfully deleted.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl --location --request DELETE 'https://api.honeyhive.ai/tasks/my_task' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Token <token>'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "deleted": true
+}
+
+```
+
+</ResponseExample>

@@ -52,12 +52,21 @@
       "pages": ["api-reference/authentication"]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "Task APIs",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/update",
-        "api-reference/endpoint/delete"
+        "api-reference/tasks/get",
+        "api-reference/tasks/post",
+        "api-reference/tasks/put",
+        "api-reference/tasks/delete"
+      ]
+    },
+    {
+      "group": "Prompt APIs",
+      "pages": [
+        "api-reference/prompts/get",
+        "api-reference/prompts/post",
+        "api-reference/prompts/put",
+        "api-reference/prompts/delete"
       ]
     }
   ],

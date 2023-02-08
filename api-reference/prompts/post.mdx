@@ -1,0 +1,141 @@
+---
+title: "Create Prompt"
+api: "POST https://honeyhive.ai:5000/prompts"
+description: "This endpoint creates a prompt for a task."
+---
+
+### Body
+
+<ParamField body="name" type="string">
+  Optional parameter to specify the name of the prompt.
+</ParamField>
+
+<ParamField body="task" type="string">
+  Required parameter to specify the task for which the prompt is created.
+</ParamField>
+
+<ParamField body="version" type="string">
+  Optional parameter to specify the version of the prompt.
+</ParamField>
+
+<ParamField body="text" type="string">
+  Required parameter to specify the text of the prompt.
+</ParamField>
+
+<ParamField body="input_variables" type="array">
+  Optional parameter to specify the input variables for the prompt.
+</ParamField>
+
+<ParamField body="model" type="string">
+  Required parameter to specify the model for the prompt.
+</ParamField>
+
+<ParamField body="provider" type="string">
+  Required parameter to specify the provider for the prompt.
+</ParamField>
+
+<ParamField body="hyperparameters" type="object">
+  Required parameter to specify the hyperparameters for the prompt.
+</ParamField>
+
+<ParamField body="few_shot_examples" type="array">
+  Optional parameter to specify the few shot examples for the prompt.
+</ParamField>
+
+### Response
+
+<ResponseField name="data" type="object">
+
+The contents of the created prompt
+
+<Expandable title="Toggle object">
+
+<ResponseField name="name" type="string">
+  This is the name of the prompt.
+</ResponseField>
+
+<ResponseField name="version" type="string">
+  This is the version of the prompt.
+</ResponseField>
+
+<ResponseField name="text" type="string">
+  This is the text of the prompt.
+</ResponseField>
+
+<ResponseField name="task" type="string">
+  This is the task for which the prompt is created.
+</ResponseField>
+
+<ResponseField name="input_variables" type="array">
+  This is the list of input variables for the prompt.
+</ResponseField>
+
+<ResponseField name="model" type="string">
+  This is the model for the prompt.
+</ResponseField>
+
+<ResponseField name="provider" type="string">
+  This is the provider for the prompt.
+</ResponseField>
+
+<ResponseField name="hyperparameters" type="object">
+  This is the hyperparameters for the prompt.
+</ResponseField>
+
+<ResponseField name="few_shot_examples" type="array">
+  This is the list of few shot examples for the prompt.
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  This is the date and time when the prompt was created.
+</ResponseField>
+
+<ResponseField name="updated_at" type="string">
+  This is the date and time when the prompt was last updated.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl --location --request POST 'https://api.honeyhive.ai/prompts' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Token <token>' \
+--data-raw '{
+    "name": "My Prompt",
+    "task": "My Task",
+    "version": "1.0",
+    "text": "This is my prompt.",
+    "input_variables": [],
+    "model": "My Model",
+    "provider": "My Provider",
+    "hyperparameters": {},
+    "few_shot_examples": []
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "name": "My Prompt",
+  "version": "1.0",
+  "text": "This is my prompt.",
+  "task": "My Task",
+  "input_variables": [],
+  "model": "My Model",
+  "provider": "My Provider",
+  "hyperparameters": {},
+  "few_shot_examples": [],
+  "created_at": "2020-09-17T14:45:12.000Z",
+  "updated_at": "2020-09-17T14:45:12.000Z"
+}
+
+```
+
+</ResponseExample>

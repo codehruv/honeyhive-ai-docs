@@ -1,44 +1,44 @@
 ---
-title: "Create Task"
-api: "POST https://honeyhive.ai:5000/tasks"
-description: "This endpoint creates a new task."
+title: "Update Task"
+api: "PUT https://honeyhive.ai:5000/tasks"
+description: "This endpoint changes the details of a particular task."
 ---
 
 ### Body
 
-<ParamField body="name" type="string">
-  Required parameter to specify the name of the task.
+<ParamField body="task_id" type="string">
+  The unique identifier of the task to be changed.
 </ParamField>
 
-<ParamField body="description" type="string">
-  Optional parameter to specify the description of the task.
+<ParamField body="name" type="string">
+  The new name of the task.
 </ParamField>
 
 <ParamField body="type" type="string">
-  Optional parameter to specify the type of the task. Possible values are 'Text Generation', 'Code Generation', 'Classification', 'Summarization' and 'Other'.
-</ParamField>
-
-<ParamField body="fine_tuned_models" type="array">
-  Optional parameter to specify the list of fine-tuned models for the task.
+  The new type of the task. Possible values are 'Text Generation', 'Code Generation', 'Classification', 'Summarization' and 'Other'.
 </ParamField>
 
 <ParamField body="prompts" type="array">
-  Optional parameter to specify the list of prompts for the task.
+  The new list of prompts saved for the task.
+</ParamField>
+
+<ParamField body="fine_tuned_models" type="array">
+  The new list of fine-tuned models that have been trained for the task.
 </ParamField>
 
 <ParamField body="datasets" type="array">
-  Optional parameter to specify the list of datasets for the task.
+  The new list of datasets that have been uploaded for the task.
 </ParamField>
 
 <ParamField body="metrics" type="array">
-  Optional parameter to specify the list of metrics for the task.
+  The new list of metrics that have been setup for the task.
 </ParamField>
 
 ### Response
 
 <ResponseField name="data" type="object">
 
-The contents of the created task
+The contents of the updated task
 
 <Expandable title="Toggle object">
 
@@ -85,22 +85,24 @@ The contents of the created task
 <RequestExample>
 
 ```bash Example Request
-curl --location --request POST 'https://api.honeyhive.ai/tasks' \
+curl --location --request PUT 'https://api.honeyhive.ai/tasks' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Token <token>' \
 --data-raw '{
-    "name": "My Task",
-    "description": "My task description",
-    "type": "Text Generation"
+    "task_id": "<task_id>",
+    "name": "<name>",
+    "type": "<type>",
+    "prompts": [],
+    "fine_tuned_models": [],
+    "datasets": [],
+    "metrics": []
 }'
 ```
 
 </RequestExample>
 
 <ResponseExample>
-
 ```json Response
 {}
 ```
-
 </ResponseExample>

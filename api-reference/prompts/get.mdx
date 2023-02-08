@@ -1,0 +1,132 @@
+---
+title: "Get Prompts"
+api: "GET https://honeyhive.ai:5000/prompts"
+description: "This endpoint gets the prompts associated with a particular task."
+---
+
+### Body
+
+<ParamField body="task" type="string">
+  Optional parameter to fetch prompts associated with a particular task.
+</ParamField>
+
+<ParamField body="name" type="string">
+  Optional parameter to fetch a particular prompt by name.
+</ParamField>
+
+### Response
+
+<ResponseField name="data" type="array">
+
+The contents of the prompt list
+
+<Expandable title="Toggle object">
+
+<ResponseField name="name" type="string">
+  This is the name of the prompt.
+</ResponseField>
+
+<ResponseField name="version" type="string">
+  This is the version of the prompt.
+</ResponseField>
+
+<ResponseField name="input_variables" type="array">
+  This is the list of input variables for the prompt.
+</ResponseField>
+
+<ResponseField name="model" type="string">
+  This is the model associated with the prompt.
+</ResponseField>
+
+<ResponseField name="provider" type="string">
+  This is the provider associated with the prompt.
+</ResponseField>
+
+<ResponseField name="hyperparameters" type="array">
+  This is the list of hyperparameters associated with the prompt.
+</ResponseField>
+
+<ResponseField name="is_deployed" type="boolean">
+  This is a boolean indicating whether the prompt is deployed or not.
+</ResponseField>
+
+<ResponseField name="few_shot_examples" type="array">
+  This is the list of few-shot examples associated with the prompt.
+</ResponseField>
+
+<ResponseField name="task" type="string">
+  This is the name of the task associated with the prompt.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl --location --request POST 'https://api.honeyhive.ai/prompts' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Token <token>' \
+--data-raw '{
+    "task": "",
+    "name": ""
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+[
+  {
+    "name": "davinci-simple",
+    "version": "davinci-simple",
+    "text": "Answer the following questions based on the document provided.\n\nDocument:\n{{document}}\n\nQuestions:\n{{questions}}\n\nAnswers:",
+    "task": "Question Answers",
+    "input_variables": [
+      "document",
+      "questions"
+    ],
+    "model": "text-davinci-003",
+    "provider": "openai",
+    "hyperparameters": {
+      "temperature": 0.5,
+      "max_tokens": 100,
+      "top_p": 1,
+      "frequency_penalty": 0,
+      "presence_penalty": 0
+    },
+    "is_deployed": true,
+    "few_shot_examples": null,
+    "created_at": "2023-02-04T22:44:09.864Z",
+    "updated_at": "2023-02-04T22:44:09.864Z"
+  },
+  {
+    "name": "code-to-docs",
+    "version": "code-to-docs",
+    "text": "This is an interface to convert API code to docs.\n\nAPI code:\n\n// task JSON looks like:\n// - task_id\n// - name\n// - type (optional)\n// - created_at\n// - last_updated\n// - fine-tuned models\n// - prompts\n// - datasets\n\n// get tasks\nrecordRoutes.route('/tasks').get(async function (_req, res) {\n    const dbConnect = dbo.getDb();\n\n    // check if name is specified\n    var name = _req.query.name;\n    var has_prompts = _req.query.has_prompts;\n    \n    // if it not specified, return all tasks\n    if (name == undefined) {\n        dbConnect\n            .collection('tasks')\n            .find({})\n            .toArray(function (err, result) {\n                if (err) {\n                    res.status(400).send('Error fetching tasks!');\n                } else {\n                    // replace _id with id\n                    var finalResult = [];\n\n                    // if has_prompts is specified, return only has_prompts tasks\n                    // has_prompts means that the task has at least one prompt\n                    for (var i = 0; i < result.length; i++) {\n                        result[i].id = result[i]._id;\n                        delete result[i]._id;\n\n                        if (has_prompts != 'true' || result[i].prompts.length > 0) {\n                            finalResult.push(result[i]);\n                        }\n                    }\n                    \n                    res.json(finalResult);\n                    console.log(finalResult);\n                }\n            }\n        );\n    }\n    // if it is specified, return the task with that name\n    else {\n        dbConnect\n            .collection('tasks')\n            .find({ name: name })\n            .toArray(function (err, result) {\n                if (err) {\n                    res.status(400).send('Error fetching task!');\n                } else {\n                    res.json(result);\n                }\n            }\n        );\n    }\n});\n\nAPI docs:\n---\ntitle: \"Get Tasks\"\napi: \"GET https://honeyhive.ai:5000/tasks\"\ndescription: \"This endpoint gets the tasks being managed by the user.\"\n---\n\n### Body\n\n<ParamField body=\"name\" type=\"string\">\n  Optional parameter to fetch a particular task by name.\n</ParamField>\n\n### Response\n\n<ResponseField name=\"data\" type=\"object\">\n\nThe contents of the task list\n\n<Expandable title=\"Toggle object\">\n\n<ResponseField name=\"name\" type=\"string\">\n  This is the name of the task.\n</ResponseField>\n\n<ResponseField name=\"type\" type=\"string\">\n  This is the type of the task. Possible values are 'Text Generation', 'Code Generation', 'Classification', 'Summarization' and 'Other'.\n</ResponseField>\n\n<ResponseField name=\"prompts\" type=\"array\">\n  This is the list of prompts saved for the task.\n</ResponseField>\n\n<ResponseField name=\"fine_tuned_models\" type=\"array\">\n  This is the list of fine-tuned models that have been trained for the task.\n</ResponseField>\n\n<ResponseField name=\"datasets\" type=\"array\">\n  This is the list of datasets that have been uploaded for the task.\n</ResponseField>\n\n<ResponseField name=\"metrics\" type=\"array\">\n  This is the list of metrics that have been setup for the task.\n</ResponseField>\n\n<ResponseField name=\"created_at\" type=\"string\">\n  This is the date and time when the task was created.\n</ResponseField>\n\n<ResponseField name=\"updated_at\" type=\"string\">\n  This is the date and time when the task was last updated.\n</ResponseField>\n\n<ResponseField name=\"id\" type=\"string\">\n  This is the unique identifier for the task.\n</ResponseField>\n\n</Expandable>\n\n</ResponseField>\n\n<RequestExample>\n\n```bash Example Request\ncurl --location --request POST 'https://api.honeyhive.ai/tasks' \\\n--header 'Content-Type: application/json' \\\n--header 'Authorization: Token <token>' \\\n--data-raw '{\n    \"name\": \"\"\n}'\n```\n\n</RequestExample>\n\n<ResponseExample>\n\n```json Response\n[]\n\n```\n\n</ResponseExample>\n\n\n<API code>\n{{api_code}}\n</API code>\n\n\n\n<API docs>",
+    "task": "Question Answers",
+    "input_variables": [
+      "api_code"
+    ],
+    "model": "text-davinci-003",
+    "provider": "openai",
+    "hyperparameters": {
+      "temperature": 0.3,
+      "max_tokens": 800,
+      "top_p": 1,
+      "frequency_penalty": 0,
+      "presence_penalty": 0
+    },
+    "is_deployed": false,
+    "few_shot_examples": null,
+    "created_at": "2023-02-08T16:56:43.968Z",
+    "updated_at": "2023-02-08T16:56:43.968Z"
+  }
+]
+
+```
+
+</ResponseExample>
