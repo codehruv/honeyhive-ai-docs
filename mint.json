@@ -79,6 +79,12 @@
       ]
     },
     {
+      "group": "Feedback",
+      "pages": [
+        "api-reference/feedback/post"
+      ]
+    },
+    {
       "group": "Fine Tuning",
       "pages": [
         "api-reference/fine-tuning/get",

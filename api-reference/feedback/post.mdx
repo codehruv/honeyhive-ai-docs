@@ -1,0 +1,86 @@
+---
+title: "Post Feedback"
+api: "POST https://honeyhive.ai:5000/feedback"
+description: "This endpoint posts feedback for a particular task and generation_id."
+---
+
+### Body
+
+<ParamField body="task" type="string">
+  This is the unique identifier for the task.
+</ParamField>
+
+<ParamField body="generation_id" type="string">
+  This is the unique identifier for the generation.
+</ParamField>
+
+<ParamField body="feedback_json" type="object">
+  This is the feedback for the task.
+</ParamField>
+
+### Response
+
+<ResponseField name="data" type="object">
+
+The contents of the feedback
+
+<Expandable title="Toggle object">
+
+<ResponseField name="timestamp" type="string">
+  This is the date and time when the feedback was posted.
+</ResponseField>
+
+<ResponseField name="feedback_id" type="string">
+  This is the unique identifier for the feedback.
+</ResponseField>
+
+<ResponseField name="task" type="string">
+  This is the unique identifier for the task.
+</ResponseField>
+
+<ResponseField name="generation_id" type="string">
+  This is the unique identifier for the generation.
+</ResponseField>
+
+<ResponseField name="feedback_json" type="object">
+  This is the feedback for the task.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl --location --request POST 'https://api.honeyhive.ai/feedback' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Token <token>' \
+--data-raw '{
+    "task": "<task_id>",
+    "generation_id": "<generation_id>",
+    "feedback_json": {
+        "score": 5,
+        "comment": "This is a great task!"
+    }
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "timestamp": "2020-11-20T20:00:00.000Z",
+    "task": "<task_id>",
+    "generation_id": "<generation_id>",
+    "feedback_json": {
+        "score": 5,
+        "comment": "This is a great task!"
+    }
+}
+
+```
+
+</ResponseExample>
