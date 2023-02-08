@@ -52,7 +52,7 @@
       "pages": ["api-reference/authentication"]
     },
     {
-      "group": "Task APIs",
+      "group": "Tasks",
       "pages": [
         "api-reference/tasks/get",
         "api-reference/tasks/post",
@@ -61,7 +61,7 @@
       ]
     },
     {
-      "group": "Prompt APIs",
+      "group": "Prompts",
       "pages": [
         "api-reference/prompts/get",
         "api-reference/prompts/post",
@@ -70,12 +70,19 @@
       ]
     },
     {
-      "group": "Generations APIs",
+      "group": "Generations",
       "pages": [
         "api-reference/generations/post_saved",
         "api-reference/generations/post_generate",
         "api-reference/generations/get",
         "api-reference/generations/post_bulk"
+      ]
+    },
+    {
+      "group": "Fine Tuning",
+      "pages": [
+        "api-reference/fine-tuning/get",
+        "api-reference/generations/delete"
       ]
     }
   ],

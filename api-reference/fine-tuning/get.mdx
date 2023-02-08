@@ -1,0 +1,93 @@
+---
+title: "Get Fine-Tuned Models"
+api: "GET https://honeyhive.ai:5000/fine_tuned_models"
+description: "This endpoint gets the fine-tuned models being managed by the user."
+---
+
+### Body
+
+<ParamField body="model_id" type="string">
+  Optional parameter to fetch a particular fine-tuned model by model_id.
+</ParamField>
+
+<ParamField body="task" type="string">
+  Optional parameter to fetch a particular fine-tuned model by task.
+</ParamField>
+
+### Response
+
+<ResponseField name="data" type="object">
+
+The contents of the fine-tuned model list
+
+<Expandable title="Toggle object">
+
+<ResponseField name="model_id" type="string">
+  This is the unique identifier for the fine-tuned model.
+</ResponseField>
+
+<ResponseField name="object" type="string">
+  This is the type of the object being fine-tuned.
+</ResponseField>
+
+<ResponseField name="model" type="string">
+  This is the name of the model being fine-tuned.
+</ResponseField>
+
+<ResponseField name="hyperparams" type="object">
+  This is the list of hyperparameters used for the fine-tuned model.
+</ResponseField>
+
+<ResponseField name="org_id" type="string">
+  This is the unique identifier for the organization.
+</ResponseField>
+
+<ResponseField name="result_files" type="array">
+  This is the list of result files associated with the fine-tuned model.
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  This is the status of the fine-tuned model. Possible values are 'In Progress', 'Completed' and 'Failed'.
+</ResponseField>
+
+<ResponseField name="validation_files" type="array">
+  This is the list of validation files associated with the fine-tuned model.
+</ResponseField>
+
+<ResponseField name="training_files" type="array">
+  This is the list of training files associated with the fine-tuned model.
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  This is the date and time when the fine-tuned model was created.
+</ResponseField>
+
+<ResponseField name="updated_at" type="string">
+  This is the date and time when the fine-tuned model was last updated.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl --location --request POST 'https://api.honeyhive.ai/fine_tuned_models' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Token <token>' \
+--data-raw '{
+    "model_id": ""
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+[]
+
+```
+
+</ResponseExample>

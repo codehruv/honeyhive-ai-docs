@@ -1,0 +1,70 @@
+---
+title: "Delete Fine-Tuned Model"
+api: "DELETE https://honeyhive.ai:5000/fine_tuned_models"
+description: "This endpoint deletes a fine-tuned model being managed by the user."
+---
+
+### Body
+
+<ParamField body="model_id" type="string">
+  Required parameter to delete a particular fine-tuned model by its model_id.
+</ParamField>
+
+### Response
+
+<ResponseField name="data" type="object">
+
+The contents of the deleted fine-tuned model
+
+<Expandable title="Toggle object">
+
+<ResponseField name="model_id" type="string">
+  This is the unique identifier for the fine-tuned model.
+</ResponseField>
+
+<ResponseField name="task_id" type="string">
+  This is the unique identifier for the task.
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  This is the name of the fine-tuned model.
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  This is the date and time when the fine-tuned model was created.
+</ResponseField>
+
+<ResponseField name="updated_at" type="string">
+  This is the date and time when the fine-tuned model was last updated.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl --location --request DELETE 'https://api.honeyhive.ai/fine_tuned_models' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Token <token>' \
+--data-raw '{
+    "model_id": "<model_id>"
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "data": {
+        "acknowledged": true,
+        "deleted_count": 1
+    }
+}
+
+```
+
+</ResponseExample>
