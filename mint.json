@@ -68,6 +68,15 @@
         "api-reference/prompts/put",
         "api-reference/prompts/delete"
       ]
+    },
+    {
+      "group": "Generations APIs",
+      "pages": [
+        "api-reference/generations/post_saved",
+        "api-reference/generations/post_generate",
+        "api-reference/generations/get",
+        "api-reference/generations/post_bulk"
+      ]
     }
   ],
   "footerSocials": {

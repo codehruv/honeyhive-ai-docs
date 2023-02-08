@@ -1,0 +1,48 @@
+---
+title: "Delete Prompt"
+api: "DELETE https://honeyhive.ai:5000/prompts/:name"
+description: "This endpoint deletes a particular prompt from the task."
+---
+
+### Body
+
+<ParamField body="name" type="string">
+  Required parameter to delete a particular prompt by name.
+</ParamField>
+
+### Response
+
+<ResponseField name="data" type="object">
+
+The contents of the task list
+
+<Expandable title="Toggle object">
+
+<ResponseField name="deleted" type="boolean">
+  This is a boolean value indicating whether the prompt was successfully deleted or not.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl --location --request DELETE 'https://api.honeyhive.ai/prompts/:name' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Token <token>'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "deleted": true
+}
+
+```
+
+</ResponseExample>

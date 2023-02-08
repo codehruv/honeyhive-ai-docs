@@ -1,0 +1,140 @@
+---
+title: "Generation for Task"
+api: "POST https://honeyhive.ai:5000/generations"
+description: "This endpoint produces a new generation for a given task."
+---
+
+### Body
+
+<ParamField body="task" type="string">
+  The name of the task.
+</ParamField>
+
+<ParamField body="input" type="object">
+  The input variables for the prompt.
+</ParamField>
+
+<ParamField body="prompts" type="array">
+  Optional list of prompts to generate completions for.
+</ParamField>
+
+<ParamField body="model_id" type="string">
+  Optional model_id to use for the generation.
+</ParamField>
+
+<ParamField body="best_of" type="integer">
+  Optional number of generations to generate.
+</ParamField>
+
+<ParamField body="metric" type="string">
+  Optional metric to use for scoring the generations.
+</ParamField>
+
+<ParamField body="sampling" type="string">
+  Optional sampling strategy to use for generation.
+</ParamField>
+
+<ParamField body="user_properties" type="object">
+  Optional user properties to use for generation.
+</ParamField>
+
+<ParamField body="provider_api_keys" type="object">
+  Optional provider API keys to use for generation.
+</ParamField>
+
+<ParamField body="source" type="string">
+  Optional source of the generation.
+</ParamField>
+
+### Response
+
+<ResponseField name="data" type="array">
+
+The list of generated completions
+
+<Expandable title="Toggle object">
+
+<ResponseField name="prompt" type="string">
+  This is the prompt used for the generation.
+</ResponseField>
+
+<ResponseField name="generation" type="string">
+  This is the generated completion.
+</ResponseField>
+
+<ResponseField name="generation_id" type="string">
+  This is the unique identifier for the generation.
+</ResponseField>
+
+<ResponseField name="total_tokens" type="integer">
+  This is the total number of tokens used for the generation.
+</ResponseField>
+
+<ResponseField name="completion_tokens" type="integer">
+  This is the number of tokens used for the completion.
+</ResponseField>
+
+<ResponseField name="cost" type="float">
+  This is the cost of the generation.
+</ResponseField>
+
+<ResponseField name="latency" type="float">
+  This is the latency of the generation.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl --location --request POST 'https://api.honeyhive.ai/generations' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Token <token>' \
+--data-raw '{
+    "task": "Test task",
+    "input": {
+        "name": "John Doe"
+    },
+    "prompts": ["1.0.0", "1.0.1"],
+    "model_id": "",
+    "best_of": 5,
+    "metric": "",
+    "sampling": "",
+    "user_properties": {
+        "user_id": 1234
+    }
+}'
+```
+
+</RequestExample>
+
+
+<ResponseExample>
+    
+```json Example Response
+{
+    "data": [
+        {
+            "prompt": "1.0.0",
+            "generation": "Hello John Doe!",
+            "generation_id": "5f9b5b5b-5f9b-5b5b-5b5b-5f9b5b5b5b5b",
+            "total_tokens": 5,
+            "completion_tokens": 3,
+            "cost": 0.0005,
+            "latency": 0.0005
+        },
+        {
+            "prompt": "1.0.1",
+            "generation": "Hello John Doe!",
+            "generation_id": "5f9b5b5b-5f9b-5b5b-5b5b-5f9b5b5b5b5b",
+            "total_tokens": 5,
+            "completion_tokens": 3,
+            "cost": 0.0005,
+            "latency": 0.0005
+        }
+    ]
+}
+```
+</ResponseExample>

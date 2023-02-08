@@ -1,0 +1,132 @@
+---
+title: "Change Prompt"
+api: "PUT https://honeyhive.ai:5000/prompts/:id"
+description: "This endpoint changes a prompt for a task."
+---
+
+### Body
+
+<ParamField body="name" type="string">
+  The name of the prompt to be changed.
+</ParamField>
+
+<ParamField body="version" type="string">
+  The version of the prompt to be changed.
+</ParamField>
+
+<ParamField body="text" type="string">
+  The text of the prompt to be changed.
+</ParamField>
+
+<ParamField body="input_variables" type="array">
+  The list of input variables for the prompt to be changed.
+</ParamField>
+
+<ParamField body="model" type="string">
+  The model to be used for the prompt to be changed.
+</ParamField>
+
+<ParamField body="provider" type="string">
+  The provider to be used for the prompt to be changed.
+</ParamField>
+
+<ParamField body="hyperparameters" type="object">
+  The hyperparameters to be used for the prompt to be changed.
+</ParamField>
+
+<ParamField body="is_deployed" type="boolean">
+  Whether the prompt is deployed or not.
+</ParamField>
+
+<ParamField body="few_shot_examples" type="array">
+  The list of few-shot examples for the prompt to be changed.
+</ParamField>
+
+### Response
+
+<ResponseField name="data" type="object">
+
+The contents of the updated prompt
+
+<Expandable title="Toggle object">
+
+<ResponseField name="name" type="string">
+  This is the name of the prompt.
+</ResponseField>
+
+<ResponseField name="version" type="string">
+  This is the version of the prompt.
+</ResponseField>
+
+<ResponseField name="text" type="string">
+  This is the text of the prompt.
+</ResponseField>
+
+<ResponseField name="input_variables" type="array">
+  This is the list of input variables for the prompt.
+</ResponseField>
+
+<ResponseField name="model" type="string">
+  This is the model used for the prompt.
+</ResponseField>
+
+<ResponseField name="provider" type="string">
+  This is the provider used for the prompt.
+</ResponseField>
+
+<ResponseField name="hyperparameters" type="object">
+  This is the hyperparameters used for the prompt.
+</ResponseField>
+
+<ResponseField name="is_deployed" type="boolean">
+  This is whether the prompt is deployed or not.
+</ResponseField>
+
+<ResponseField name="few_shot_examples" type="array">
+  This is the list of few-shot examples for the prompt.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl --location --request PUT 'https://api.honeyhive.ai/prompts/:id' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Token <token>' \
+--data-raw '{
+    "name": "",
+    "version": "",
+    "text": "",
+    "input_variables": [],
+    "model": "",
+    "provider": "",
+    "hyperparameters": {},
+    "is_deployed": true,
+    "few_shot_examples": []
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```bash Example Response
+{
+    "data": {
+        "name": "",
+        "version": "",
+        "text": "",
+        "input_variables": [],
+        "model": "",
+        "provider": "",
+        "hyperparameters": {},
+        "is_deployed": true,
+        "few_shot_examples": []
+    }
+}
+```
+
+</ResponseExample>
