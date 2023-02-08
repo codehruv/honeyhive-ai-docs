@@ -1,20 +1,44 @@
 ---
-title: "Get Tasks"
-api: "GET https://honeyhive.ai:5000/tasks"
-description: "This endpoint gets the tasks being managed by the user."
+title: "Change Task"
+api: "PUT https://honeyhive.ai:5000/tasks"
+description: "This endpoint changes the details of a particular task."
 ---
 
 ### Body
 
+<ParamField body="task_id" type="string">
+  The unique identifier of the task to be changed.
+</ParamField>
+
 <ParamField body="name" type="string">
-  Optional parameter to fetch a particular task by name.
+  The new name of the task.
+</ParamField>
+
+<ParamField body="type" type="string">
+  The new type of the task. Possible values are 'Text Generation', 'Code Generation', 'Classification', 'Summarization' and 'Other'.
+</ParamField>
+
+<ParamField body="prompts" type="array">
+  The new list of prompts saved for the task.
+</ParamField>
+
+<ParamField body="fine_tuned_models" type="array">
+  The new list of fine-tuned models that have been trained for the task.
+</ParamField>
+
+<ParamField body="datasets" type="array">
+  The new list of datasets that have been uploaded for the task.
+</ParamField>
+
+<ParamField body="metrics" type="array">
+  The new list of metrics that have been setup for the task.
 </ParamField>
 
 ### Response
 
 <ResponseField name="data" type="object">
 
-The contents of the task list
+The contents of the updated task
 
 <Expandable title="Toggle object">
 
@@ -61,58 +85,24 @@ The contents of the task list
 <RequestExample>
 
 ```bash Example Request
-curl --location --request POST 'https://api.honeyhive.ai/tasks' \
+curl --location --request PUT 'https://api.honeyhive.ai/tasks' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Token <token>' \
 --data-raw '{
-    "name": ""
+    "task_id": "<task_id>",
+    "name": "<name>",
+    "type": "<type>",
+    "prompts": [],
+    "fine_tuned_models": [],
+    "datasets": [],
+    "metrics": []
 }'
 ```
 
 </RequestExample>
 
 <ResponseExample>
-
 ```json Response
-[
-  {
-    "name": "Question Answers",
-    "type": "Text Generation",
-    "fine_tuned_models": [],
-    "prompts": [
-      {
-        "name": "davinci-simple",
-        "version": "davinci-simple",
-        "text": "Answer the following questions based on the document provided.\n\nDocument:\n{{document}}\n\nQuestions:\n{{questions}}\n\nAnswers:",
-        "task": "Question Answers",
-        "input_variables": [
-          "document",
-          "questions"
-        ],
-        "model": "text-davinci-003",
-        "provider": "openai",
-        "hyperparameters": {
-          "temperature": 0.5,
-          "max_tokens": 100,
-          "top_p": 1,
-          "frequency_penalty": 0,
-          "presence_penalty": 0
-        },
-        "is_deployed": true,
-        "few_shot_examples": null,
-        "created_at": "2023-02-04T22:44:09.864Z",
-        "updated_at": "2023-02-04T22:44:09.864Z"
-      }
-    ],
-    "datasets": [],
-    "metrics": [],
-    "created_at": "2023-02-04T21:48:39.256Z",
-    "updated_at": "2023-02-07T01:56:26.636Z",
-    "last_updated": "2023-02-04T22:30:27.789Z",
-    "id": "63ded2b75c37555cf8d6017c"
-  }
-]
-
+{}
 ```
-
 </ResponseExample>
