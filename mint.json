@@ -6,6 +6,7 @@
     "light": "/logo/light.png"
   },
   "favicon": "/images/favicon.png",
+  "backgroundImage": "/images/gradient.png",
   "colors": {
     "primary": "#b45f06",
     "light": "#b45f06",
@@ -23,7 +24,7 @@
   ],
   "topbarCtaButton": {
     "name": "Get Started",
-    "url": "https://www.honeyhive.ai"
+    "url": "https://honeyhive.ai"
   },
   "anchors": [
     {
