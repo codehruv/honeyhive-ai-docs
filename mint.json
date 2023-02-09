@@ -6,6 +6,7 @@
     "light": "/logo/light.png"
   },
   "favicon": "/images/favicon.png",
+  "backgroundImage": "/images/gradient.png",
   "colors": {
     "primary": "#b45f06",
     "light": "#b45f06",
@@ -45,11 +46,7 @@
   "navigation": [
     {
       "group": "Home",
-      "pages": ["introduction", "development"]
-    },
-    {
-      "group": "Learn More",
-      "pages": ["features", "resources"]
+      "pages": ["introduction", "features"]
     },
     {
       "group": "API Documentation",
