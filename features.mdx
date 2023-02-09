@@ -1,35 +1,34 @@
 ---
-title: "Features"
+title: "Core Capabilities"
 description: "Key platform capabilities for your production deployment."
 ---
 
+## Offline Model Evaluation
 
-## Model Observability & Analytics
+Run batch evaluations against your validation datasets across a wide variety of custom metrics. Compare different prompts, model providers or fine-tuning strategies and make informed decisions by understanding the cost, latency, and performance tradeoffs.
 
-Monitor how your prompts perform in production by tracking user feedback and success metrics via our SDK. Easily visualize embeddings-based metrics such as Acceptance Rate, MAUVE or Cosine Distance, compare data slices, visualize clusters of user inputs & find data slices where your models underperform in production.
+![Evaluation](/images/evaluation.png)
 
-![Conversion](/images/monitoring.png)
-
-## Analyze Model Performance across Long-Tail
-
-Visualize clusters of user inputs, slice and dice data to understand where your models fail in production and precisely fine-tune over those examples using our fine-tuning workflow to improve long-tail performance.
-
-![Longtail](/images/clusters.png)
-
-## Data Management & Fine-Tuning
-
-Automatically log model generations, user feedback & custom metadata via our REST API or Python SDK. Seamlessly manage datasets across the entire LLM development lifecycle (Validation, Production, Fine-Tuning) and use your proprietary data to continuously update and fine-tune your models on task-specific datasets. Open-source models available.
-
-![Finetuning](/images/datasets.png)
-
-## Collaborative IDE built for teams
+## Prompt CI/CD
 
 Collaborate on new prompt variants with access to leading closed and open-source model providers such as OpenAI, Cohere, Stability AI & Google's Flan T-5. HoneyHive automatically versions all your prompt variants and helps you rigorously test performance before deploying any models to live users. Our advanced deployment logic allows you to deploy personalized models to specific user cohorts with the same API endpoint based on custom user properties such as tenant name or subscription tier.
 
 ![Playground](/images/playground1.png)
 
-## Offline Model Evaluation
+## Model Monitoring & Analytics
 
-Run batch evaluations against your validation datasets across a wide variety of metrics. Compare different prompts, model providers or fine-tuning strategies and make informed decisions by understanding the cost, latency, and performance tradeoffs.
+Monitor how your prompts perform in production by tracking user feedback, custom projections and success metrics via our SDK. Easily visualize embeddings-based metrics such as Acceptance Rate, MAUVE or Cosine Distance, compare data slices, and find actionable ways you can improve model performance in production.
 
-![Evaluation](/images/evaluation.png)
+![Conversion](/images/monitoring.png)
+
+## Visualizing Data Distribution
+
+Visualize clusters of user inputs & model generations, slice and dice data to understand where your models fail in production and precisely fine-tune over those examples using our fine-tuning workflow to improve long-tail performance.
+
+![Longtail](/images/clusters.png)
+
+## Data Management & Fine-Tuning
+
+Automatically log model generations, user feedback & custom metadata via our REST API or Python SDK. Seamlessly manage datasets across the entire LLM development lifecycle (Validation, Production, Fine-Tuning) and use your proprietary data to continuously update and fine-tune your models. Open-source models available.
+
+![Finetuning](/images/datasets.png)
