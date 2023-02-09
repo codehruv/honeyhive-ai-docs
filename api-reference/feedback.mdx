@@ -1,0 +1,38 @@
+---
+title: "Feedback"
+description: "How we think about feedback"
+---
+
+For every generation that comes from the models, we allow teams to ingest an arbitrary JSON as feedback.
+This feedback is measured on a per generation level and is used for analyzing the performance of the models and create better fine-tuning payloads.
+
+## What kind of feedback to ingest?
+
+Depending on one's use-case, it might make sense to ingest different kinds of feedback.
+
+Certain types of feedback that generally make sense are:
+1. User properties
+- Examples include: demographics, location, plan/tier, language, etc.
+2. User interactions
+- Examples include: accepted, regenerated, edited, copied, etc.
+
+### Ingesting feedback
+
+To ingest feedback, you can follow the steps below:
+1. Get the generation id for the model response from the response on the [generations API](/api-reference/generations/post_saved)
+2. Record whichever feedback you want to ingest as a JSON object
+3. Send a POST request to the [feedback API](/api-reference/feedback/post_saved) with the task name, generation id and the feedback JSON object
+
+### Using feedback
+
+Once the feedback is ingested, it can be used 2 ways - monitoring and fine-tuning.
+
+#### Monitoring
+
+In the [Dashboard](https://app.honeyhive.ai/dashboard), you can use the Where query to filter model data by the feedback you ingested.
+This can help you better understand how your models are performing generally and against specific cohorts.
+
+#### Fine-tuning
+
+On the [Generations](https://app.honeyhive.ai/datasets/generations) page, you can use the Query to fetch generations filtered by the feedback you ingested.
+These filtered generations can be exported for further analysis or used for creating fine-tuning payloads.

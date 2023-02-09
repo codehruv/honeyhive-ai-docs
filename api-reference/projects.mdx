@@ -1,0 +1,38 @@
+---
+title: "Projects"
+description: "Setting up your HoneyHive deployment"
+---
+
+All the prompts, datasets, fine tuned models and metrics in HoneyHive are organized by project.
+
+## Creating a new project
+
+To create a new project, click on the "New Project" button on the top right corner of the [home page](https://app.honeyhive.ai/).
+
+You will be prompted to enter the name of the project, type and the description. With that, a new project is created.
+
+# Project overview
+
+### Prompts
+
+You can go to the [Playground](https://app.honeyhive.ai/playground) to add prompts for the task or add them via the [prompts POST API](/api-reference/prompts/post).
+
+Prompt management is done via the [Prompts](https://app.honeyhive.ai/prompts) page or the APIs.
+
+### Datasets
+
+To add datasets for [validation](https://app.honeyhive.ai/datasets/validation) or [fine-tuning](https://app.honeyhive.ai/datasets/finetuning), you can upload them via the webapp.
+
+Alternatively, you can add them via the [datasets POST API](/api-reference/datasets/post) while specifying the purpose of the dataset.
+
+Dataset management is done via the [Datasets](https://app.honeyhive.ai/datasets) page or the APIs.
+
+### Fine-tuned models
+
+You can trigger fine-tuning jobs via the [Fine-Tuning](https://app.honeyhive.ai/fine-tuning) page.
+Currently, we don't have model import functionality. We are working on adding it.
+
+### Metrics
+
+Currently, metrics can only be ingested via the [metrics POST API](/api-reference/metrics/post). 
+We are working on adding the metrics ingestion functionality via the webapp.

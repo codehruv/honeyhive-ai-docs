@@ -123,14 +123,14 @@ The contents of the generated text
   The error message.
 </ParamField>
 
-### Example
+<RequestExample>
 
 ```bash Example Request
-curl --location --request POST 'https://api.honeyhive.ai/generations' \
+curl --location --request POST 'https://api.honeyhive.ai/generate' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Token <token>' \
 --data-raw '{
-    "model": "gpt2",
+    "model": "text-davinci-003",
     "prompt": "The quick brown fox jumps over the lazy dog.",
     "hyperparameters": {
         "max_tokens": 10,
@@ -141,10 +141,14 @@ curl --location --request POST 'https://api.honeyhive.ai/generations' \
         "stop": "###"
     },
     "task": "text-generation",
-    "version": "v1.0",
+    "version": "1.0.0",
     "source": "api"
 }'
 ```
+</RequestExample>
+
+
+<ResponseExample>
 
 ```bash Example Response
 {
@@ -152,7 +156,7 @@ curl --location --request POST 'https://api.honeyhive.ai/generations' \
         "timestamp": "2021-03-01 15:00:00",
         "version": "v1.0",
         "prompt": "The quick brown fox jumps over the lazy dog.",
-        "model": "gpt2",
+        "model": "text-davinci-003",
         "hyperparameters": {
             "max_tokens": 10,
             "temperature": 0.9,
@@ -167,7 +171,7 @@ curl --location --request POST 'https://api.honeyhive.ai/generations' \
         "completion_tokens": 10,
         "cost": 0.0001,
         "source": "api"
-    },
-    "error": null
+    }
 }
 ```
+</ResponseExample>

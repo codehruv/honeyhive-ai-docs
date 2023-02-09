@@ -1,0 +1,47 @@
+---
+title: "Getting Started"
+description: "Connect your servers to HoneyHive and start monitoring your foundation models."
+---
+
+## Getting Started
+
+Our API and SDK are designed to be easy to use and integrate with your existing infrastructure.
+
+## Create a new project
+
+1. Login to the [HoneyHive website](https://app.honeyhive.ai) via Google SSO.
+2. Create a new project by clicking on the **New Project** button.
+3. Give your project a name (optionally type and description as well) and click **Create Project**.
+
+## Add your first prompt
+
+1. Click on the [**Playground**](https://app.honeyhive.ai/playground) tab in the left sidebar.
+2. Add a new version name for the prompt (e.g. `v1`, `davinci-basic`, etc.)
+3. Type in your prompt with `{{` and `}}` around the variable you want to dynamically insert.
+4. Click **Save Prompt**.
+
+## Evaluate your prompt
+
+1. Click on the [**Evaluation**](https://app.honeyhive.ai/evaluate) tab in the left sidebar.
+2. Click `Add Dataset` to upload a dataset to evaluate your prompt.
+3. Click `Add Metrics` to add a metric to evaluate your prompt.
+4. Click `Run Comparison` to run your evaluation.
+5. Wait for the evaluation to complete and view the results.
+
+## Deploy your prompt
+
+1. Click on the [**Prompts**](https://app.honeyhive.ai/prompts) tab in the left sidebar.
+2. Select the prompt you want to deploy.
+3. Click on the **Deploy** button.
+4. Copy the deployment code snippet (which contains your API keys) and paste it into your application.
+
+## Integrate the SDK/API
+
+1. Install the SDK via `pip install honeyhive` or connect via the cURL.
+2. Replace your model provider requests with our **Generations** endpoint. More details on this can be found in the [API documentation](/api-reference/generations).
+3. Instrument your application to collect user feedback using our feedback API. More details on this can be found in the [API documentation](/api-reference/feedback).
+
+## Monitor your prompt
+
+1. Watch your prompt's performance in real-time on the [HoneyHive website](https://app.honeyhive.ai/dashboard).
+2. Use the [Generations](https://app.honeyhive.ai/datasets/generations) page or API to view the generated text and feedback.

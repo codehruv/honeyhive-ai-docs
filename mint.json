@@ -45,7 +45,7 @@
   "navigation": [
     {
       "group": "Home",
-      "pages": ["introduction", "development"]
+      "pages": ["introduction", "getting-started"]
     },
     {
       "group": "Learn More",
@@ -53,7 +53,12 @@
     },
     {
       "group": "API Documentation",
-      "pages": ["api-reference/authentication"]
+      "pages": [
+        "api-reference/authentication",
+        "api-reference/projects",
+        "api-reference/generations",
+        "api-reference/feedback"
+      ]
     },
     {
       "group": "Tasks",

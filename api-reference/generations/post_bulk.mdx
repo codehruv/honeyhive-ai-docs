@@ -30,7 +30,7 @@ The contents of the generations
   This is the model used to generate the text.
 </ResponseField>
 
-<ResponseField name="text" type="string">
+<ResponseField name="completion" type="string">
   This is the generated text.
 </ResponseField>
 
@@ -62,13 +62,13 @@ curl --location --request POST 'https://api.honeyhive.ai/generations/bulk' \
             "task_id": "task_1",
             "prompt": "This is a prompt",
             "model": "model_1",
-            "text": "This is generated text"
+            "completion": "This is generated text"
         },
         {
             "task_id": "task_2",
             "prompt": "This is another prompt",
             "model": "model_2",
-            "text": "This is another generated text"
+            "completion": "This is another generated text"
         }
     ]
 }'
@@ -85,7 +85,7 @@ curl --location --request POST 'https://api.honeyhive.ai/generations/bulk' \
             "task_id": "task_1",
             "prompt": "This is a prompt",
             "model": "model_1",
-            "text": "This is generated text",
+            "completion": "This is generated text",
             "created_at": "2020-08-17T19:12:43.000Z",
             "updated_at": "2020-08-17T19:12:43.000Z",
             "id": "5f3a2d6f8f9d9e0017d9f8d7"
@@ -94,7 +94,7 @@ curl --location --request POST 'https://api.honeyhive.ai/generations/bulk' \
             "task_id": "task_2",
             "prompt": "This is another prompt",
             "model": "model_2",
-            "text": "This is another generated text",
+            "completion": "This is another generated text",
             "created_at": "2020-08-17T19:12:43.000Z",
             "updated_at": "2020-08-17T19:12:43.000Z",
             "id": "5f3a2d6f8f9d9e0017d9f8d8"

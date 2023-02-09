@@ -1,0 +1,88 @@
+---
+title: "Generations"
+description: "How to get generations via HoneyHive"
+---
+
+
+## Creating generations
+
+Once you have a project with a prompt setup and deployed, you can quickly get model text generation via our API.
+
+
+- We automatically call the prompt that was deployed with the project, so you don't need to pass over the prompt name.
+
+We can get generations by making a POST request to the [generations API](/api-reference/generations/post_saved) with the following body:
+
+You only to pass over the input variables that were defined in the dynamic prompt template and task name in order to get generations.
+
+```json
+{
+  "task": "find-animal",
+  "input": {
+    "color": "red",
+    "animal": "cat"
+  }
+}
+```
+
+- You can also explicitly pass over other prompt names if you want to get generations from a different prompts.
+
+```json
+{
+  "task": "find-animal",
+  "prompt": ["my-prompt", "my-other-prompt"],
+  "input": {
+    "color": "red",
+    "animal": "cat"
+  }
+}
+```
+
+- You can also pass over a prompt template directly if you don't want to use a prompt that was saved in the project with the [generate API](/api-reference/generations/post_generate).
+
+```json
+{
+    "task": "text-generation",
+    "model": "text-davinci-003",
+    "prompt": "The quick brown fox jumps over the lazy dog.",
+    "hyperparameters": {
+        "max_tokens": 10,
+        "temperature": 0.9,
+        "top_p": 0.9,
+        "frequency_penalty": 0.0,
+        "presence_penalty": 0.0,
+        "stop": "###"
+    },
+    "version": "1.0.0",
+    "source": "api"
+}
+```
+
+## Ingesting generations
+
+In case you want to migrate your previous generations datasets over, we offer an API to ingest generations into your project.
+
+- You can ingest generations by making a POST request to the [bulk ingest API](/api-reference/generations/post_bulk).
+
+Make sure that the input is marked as "prompt" and the output as "completion". You can ingest any other metadata you'd like on top of it.
+
+```json
+{
+    "generations": [
+        {
+            "prompt": "The quick brown fox jumps over the lazy dog.",
+            "completion": "The quick brown fox jumps over the lazy dog.",
+            "metadata": {
+                "source": "api"
+            }
+        },
+        ...
+    ]
+}
+```
+
+## Exporting generations
+
+You can export generations from your project by making a GET request to the [generations GET API](/api-reference/generations/get).
+
+Alternatively, you can also export generations from the UI by clicking on the "Export" button on the [generations](https://app.honeyhive.ai/datasets/generations) page.
