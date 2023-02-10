@@ -58,7 +58,8 @@
         "api-reference/authentication",
         "api-reference/projects",
         "api-reference/generations",
-        "api-reference/feedback"
+        "api-reference/feedback",
+        "api-reference/metrics"
       ]
     },
     {
