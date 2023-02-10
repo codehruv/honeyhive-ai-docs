@@ -1,0 +1,46 @@
+---
+title: "Metrics"
+description: "Adding metrics to better evaluate your responses"
+---
+
+Metrics are custom python functions that help better evaluate your model responses.
+They accept the model response and ground truth (optionally) as input and return a float value.
+
+## Syntax
+    
+```python
+
+def metric_fn(generation, ground_truth=None):
+    # your code here along with package imports
+
+    metric_value = 0.0  # a float value
+    return metric_value
+
+```
+
+You can ingest like above via the [metrics API](/api-reference/metrics/post).
+
+## Example Request
+
+```bash
+{
+    "task": "summarization",
+    "name": "is_passive",
+    "code_snippet":
+        "def is_passive(generation, ground_truth=None):
+            # checks if the generated sentence was in passive voice
+            import spacy
+            nlp = spacy.load('en_core_web_sm')
+            doc = nlp(generation)
+            for token in doc:
+                if token.dep_ == 'auxpass':
+                    return 1.0
+            return 0.0"
+}
+```
+
+## Usage
+
+Metrics are calculate at inference time via the generations API and can be used to filter responses based on the metric value.
+
+These can help in offline evaluation to compare model performance and also in real-time evaluation to filter responses based on the metric value.
