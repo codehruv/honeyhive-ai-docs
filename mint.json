@@ -67,8 +67,7 @@
       "pages": [
         "api-reference/tasks/get",
         "api-reference/tasks/post",
-        "api-reference/tasks/put",
-        "api-reference/tasks/delete"
+        "api-reference/tasks/put"
       ]
     },
     {
@@ -124,8 +123,8 @@
   },
   "api": {
     "auth": {
-        "method": "key",
-        "name": "bRyCnbMZRMiVOMVx41TSvJr8ZHbW3qDG"
+        "method": "bearer",
+        "name": "api_key"
      }
  }
 }

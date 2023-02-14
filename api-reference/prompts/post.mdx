@@ -6,10 +6,6 @@ description: "This endpoint creates a prompt for a task."
 
 ### Body
 
-<ParamField body="name" type="string">
-  Optional parameter to specify the name of the prompt.
-</ParamField>
-
 <ParamField body="task" type="string">
   Required parameter to specify the task for which the prompt is created.
 </ParamField>
@@ -34,7 +30,7 @@ description: "This endpoint creates a prompt for a task."
   Required parameter to specify the provider for the prompt.
 </ParamField>
 
-<ParamField body="hyperparameters" type="object">
+<ParamField body="hyperparameters" type="json">
   Required parameter to specify the hyperparameters for the prompt.
 </ParamField>
 

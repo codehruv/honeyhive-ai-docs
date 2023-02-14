@@ -1,5 +1,5 @@
 ---
-title: "Generation for Task"
+title: "Create Generation for Task"
 api: "POST https://honeyhive.ai:5000/generations"
 description: "This endpoint produces a new generation for a given task."
 ---
@@ -16,10 +16,16 @@ description: "This endpoint produces a new generation for a given task."
 
 <ParamField body="prompts" type="array">
   Optional list of prompts to generate completions for.
+  If not specified, the deployed prompt is used.
+</ParamField>
+
+<ParamField body="source" type="string">
+  Optional source of the generation.
 </ParamField>
 
 <ParamField body="model_id" type="string">
   Optional model_id to use for the generation.
+  The model_id is for any fine-tuned models you might have.
 </ParamField>
 
 <ParamField body="best_of" type="integer">
@@ -40,10 +46,6 @@ description: "This endpoint produces a new generation for a given task."
 
 <ParamField body="provider_api_keys" type="object">
   Optional provider API keys to use for generation.
-</ParamField>
-
-<ParamField body="source" type="string">
-  Optional source of the generation.
 </ParamField>
 
 ### Response

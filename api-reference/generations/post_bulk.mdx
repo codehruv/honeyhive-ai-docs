@@ -6,6 +6,12 @@ description: "This endpoint ingests generations in bulk."
 
 ### Body
 
+Please try to keep a `task`, `model`, `hyperparameters`, `prompt`, `completion`, and `created_at` for each generation. 
+
+If you do not have a `created_at` for a generation, we will use the current time.
+
+Any additional metadata ought to be included in a `feedback` field for now.
+
 <ParamField body="generations" type="array">
   An array of generations to be ingested.
 </ParamField>

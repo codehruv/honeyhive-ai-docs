@@ -6,16 +6,22 @@ description: "This endpoint gets the generations for a given task, prompt and mo
 
 ### Body
 
+We are currently following the MongoDB query paradigm here.
+
+You can pass in any field filter that's found on the generation.
+
+If your query takes too long, it's recommended to pass in a timestamp filter with `gte` and `lte` specified using UTC time.
+
 <ParamField body="task" type="string">
   The task ID for which to get generations.
 </ParamField>
 
-<ParamField body="prompt" type="string">
-  The prompt ID for which to get generations.
+<ParamField body="version" type="string">
+  The prompt version for which to get generations.
 </ParamField>
 
 <ParamField body="model" type="string">
-  The model ID for which to get generations.
+  The model for which to get generations.
 </ParamField>
 
 <ParamField body="limit" type="integer">

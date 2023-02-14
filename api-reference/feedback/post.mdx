@@ -6,15 +6,15 @@ description: "This endpoint posts feedback for a particular task and generation_
 
 ### Body
 
-<ParamField body="task" type="string">
+<ParamField body="task" type="string" Required>
   This is the unique identifier for the task.
 </ParamField>
 
-<ParamField body="generation_id" type="string">
+<ParamField body="generation_id" type="string" Required>
   This is the unique identifier for the generation.
 </ParamField>
 
-<ParamField body="feedback_json" type="object">
+<ParamField body="feedback_json" type="object" Required>
   This is the feedback for the task.
 </ParamField>
 
