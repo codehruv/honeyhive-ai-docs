@@ -9,6 +9,8 @@ description: "How to get generations via HoneyHive"
 Once you have a project with a prompt setup and deployed, you can quickly get model text generation via our API.
 
 
+### Deployed prompt generation
+
 - We automatically call the prompt that was deployed with the project, so you don't need to pass over the prompt name.
 
 We can get generations by making a POST request to the [generations API](/api-reference/generations/post_saved) with the following body:
@@ -25,6 +27,8 @@ You only to pass over the input variables that were defined in the dynamic promp
 }
 ```
 
+### Specified prompt generation
+
 - You can also explicitly pass over other prompt names if you want to get generations from a different prompts.
 
 ```json
@@ -37,6 +41,8 @@ You only to pass over the input variables that were defined in the dynamic promp
   }
 }
 ```
+
+### Custom prompt generation
 
 - You can also pass over a prompt template directly if you don't want to use a prompt that was saved in the project with the [generate API](/api-reference/generations/post_generate).
 
@@ -64,7 +70,9 @@ In case you want to migrate your previous generations datasets over, we offer an
 
 - You can ingest generations by making a POST request to the [bulk ingest API](/api-reference/generations/post_bulk).
 
-Make sure that the input is marked as "prompt" and the output as "completion". You can ingest any other metadata you'd like on top of it.
+Make sure that the input is marked as "prompt" and the output as "completion". You can ingest any other metadata you'd like on top of it within "feedback".
+
+Try to follow the below format.
 
 ```json
 {
@@ -72,8 +80,22 @@ Make sure that the input is marked as "prompt" and the output as "completion". Y
         {
             "prompt": "The quick brown fox jumps over the lazy dog.",
             "completion": "The quick brown fox jumps over the lazy dog.",
-            "metadata": {
-                "source": "api"
+            "model": "text-davinci-003",
+            "task": "text-generation",
+            "version": "1.0.0",
+            "source": "api",
+            "hyperparameters" : {
+                "max_tokens": 10,
+                "temperature": 0.9,
+                "top_p": 0.9,
+                "frequency_penalty": 0.0,
+                "presence_penalty": 0.0,
+                "stop": "###"
+            },
+            "feedback" : {
+                "provided": true,
+                "accepted": true,
+                "user_country": "US"
             }
         },
         ...
