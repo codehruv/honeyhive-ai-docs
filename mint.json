@@ -121,5 +121,11 @@
   "footerSocials": {
     "twitter": "https://twitter.com/honeyhiveai",
     "linkedin": "https://www.linkedin.com/company/honeyhive-ai/"
-  }
+  },
+  "api": {
+    "auth": {
+        "method": "key",
+        "name": "bRyCnbMZRMiVOMVx41TSvJr8ZHbW3qDG"
+     }
+ }
 }
