@@ -85,7 +85,8 @@
         "api-reference/generations/post_saved",
         "api-reference/generations/post_generate",
         "api-reference/generations/get",
-        "api-reference/generations/post_bulk"
+        "api-reference/generations/post_bulk",
+        "api-reference/generations/post_log"
       ]
     },
     {
