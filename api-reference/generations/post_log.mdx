@@ -6,16 +6,6 @@ description: "This endpoint ingests a single generation."
 
 ### Body
 
-"task": "Sandbox - Email Writer",
-    "inputs": {"var": "test"},
-    "generation": openai_response["choices"][0]["text"],
-    "model": "text-davinci-003",
-    "prompt": "Say this is a {{var}}",
-    "hyperparameters": {"max_tokens": 7, "temperature": 0},
-    "response": openai_response,
-    "source": "testing",
-    "latency": latency
-
 <ParamField 
     body="task"
     type="string"
