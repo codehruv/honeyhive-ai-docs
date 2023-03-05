@@ -18,11 +18,15 @@ description: "This endpoint ingests a single generation."
     The hyperparameters that were used to generate the text.
 </ParamField>
 
-<ParamField body="prompt_template" type="string" required>
+<ParamField body="prompt_template" type="string">
+    Prompt used to generate the text, to be used if you don't have a prompt template with inputs defined.
+</ParamField>
+
+<ParamField body="prompt_template" type="string">
     The prompt template that was used to generate the text. Make sure it has the variables in brackets like this - `{{var}}`
 </ParamField>
 
-<ParamField body="inputs" type="object" required>
+<ParamField body="inputs" type="object">
     The inputs filled into the prompt. This is a dictionary which specifies the values filled into the prompt template.
 </ParamField>
 
