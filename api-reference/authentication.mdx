@@ -17,6 +17,7 @@ Please pass the API key as a header with each request as follows:
 In case of the Python SDK, you can pass in the api key via the `api_key` parameter.
 
 ```Python
-import honeyhive as hh
-hh.api_key = 'YOUR_API_KEY'
+import honeyhive
+honeyhive.api_key = 'YOUR_API_KEY'
+honeyhive.openai_api_key = 'OPENAI_API_KEY'
 ```

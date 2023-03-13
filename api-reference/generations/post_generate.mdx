@@ -65,12 +65,6 @@ description: "This endpoint generates text using a given model and prompt."
 
 ### Response
 
-<ResponseField name="data" type="object">
-
-The contents of the generated text
-
-<Expandable title="Toggle object">
-
 <ResponseField name="timestamp" type="string">
   This is the date and time when the text was generated.
 </ResponseField>
@@ -119,13 +113,9 @@ The contents of the generated text
   The error from the model provider.
 </ResponseField>
 
-</Expandable>
-
-</ResponseField>
-
 <RequestExample>
 
-```bash Example Request
+```bash cURL Request
 curl --location --request POST 'https://honeyhive.ai:5000/generate' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Token <token>' \
@@ -145,33 +135,53 @@ curl --location --request POST 'https://honeyhive.ai:5000/generate' \
     "source": "api"
 }'
 ```
-</RequestExample>
 
+```python Python Request
+import honeyhive
+honeyhive.api_key = "<token>"
+honeyhive.openai_api_key = "<token>"
+
+generation = honeyhive.Completions.create(
+    project="text-generation",
+    model="text-davinci-003",
+    prompt="The quick brown fox jumps over the lazy dog.",
+    hyperparameters={
+        "max_tokens": 10,
+        "temperature": 0.9,
+        "top_p": 0.9,
+        "frequency_penalty": 0.0,
+        "presence_penalty": 0.0,
+        "stop": "###"
+    },
+    source="testing"
+)
+```
+
+</RequestExample>
 
 <ResponseExample>
 
 ```bash Example Response
 {
-    "data": {
-        "timestamp": "2021-03-01 15:00:00",
-        "version": "v1.0",
-        "prompt": "The quick brown fox jumps over the lazy dog.",
-        "model": "text-davinci-003",
-        "hyperparameters": {
-            "max_tokens": 10,
-            "temperature": 0.9,
-            "top_p": 0.9,
-            "frequency_penalty": 0.0,
-            "presence_penalty": 0.0,
-            "stop": "###"
-        },
-        "task": "text-generation",
-        "generation": "The quick brown fox jumps over the lazy dog. ",
-        "total_tokens": 10,
-        "completion_tokens": 10,
-        "cost": 0.0001,
-        "source": "api"
-    }
+    "timestamp": "2021-03-01 15:00:00",
+    "version": "v1.0",
+    "prompt": "The quick brown fox jumps over the lazy dog.",
+    "model": "text-davinci-003",
+    "hyperparameters": {
+        "max_tokens": 10,
+        "temperature": 0.9,
+        "top_p": 0.9,
+        "frequency_penalty": 0.0,
+        "presence_penalty": 0.0,
+        "stop": "###"
+    },
+    "task": "text-generation",
+    "generation": "The quick brown fox jumps over the lazy dog. ",
+    "total_tokens": 10,
+    "completion_tokens": 10,
+    "cost": 0.0001,
+    "latency": 2000.12,
+    "source": "api"
 }
 ```
 </ResponseExample>

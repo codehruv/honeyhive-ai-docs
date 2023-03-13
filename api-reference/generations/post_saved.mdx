@@ -6,11 +6,11 @@ description: "This endpoint produces a new generation for a given task."
 
 ### Body
 
-<ParamField body="task" type="string">
-  The name of the task.
+<ParamField body="task" type="string" required>
+  The name of the project.
 </ParamField>
 
-<ParamField body="input" type="object">
+<ParamField body="input" type="object" required>
   The input variables for the prompt.
 </ParamField>
 
@@ -24,7 +24,6 @@ description: "This endpoint produces a new generation for a given task."
 </ParamField>
 
 <ParamField body="model_id" type="string">
-  Optional model_id to use for the generation.
   The model_id is for any fine-tuned models you might have.
 </ParamField>
 
@@ -50,11 +49,6 @@ description: "This endpoint produces a new generation for a given task."
 
 ### Response
 
-<ResponseField name="data" type="array">
-
-The list of generated completions
-
-<Expandable title="Toggle object">
 
 <ResponseField name="version" type="string">
   This is the model version used for the generation.
@@ -84,13 +78,10 @@ The list of generated completions
   This is the latency of the generation.
 </ResponseField>
 
-</Expandable>
-
-</ResponseField>
 
 <RequestExample>
 
-```bash Example Request
+```bash cURL Request
 curl --location --request POST 'https://honeyhive.ai:5000/generations' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Token <token>' \
@@ -99,7 +90,7 @@ curl --location --request POST 'https://honeyhive.ai:5000/generations' \
     "input": {
         "name": "John Doe"
     },
-    "prompts": ["1.0.0", "1.0.1"],
+    "prompts": ["1.0.0"],
     "model_id": "",
     "best_of": 5,
     "metric": "",
@@ -110,6 +101,20 @@ curl --location --request POST 'https://honeyhive.ai:5000/generations' \
 }'
 ```
 
+```python Python SDK
+import honeyhive
+honeyhive.api_key = "<token>"
+honeyhive.openai_api_key = "<openai_api_key>"
+
+generation = honeyhive.generations.generate(
+    task="Test Project",
+    input={
+      "example1": "Hello World!",
+      "example2": "Hello World!"
+    },
+    prompts=["1.0.0"],
+)
+```
 </RequestExample>
 
 
@@ -117,26 +122,13 @@ curl --location --request POST 'https://honeyhive.ai:5000/generations' \
     
 ```json Example Response
 {
-    "data": [
-        {
-            "prompt": "1.0.0",
-            "generation": "Hello John Doe!",
-            "generation_id": "5f9b5b5b-5f9b-5b5b-5b5b-5f9b5b5b5b5b",
-            "total_tokens": 5,
-            "completion_tokens": 3,
-            "cost": 0.0005,
-            "latency": 0.0005
-        },
-        {
-            "prompt": "1.0.1",
-            "generation": "Hello John Doe!",
-            "generation_id": "5f9b5b5b-5f9b-5b5b-5b5b-5f9b5b5b5b5b",
-            "total_tokens": 5,
-            "completion_tokens": 3,
-            "cost": 0.0005,
-            "latency": 0.0005
-        }
-    ]
+  "version": "1.0.0",
+  "generation": "Hello John Doe!",
+  "generation_id": "5f9b5b5b-5f9b-5b5b-5b5b-5f9b5b5b5b5b",
+  "total_tokens": 5,
+  "completion_tokens": 3,
+  "cost": 0.0005,
+  "latency": 1550.50
 }
 ```
 </ResponseExample>

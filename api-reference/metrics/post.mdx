@@ -27,15 +27,19 @@ The contents of the metric
 <Expandable title="Toggle object">
 
 <ResponseField name="task_name" type="string">
-  This is the name of the task.
+  This is the name of the project linked to this metric.
 </ResponseField>
 
 <ResponseField name="name" type="string">
   This is the name of the metric.
 </ResponseField>
 
+<ResponseField name="description" type="string">
+  This is the description of the metric - ideally what it does.
+</ResponseField>
+
 <ResponseField name="code_snippet" type="string">
-  This is the code snippet of the metric.
+  This is the code snippet of the metric in python. Make sure it returns a float or None.
 </ResponseField>
 
 </Expandable>
@@ -49,9 +53,13 @@ curl --location --request POST 'https://honeyhive.ai:5000/metrics' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Token <token>' \
 --data-raw '{
-    "task": "",
-    "name": "",
-    "code_snippet": ""
+    "task": "Sandbox - Email Writer",
+    "name": "Number of sentences",
+    "description": "Count number of sentences in generated text",
+    "code_snippet": "def num_sentences(generation):
+    return len(generation["generation"].split('.'))
+
+result = num_sentences(generation)"
 }'
 ```
 
@@ -61,8 +69,7 @@ curl --location --request POST 'https://honeyhive.ai:5000/metrics' \
 
 ```json Response
 {
-    "acknowledged": true,
-    "inserted_count": 1
+    "inserted": true
 }
 
 ```

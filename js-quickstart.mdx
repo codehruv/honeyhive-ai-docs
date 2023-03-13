@@ -1,0 +1,84 @@
+---
+title: "Javascript Quickstart"
+description: "Getting started with HoneyHive via Javascript"
+---
+
+In this tutorial, we will use `axios` to send the request. You can adapt this to `fetch` as needed.
+
+### Get API keys
+
+After signing up on the app, you can find your API key in the [Settings](https://app.honeyhive.ai/settings/account) page.
+
+### Ingest model completions
+
+Any model completion can be ingested into HoneyHive via our [logging api](/api-reference/generations/post_log).
+
+We take in all the typical model provider parameters along with `task`, `source`, `latency` as HoneyHive specific parameters.
+
+```javascript
+var url = 'https://honeyhive.ai:5000/generations/log';
+const config = {
+    headers: { Authorization: Bearer ${api_token} }
+};
+
+var data = {
+    // honeyhive params
+    "task": "PROJECT_NAME",
+    "source": "testing",
+    "latency": 1500,
+
+    // model provider params
+    "model": "gpt-3.5-turbo",
+    "hyperparameters": {"max_tokens": 1000, "temperature": 1},
+    "prompt_template": "Say this is a {{var}}",
+    "inputs": {"var": "test"},
+    "generation": "This is a generated completion from OpenAI.",
+    "usage": openaiResponse.usage // example: {"prompt_tokens": 3, "completion_tokens": 7, "total_tokens": 10},
+};
+
+
+var response = await axios.create(config).post(url, data);
+response = await response.data;
+var generationId = response.generation_id;
+```
+
+*Note:* Instead of providing a prompt_template with inputs, you can provide just a prompt if your prompt can't be templated. Refer to our [generation ingestion API docs](/api-reference/generations/post_log) for more details.
+
+
+Alternatively, you can leverage our prompt CI/CD capabilities and call a generation for a project without specifying all the parameters.
+
+More documentation can be found on our [saved prompt generations API page](/api-reference/generations/post_saved).
+
+```javascript
+var url = 'https://honeyhive.ai:5000/generations';
+var data = {
+    task: "PROJECT_NAME",
+    source: "testing",
+    input: {"var": "test"},
+};
+
+var response = await axios.create(config).post(url, data);
+response = await response.data;
+var generationId = response.generation_id;
+```
+
+### Provide feedback
+
+Using the generation id that is returned, you can then send arbitrary feedback to HoneyHive using the `feedback` API.
+
+```javascript
+const config = {
+    headers: { Authorization: Bearer ${api_token} }
+};
+axios.create(config).post('https://honeyhive.ai:5000/feedback', {
+    generation_id: generationId,
+    task: "PROJECT_NAME",
+    feedback_json: {
+        "num_turns": 5,
+        "accepted": true,
+        "rating": 5,
+        "user_country": "US",
+        "user_language": "en",
+    }
+})
+```
