@@ -1,0 +1,125 @@
+---
+title: "Go Quickstart"
+description: "Getting started with HoneyHive via the Go SDK"
+---
+
+
+### Get API Key
+
+After signing up on the app, you can find your API key in the [Settings](https://app.honeyhive.ai/settings/account) page.
+
+### Install the Python SDK
+
+```bash
+go get github.com/honeyhive-ai/honeyhive-go-sdk
+```
+
+### Feeding OpenAI's inference to HoneyHive
+
+The below example shows how you can ingest the OpenAI input/outputs with additional parameters for `task` and `source` into HoneyHive.
+
+This way you can run the OpenAI call on your side and ingest the response later. Please do track latency on your end if you choose this option.
+
+```go
+package main
+​
+import (
+    "context"
+    "github.com/honeyhive-ai/honeyhive-go-sdk"
+    "github.com/honeyhive-ai/honeyhive-go-sdk/pkg/models/shared"
+    "github.com/honeyhive-ai/honeyhive-go-sdk/pkg/models/operations"
+	"fmt"
+)
+
+func main() {
+    honeyhiveClient := honeyhive.New(honeyhive.WithSecurity(
+        shared.Security{
+            BearerAuth: shared.SchemeBearerAuth{
+                Authorization: "Bearer <API_KEY>",
+            },
+        },
+    ))
+
+    projectName := "PROJECT_NAME"
+    source := "SOURCE"
+    hyperparameters := shared.HyperParameters{
+        MaxTokens: &maxtokens,
+        Temperature: &temperature,
+        TopP: &topP,
+        FrequencyPenalty: &fp,
+        PresencePenalty: &pp,
+    }
+    usage_map := make(map[string]int)
+    usage_map["prompt_tokens"] = resp.Usage.PromptTokens
+    usage_map["completion_tokens"] = resp.Usage.CompletionTokens
+    usage_map["total_tokens"] = resp.Usage.TotalTokens
+    ​
+    req := operations.IngestSingleGenerationRequest{
+        Request: shared.SingleGenerationInput{
+            Task: &projectName,
+            PromptTemplate: &prompt_template,
+            Model: &engine,
+            Inputs: inputs,
+            Usage: usage_map,
+            Source: &source,
+            Hyperparameters: &hyperparameters,
+            Generation: &resp.Choices[0].Text,
+            Latency: &elapsed,
+        },
+    }
+
+    res, err := honeyhiveClient.Generation.IngestSingleGeneration(ctx, req)
+
+    if res.SingleGenerationOutput != nil {
+        generationID := res.SingleGenerationOutput.GenerationID
+    }
+}
+```
+
+### HoneyHive Prompt CI/CD alternative
+
+Alternatively, you can leverage our prompt CI/CD capabilities and just call generation for a project without specifying all the parameters.
+
+More documentation can be found on our [saved prompt generations API page](/api-reference/generations/post_saved).
+
+```go
+req := operations.TaskCreateGenerationRequest{
+    Request: shared.TaskGenerationInput{
+        Task: &projectName,
+        Inputs: inputs,
+    },
+}
+
+res, err := honeyhiveClient.Generation.TaskCreateGeneration(ctx, req)
+
+if res.TaskGenerationOutput != nil {
+    generationID := res.TaskGenerationOutput.GenerationID
+}
+```
+
+### Provide feedback
+
+Using the generation id that is returned, you can then send arbitrary feedback to HoneyHive using the `feedback` method.
+
+```go
+taskName := "PROJECT_NAME"
+feedbackJSON := map[string]interface{}{
+    "correction": "This is not a test",
+    "accepted": true,
+    "feedback_provided": true,
+    "user_tenant": "Contoso",
+    "user_country": "US",
+    "user_department": "Engineering"
+}
+
+req := operations.CreateFeedbackRequest{
+    Request: shared.Feedback{
+        Task: &taskName,
+        GenerationID: generationID,
+        FeedbackJSON: feedbackJSON,
+    },
+}
+​
+res, err := s.Feedback.CreateFeedback(ctx, req)
+​
+```

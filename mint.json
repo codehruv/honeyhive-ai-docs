@@ -46,7 +46,7 @@
   "navigation": [
     {
       "group": "Home",
-      "pages": ["introduction", "getting-started", "python-quickstart", "js-quickstart"]
+      "pages": ["introduction", "getting-started", "python-quickstart", "js-quickstart", "go-quickstart"]
     },
     {
       "group": "Learn More",
