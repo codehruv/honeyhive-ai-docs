@@ -53,7 +53,7 @@ response = honeyhive.generations.generate(
 
 ### Provide feedback
 
-Using the Generation ID that is returned, you can then send arbitrary feedback to HoneyHive using the `feedback` method. We recommend providing a unique user identifier in this reuqest as best-practice when deploying models to your production application.
+Using the Generation ID that is returned, you can then send arbitrary feedback to HoneyHive using the `feedback` method. We recommend providing a unique user identifier along with each request as best-practice when deploying models to production.
 
 ```python
 honeyhive.feedback(
