@@ -32,7 +32,7 @@ const response = await honeyhiveAxios.post(
     }
   }
 );
-var generationId = response.generation_id;
+var generationId = response.data.generation_id;
 ```
 
 ### Ingest Model Completions
