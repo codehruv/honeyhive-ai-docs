@@ -21,6 +21,11 @@ You can leverage our prompt CI/CD capabilities and automatically call the curren
 More documentation can be found on our [saved prompt generations API page](/api-reference/generations/post_saved).
 
 ```python
+import honeyhive
+
+honeyhive.api_key = "HONEYHIVE_API_KEY"
+honeyhive.openai_api_key = "OPENAI_API_KEY"
+
 response = honeyhive.generations.generate(
     project="Sandbox - Email Writer",
     source="staging",
@@ -38,11 +43,6 @@ Alternatively, we provide you the option to run model completion requests within
 <Note>Using this method, you will not be able to use our Prompt CI/CD capabilities within the platform and will need to manually update the prompt, model provider and hyperparamater settings in your codebase when deploying new variants to production.</Note>
 
 ```python
-import honeyhive
-
-honeyhive.api_key = "HONEYHIVE_API_KEY"
-honeyhive.openai_api_key = "OPENAI_API_KEY"
-
 response = honeyhive.Completions.create(
     project="Sandbox - Email Writer",
     source="staging",
