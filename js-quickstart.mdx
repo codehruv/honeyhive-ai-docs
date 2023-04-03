@@ -45,7 +45,7 @@ Alternatively, we provide you the option to run model completion requests within
 ```javascript
 var url = 'https://honeyhive.ai:5000/generations/log';
 const config = {
-    headers: { Authorization: Bearer ${api_token} }
+    headers: { Authorization: "Bearer ${api_token}" }
 };
 
 var data = {
@@ -80,7 +80,7 @@ Using the `generation_id` that is returned, you can then send arbitrary feedback
 
 ```javascript
 const config = {
-    headers: { Authorization: Bearer ${api_token} }
+    headers: { Authorization: "Bearer ${api_token}" }
 };
 axios.create(config).post('https://honeyhive.ai:5000/feedback', {
     generation_id: generationId,
