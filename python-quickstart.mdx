@@ -14,11 +14,26 @@ After signing up on the app, you can find your API key in the [Settings](https:/
 pip install honeyhive
 ```
 
-### Replace `openai` with `honeyhive`
+### HoneyHive Proxy Method
 
-Replace your OpenAI calls with HoneyHive by simply renaming `openai` to `honeyhive` and adding parameters for `project` and `source`.
+You can leverage our prompt CI/CD capabilities and automatically call the current deployed prompt within a specified project without specifying all the parameters. Using this method, we automatically route your requests to the model-prompt configuration that you choose to deploy within the platform.
 
-Using this method, we run the OpenAI call on your side and ingest the response later without acting as a proxy layer.
+More documentation can be found on our [saved prompt generations API page](/api-reference/generations/post_saved).
+
+```python
+response = honeyhive.generations.generate(
+    project="Sandbox - Email Writer",
+    source="staging",
+    input={
+        "topic": "Model evaluation for companies using GPT-4",
+        "tone": "friendly"
+    },
+)
+```
+
+### Ingest Model Completions
+
+Alternatively, we provide you the option to run model completion requests within your own servers and ingest the response later without using HoneyHive's proxy server. To get started, simply replace your OpenAI calls with HoneyHive by renaming `openai` to `honeyhive` and adding parameters for `project` and `source`.
 
 ```python
 import honeyhive
@@ -31,23 +46,6 @@ response = honeyhive.Completions.create(
     source="staging",
     model="text-davinci-003",
     prompt="This is a prompt",
-)
-```
-
-### HoneyHive Proxy Method
-
-Alternatively, you can leverage our prompt CI/CD capabilities and just call the current deployed prompt within a project without specifying all the parameters. Using this method, we automatically route your requests to the model-prompt configuration that you choose to deploy within the platform.
-
-More documentation can be found on our [saved prompt generations API page](/api-reference/generations/post_saved).
-
-```python
-response = honeyhive.generations.generate(
-    project="Sandbox - Email Writer",
-    source="staging",
-    input={
-        "topic": "Model evaluation for companies using GPT-4",
-        "tone": "friendly"
-    },
 )
 ```
 
