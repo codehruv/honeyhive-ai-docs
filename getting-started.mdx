@@ -11,6 +11,8 @@ Everything you can do via the platform can be done via the API.
 
 ## Create a new project
 
+![projects](/images/projects.png)
+
 1. Login to the [HoneyHive platform](https://app.honeyhive.ai) via Google SSO.
 2. Create a new project by clicking on the **New Project** button.
 3. Give your project a name (optionally type and description as well) and click **Create Project**.
@@ -19,16 +21,18 @@ It is best to organize each project within your workspace as a separate task for
 
 ## Add your first prompt
 
+![playground1](/images/playground1.png)
+
 1. You can access the [**Playground**](https://app.honeyhive.ai/playground) within the **Prompts** tab in the left sidebar.
 2. Add a version name for your prompt (e.g. `v1`, `davinci-basic`, etc.). We typically recommend using a serialized format such as v1.x.x to better organize your prompts.
 3. Type in your prompt with `{{` and `}}` around the variable you want to dynamically insert. You'll be using these variable names when sending requests to HoneyHive.
-4. Click **Save Prompt** to save your changes.
+4. Click **Save** to save your changes.
 
 ## Evaluate your prompt
 
 1. Click on the [**Evaluation**](https://app.honeyhive.ai/evaluate) tab in the left sidebar.
 2. Click `Add Dataset` to upload a dataset to evaluate your prompt. Alternatively, you also have the option to generate a synthetic evaluation dataset.
-3. Click `Add Metrics` to add a metric to evaluate your prompt. We provide a few out-of-the-box metrics and allow users to add their own custom metrics in Python via an in-built code editor within the platform. 
+3. Click `Add Metrics` to add a metric to evaluate your prompt. We provide a few out-of-the-box metrics and allow users to add their own custom metrics in Python via an in-built code editor within the platform.
 4. Click `Run Comparison` to run your evaluation.
 5. Wait for the evaluation to complete and view the results.
 6. Rate the results to begin collecting labelled data.
