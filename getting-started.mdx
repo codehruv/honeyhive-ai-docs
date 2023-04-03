@@ -50,6 +50,12 @@ It is best to organize each project within your workspace as a separate task for
 
 ## Integrate the SDK/API
 
+1. Install the SDK via `pip install honeyhive` or connect via your favorite web client.
+2. Replace your model provider requests with our **Generations** endpoint. More details on this can be found in the [API documentation](/api-reference/generations).
+3. Instrument your application to collect user feedback using our feedback API. More details on this can be found in the [API documentation](/api-reference/feedback).
+
+![deploymentcode](/images/deploymentcode.png)
+
 <CardGroup>
   <Card title="Python Quickstart" icon="rectangle-terminal" href="/python-quickstart">
     How to quickly get started with our Python SDK
@@ -59,15 +65,10 @@ It is best to organize each project within your workspace as a separate task for
   </Card>
 </CardGroup>
 
-![deploymentcode](/images/deploymentcode.png)
-
-1. Install the SDK via `pip install honeyhive` or connect via your favorite web client.
-2. Replace your model provider requests with our **Generations** endpoint. More details on this can be found in the [API documentation](/api-reference/generations).
-3. Instrument your application to collect user feedback using our feedback API. More details on this can be found in the [API documentation](/api-reference/feedback).
-
 ## Monitor your prompt
 
-1. Watch your prompt's performance in real-time on the [HoneyHive platform](https://app.honeyhive.ai/dashboard).
-2. Use the [Generations](https://app.honeyhive.ai/datasets/generations) page or API to view the generated text and feedback.
+1. Watch your prompt's performance in real-time on [HoneyHive](https://app.honeyhive.ai/dashboard).
+2. Slice and dice your data using `where` and `group by` filters.
+3. Use the [Generations](https://app.honeyhive.ai/datasets/generations) page or API to view the generated text, feedback and any custom metadata.
 
 ![monitoring1](/images/monitoring1.png)
