@@ -37,11 +37,6 @@
       "icon": "discord",
       "url": "https://discord.gg/vqctGpqA97"
     },
-    {
-      "name": "About Us",
-      "icon": "circle-info",
-      "url": "https://honeyhiveai.notion.site/HoneyHive-AI-684f42a078a34c7e8f6d96e1dd75c9cc"
-    }
   ],
   "navigation": [
     {
@@ -50,7 +45,7 @@
     },
     {
       "group": "Learn More",
-      "pages": ["features", "resources"]
+      "pages": ["concepts", "features", "resources"]
     },
     {
       "group": "Quickstart Guide",
