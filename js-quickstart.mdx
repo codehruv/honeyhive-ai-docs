@@ -33,6 +33,8 @@ var generationId = response.generation_id;
 
 Alternatively, we provide you the option to run model completion requests within your own servers and ingest the response later without using HoneyHive's proxy server via our [logging api](/api-reference/generations/post_log). We take in all the typical model provider parameters along with `task`, `source`, `latency` as HoneyHive specific parameters.
 
+<Note>Using this method, you will not be able to use our Prompt CI/CD capabilities within the platform and will need to manually update your prompt, model provider and hyperparamater settings when deploying new variants to production.</Note>
+
 ```javascript
 var url = 'https://honeyhive.ai:5000/generations/log';
 const config = {
