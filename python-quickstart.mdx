@@ -51,7 +51,9 @@ response = honeyhive.Completions.create(
 
 ### Log User Feedback and Metadata
 
-Using the Generation ID that is returned, you can then send arbitrary feedback to HoneyHive using the `feedback` method. We recommend providing a unique user identifier along with each request as best-practice when deploying models to production.
+Using the Generation ID that is returned, you can then send arbitrary feedback to HoneyHive using the `feedback` method. 
+
+<Tip>We recommend providing a unique user identifier along with each request as production best-practice when deploying models to production.</Tip>
 
 ```python
 honeyhive.feedback(
