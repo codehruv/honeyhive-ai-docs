@@ -35,6 +35,8 @@ response = honeyhive.generations.generate(
 
 Alternatively, we provide you the option to run model completion requests within your own servers and ingest the response later without using HoneyHive's proxy server. To get started, simply replace your OpenAI calls with HoneyHive by renaming `openai` to `honeyhive` and add parameters for `project` and `source`.
 
+<Note>Using this method, you will not be able to use our Prompt CI/CD capabilities within the platform and will need to manually update the prompt, model provider and hyperparamater settings in your codebase when deploying new variants to production.</Note>
+
 ```python
 import honeyhive
 
