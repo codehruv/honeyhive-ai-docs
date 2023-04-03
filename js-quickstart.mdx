@@ -16,6 +16,12 @@ You can leverage our prompt CI/CD capabilities and automatically call the curren
 More documentation can be found on our [saved prompt generations API page](/api-reference/generations/post_saved).
 
 ```javascript
+const honeyhiveAxios = axios.create({
+  headers: {
+    "Authorization": "Bearer ${api_token}"
+  }
+});
+
 var url = 'https://honeyhive.ai:5000/generations';
 var data = {
     task: "PROJECT_NAME",
