@@ -22,15 +22,16 @@ const honeyhiveAxios = axios.create({
   }
 });
 
-var url = 'https://honeyhive.ai:5000/generations';
-var data = {
-    task: "PROJECT_NAME",
-    source: "testing",
-    input: {"var": "test"},
-};
-
-var response = await axios.create(config).post(url, data);
-response = await response.data;
+const response = await honeyhiveAxios.post(
+  'https://honeyhive.ai:5000/generations', 
+  {
+     "task": "Sandbox - Email Writer",
+     "input": {
+        topic: "INSERT_INPUT",
+        tone: "INSERT_INPUT"  
+    }
+  }
+);
 var generationId = response.generation_id;
 ```
 
