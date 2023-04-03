@@ -11,22 +11,22 @@ Everything you can do via the platform can be done via the API.
 
 ## Create a new project
 
-![projects](/images/projects.png)
-
 1. Login to the [HoneyHive platform](https://app.honeyhive.ai) via Google SSO.
 2. Create a new project by clicking on the **New Project** button.
 3. Give your project a name (optionally type and description as well) and click **Create Project**.
+
+![projects](/images/projects.png)
 
 It is best to organize each project within your workspace as a separate task for which you're using large language models. For example, a SQL code generate will be concidered a seperate Project vs a SQL code interpreter. This allows you to standardize data structures and schema for each individual project but allows the flexibility to store multiple prompt variants within each Project space.
 
 ## Add your first prompt
 
-![playground1](/images/playground1.png)
-
 1. You can access the [**Playground**](https://app.honeyhive.ai/playground) within the **Prompts** tab in the left sidebar.
 2. Add a version name for your prompt (e.g. `v1`, `davinci-basic`, etc.). We typically recommend using a serialized format such as v1.x.x to better organize your prompts.
 3. Type in your prompt with `{{` and `}}` around the variable you want to dynamically insert. You'll be using these variable names when sending requests to HoneyHive.
 4. Click **Save** to save your changes.
+
+![playground2](/images/playground2.png)
 
 ## Evaluate your prompt
 
@@ -37,12 +37,16 @@ It is best to organize each project within your workspace as a separate task for
 5. Wait for the evaluation to complete and view the results.
 6. Rate the results to begin collecting labelled data.
 
+![evaluation1](/images/evaluation1.png)
+
 ## Deploy your prompt
 
 1. Click on the [**Prompts**](https://app.honeyhive.ai/prompts) tab in the left sidebar.
 2. Select the prompt you want to deploy.
 3. Click on the **Deploy** button.
 4. Copy the deployment code snippet (which contains your API keys) and paste it into your codebase.
+
+![promptmanagement](/images/promptmanagement.png)
 
 ## Integrate the SDK/API
 
@@ -55,6 +59,8 @@ It is best to organize each project within your workspace as a separate task for
   </Card>
 </CardGroup>
 
+![deploymentcode](/images/deploymentcode.png)
+
 1. Install the SDK via `pip install honeyhive` or connect via your favorite web client.
 2. Replace your model provider requests with our **Generations** endpoint. More details on this can be found in the [API documentation](/api-reference/generations).
 3. Instrument your application to collect user feedback using our feedback API. More details on this can be found in the [API documentation](/api-reference/feedback).
@@ -63,3 +69,5 @@ It is best to organize each project within your workspace as a separate task for
 
 1. Watch your prompt's performance in real-time on the [HoneyHive platform](https://app.honeyhive.ai/dashboard).
 2. Use the [Generations](https://app.honeyhive.ai/datasets/generations) page or API to view the generated text and feedback.
+
+![monitoring1](/images/monitoring1.png)
