@@ -18,13 +18,13 @@
   },
   "topbarLinks": [
     {
-      "name": "Documentation",
-      "url": "https://docs.honeyhive.ai"
+      "name": "Join private beta",
+      "url": "https://6c7ll5kpfok.typeform.com/to/fpUt5tG9?typeform-source=honeyhive.ai"
     }
   ],
   "topbarCtaButton": {
-    "name": "Get Started",
-    "url": "https://honeyhive.ai"
+    "name": "Log In",
+    "url": "https://app.honeyhive.ai"
   },
   "anchors": [
     {
