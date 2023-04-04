@@ -1,0 +1,31 @@
+---
+title: "Fine-Tune Custom Models"
+description: "Use production logs and user feedback data to fine-tune custom models."
+---
+
+Once you have integrated our SDK to your application and started logging user feedback, you can use this data to curate diverse, high-quality datasets for fine-tuning and model distillation.
+
+<Note>We typically recommend a sample size of at least couple hundred examples to fine-tune a custom model effectively. In most cases, increasing the size of your dataset sample size results in linear performance improvements.</Note>
+
+## Curate a fine-tuning dataset
+
+1. Filter your model generations in [HoneyHive](https://app.honeyhive.ai/datasets/generations) using user feedback columns that indicate high data quality (eg: "Accepted", "Edit Distance < 10", etc.)
+
+![finetuning0](/images/finetuning0.png)
+
+2. Click **Create Fine-Tuning Payload** to save this data snapshot as a fine-tuning dataset. Provide the dataset a name and (optionally) a description. Once saved, this dataset can be found in `Fine-Tuning` within **Datasets** tab in the sidebar. Alternatively, you can also directly fine-tune a new model by clicking **Go to Fine-Tuning**.
+
+## Start a fine-tuning job
+
+1. Navigate to **Fine-Tuning Datasets** within the Datasets tab in the sidebar to view any saved fine-tuning datasets. Here, you can select your dataset and click **Fine-Tune** to start the fine-tuning process.
+
+![finetuning1](/images/finetuning1.png)
+
+2. Once in Fine-Tuning, enter the appropriate training parameters for your fine-tuning job. Review your data payload and quickly add any last minute corrections if necessary.
+
+![finetuning2](/images/finetuning2.png)
+
+3. Click **Start Fine-Tuning Job** to start the fine-tuning process. You can navigate to the Fine-Tuning tab in the sidebar to check the status of your fine-tuning job.
+4. Once the fine-tuning job has been completed, you can navigate to the **Playground** to test your new model, fork a new variant and evaluate it against your baseline variant within **Evaluations**.
+
+<Tip>We recommend fine-tuning multiple models with various data sample sizes and training parameters and bennchmarking them against your production baseline variant within Evaluations before deploying a new fine-tuning model to production.</Tip>

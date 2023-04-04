@@ -45,7 +45,7 @@
     },
     {
       "group": "Getting Started",
-      "pages": ["projects", "prompts", "evaluation", "deployment", "monitoring"]
+      "pages": ["projects", "prompts", "evaluation", "deployment", "monitoring", "finetuning"]
     },
     {
       "group": "Quickstart Guides",
