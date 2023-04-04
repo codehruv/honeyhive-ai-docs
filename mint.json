@@ -41,7 +41,11 @@
   "navigation": [
     {
       "group": "Home",
-      "pages": ["introduction", "getting-started"]
+      "pages": ["introduction"]
+    },
+    {
+      "group": "Getting Started",
+      "pages": ["projects", "prompts", "evaluation", "deployment", "monitoring"]
     },
     {
       "group": "Quickstart Guides",

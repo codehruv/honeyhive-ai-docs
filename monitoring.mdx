@@ -1,0 +1,24 @@
+---
+title: "Monitor Performance"
+description: "Connect your application to HoneyHive and start monitoring model performance in production."
+---
+
+Once you have integrated our SDK to your application and started logging user feedback, you can start observing cost, latency and performance metrics on our Analytics dashboard in real time.
+
+<Note>For certain subscription tiers, we automatically embed all user inputs and model completions for quantitative analysis within HoneyHive.</Note>
+
+## Monitor Performance in Production
+
+1. Watch your prompt's performance in real-time in [HoneyHive](https://app.honeyhive.ai/dashboard).
+2. Slice and dice your data using `where` and `group by` filters. Any user properties or custom metadata ingested via the `feedback` endpoint will appear here.
+3. Use the [Generations](https://app.honeyhive.ai/datasets/generations) page or API endpoint to view the generated text, user feedback and any custom metadata.
+
+![monitoring1](/images/monitoring1.png)
+
+## Observe Data Distribution with t-SNE Embeddings Visualization
+
+Since we automatically embed user inputs and model completions, you can visualize the distribution of your production data and behavior amongst data clusters with our embeddings visualization tool.
+
+<Tip>The chart is by default color-coded by different prompt variants. You can use `group by` filters to group the chart by various features associated with each generation within your project (such as any user metadata, custom metrics or user feedback fields.)</Tip>
+
+![embeddings](/images/embeddings.png)

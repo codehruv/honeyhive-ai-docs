@@ -1,0 +1,28 @@
+---
+title: "Run Offline Evaluations"
+description: "Quantitatively evaluate your model-prompt configurations against unit tests, NLP metrics and LLM-based classifiers."
+---
+
+Evaluation allows you to run batch evaluation jobs to compare cost, latency and performance tradeoffs between multiple model-prompt configurations.
+
+## Metrics
+
+We provide the core infrastructure to run evaluations using three types of metrics:-
+
+1. **Unit Tests**: Unit tests (or assertions) commonly refer to different validation metrics that indicated the quality of your model outputs. Common unit tests include `IsValidJSON`, `Number of Sentences`, etc.
+2. **Embeddings-based NLP Metrics**: These metrics include commonly used NLP metrics such as ROUGE-L, METEOR, MAUVE, BERTScore, etc.
+
+<Note>Most NLP metrics require ground truth (i.e. your ideal model response or output) to compute, and therefore, are best suited for offline evaluations instead of production monitoring for generative tasks.</Note>
+
+3. **LLM-based Metrics**: These classifiers have been trained on our proprietary datasets to evaluate common traits across production use-cases such as **Truthfulness**, **Conciseness**, **Creativity**, etc. using large language models.
+
+## Evaluate your prompt
+
+1. Click on the [**Evaluation**](https://app.honeyhive.ai/evaluate) tab in the left sidebar.
+2. Click `Add Dataset` to upload a dataset to evaluate your prompt. Alternatively, you also have the option to generate a synthetic evaluation dataset.
+3. Click `Add Metrics` to add a metric to evaluate your prompt. We provide a few out-of-the-box metrics and allow users to add their own custom metrics in Python via an in-built code editor within the platform.
+4. Click `Run Comparison` to run your evaluation.
+5. Wait for the evaluation to complete and view the results.
+6. Rate the results to begin collecting labelled data.
+
+![evaluation1](/images/evaluation1.png)

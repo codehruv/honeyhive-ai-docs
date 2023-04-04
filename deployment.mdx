@@ -1,0 +1,30 @@
+---
+title: "Deploy New Variants"
+description: "Deploy your new model-prompt configurations to production without changing code."
+---
+
+## Deploy your variant
+
+1. Click on the [**Prompts**](https://app.honeyhive.ai/prompts) tab in the left sidebar.
+2. Select the prompt you want to deploy.
+3. Click on the **Deploy** button.
+4. Copy the deployment code snippet (which contains your API keys) and paste it into your codebase.
+
+![deploymentcode](/images/deploymentcode.png)
+
+<br />
+
+## Integrate the SDK/API
+
+1. Install the SDK via `pip install honeyhive` or connect via your favorite web client.
+2. Replace your model provider requests with our **Generations** endpoint. More details on this can be found in the [API documentation](/api-reference/generations).
+3. Instrument your application to collect user feedback using our feedback API. More details on this can be found in the [API documentation](/api-reference/feedback).
+
+<CardGroup>
+  <Card title="Python Quickstart" icon="rectangle-terminal" href="/python-quickstart">
+    How to quickly get started with our Python SDK
+  </Card>
+  <Card title="Javascript Quickstart" icon="rectangle-terminal" href="/js-quickstart">
+    How to quickly get started with Javascript
+  </Card>
+</CardGroup>

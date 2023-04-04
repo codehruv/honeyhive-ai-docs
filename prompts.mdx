@@ -1,0 +1,39 @@
+---
+title: "Add Prompts"
+description: "Add, manage and version your prompt-model configurations."
+---
+
+HoneyHive allows you to add, manage and version your prompt-model configurations within each project. To manage your prompts, click on the **Prompts** tab in the left sidebar.
+
+<Note>A prompt-model configuration refers to a combination of prompt, model and hyperparameter settings unique to a particular variant.</Note>
+
+![promptmanagement](/images/promptmanagement.png)
+
+## Add your first prompt
+
+1. You can access the [**Playground**](https://app.honeyhive.ai/playground) within the **Prompts** tab in the left sidebar.
+2. Add a version name for your prompt.
+
+<Tip>We typically recommend using a serialized format such as v1.x.x to better organize your prompts.</Tip>
+
+3. Type in your prompt with `{{` and `}}` around the variable you want to dynamically insert. You'll be using these variable names when sending requests to HoneyHive.
+
+<Tip>Dynamic variables can also be used to insert external context from external embeddings databases such as Pinecone or integrated with open-source frameworks such as LlamaIndex.</Tip>
+
+4. Click **Save** to save your changes.
+
+![playground2](/images/playground2.png)
+
+## Automatically optimize your prompts with 🪄 Prompt Magic
+
+You can alternatively use our **Prompt Magic** tool to automatically improve your prompt based on feedback provided by you for a given generation.
+
+1. Click **Fork** to start editing a new variant.
+2. Add some inputs to generate a response.
+3. Click 🪄 **Prompt Magic**.
+4. Provide feedback critiquing the generation (eg: "Response is too short, uses a lot of jargon").
+
+<Tip>To get the best responses using **Prompt Magic**, we recommend providing highly detailed pieces of feedback to our tool. We use our own LLMs under the hood to automatically improve your prompt.</Tip>
+
+5. Click **Submit Feedback** to automatically improve your prompt.
+6. Click **Save** to save your changes or **Undo** to revert back to your original prompt.

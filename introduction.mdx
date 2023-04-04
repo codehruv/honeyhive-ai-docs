@@ -3,27 +3,35 @@ title: "Introduction"
 description: "The Optimization Platform for Large Language Model Apps"
 ---
 
-## What is HoneyHive?
+### What is HoneyHive?
 
 HoneyHive is the **Optimization Platform** that helps you build powerful LLM-powered apps with quantitative rigor and continuously improve them in production. We help you **build, evaluate, deploy, monitor and fine-tune** LLM apps for production use-cases, allowing you to iteratively improve model performance & align your models with your users’ preferences.
 
 ![monitoring](/images/monitoring.png)
 
-## Pre-Production
+### Pre-Production
 
 Using HoneyHive, your team can continuously iterate on your production LLM apps and evaluate any new model-prompt configurations against a wide variety of custom quantitative metrics (Unit Tests, NLP metrics or LLM-based evaluation metrics) before pushing changes to production. This helps you safely validate model performance and understand where your model may potentially underperform in production. 
 
 After running an evaluation with HoneyHive, your team can safely deploy the best variants to production using our proxy server without having to change your backend code. This helps improve your team's iteration velocity and removes unnecessary dependencies between ML, Data Science and Engineering teams.
 
-## In-Production
+### In-Production
 
 Once in production, we help you discover new insights, behaviors and anomalies by logging your LLM completion requests, user feedback, custom metrics and any user metadata. You can quickly visualize any custom metrics, compare data slices, and understand the distribution of your production data via our embeddings and clustering visualizations.
 
 Your team can use these insights to automatically improve prompts with our `Prompt Magic` feature, re-evaluate your new model-prompt configuration against your baseline variant and run live A/B tests in production to further validate performance improvements against user feedback or any custom metrics.
 
-## Fine-Tuning
+### Fine-Tuning
 
 To further optimize your costs, latency or performance, you can use your production logs to quickly fine-tune custom models across all major LLM providers or curate and export datasets to fine-tune your own custom, open-source model via third-party services such as MosaicML. Once you have fine-tuned a model, you can quickly run a quantitative evaluation against your baseline variant to validate performance improvements before deploying the new model to production.
+
+### Integration
+
+Our APIs and SDKs are designed to be easy to use and integrate with your existing infrastructure and the larger LLMOps ecosystem (Langchain, LlamaIndex, etc.). 
+
+<Tip>Everything you can do via the platform can be done programmatically via the SDK.</Tip>
+
+<br />
 
 <CardGroup>
   <Card title="Getting Started" icon="rectangle-terminal" href="/getting-started">
@@ -53,4 +61,3 @@ To further optimize your costs, latency or performance, you can use your product
 </CardGroup>
 
 <Note>Our documentation is a work in progress. If you have any questions, please reach out to us at [dhruv@honeyhive.ai](mailto:dhruv@honeyhive.ai).</Note>
-
