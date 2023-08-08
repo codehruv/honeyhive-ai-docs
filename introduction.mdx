@@ -1,56 +1,48 @@
 ---
-title: "Introduction"
-description: "The developer-first LLMOps platform"
+title: "Introducing HoneyHive"
+description: "The developer platform for Generative AI"
 ---
 
 ### What is HoneyHive?
 
-HoneyHive is the **developer platform** that helps you build, evaluate and continuously optimize powerful LLM-powered apps with human feedback, quantitative rigor and safety best-practices. We offer powerful features that help you **manage prompts, evaluate and compare variants, monitor models in production, define custom metrics and manage datasets** across the entire ML lifecycle - helping you iterate and improve your models with confidence from prototype to production, and beyond.
+HoneyHive is the **developer platform** that helps you debug, evaluate and continuously improve your LLM apps with human feedback, quantitative rigor and safety best-practices. HoneyHive can help you **manage and version prompts, debug chains or agents, evaluate app variants against custom metrics and monitor performance metrics in production** - helping you iteratively take your LLM apps from prototype to production, and continuously improve them with data-driven insights.
 
 ![monitoring](/images/monitoring.png)
 
-### Pre-Production
+### Iterate and evaluate
 
-Using HoneyHive, your team can continuously iterate on your production LLM apps and evaluate any new model-prompt configurations against a wide variety of custom quantitative metrics (Unit Tests, NLP metrics or LLM-based evaluation metrics) before pushing changes to production. This helps you safely validate model performance and understand where your model may potentially underperform in production. 
+Using HoneyHive, your team can continuously iterate on new prompts and models in the **Playground** with your entire team and evaluate any new app versions against a wide variety of **custom metrics** and **AI feedback functions** before pushing changes to production. This helps you debug errors, safely validate app performance and run back-tests to understand if new versions are potentially regressing.
 
-After running an evaluation with HoneyHive, your team can safely deploy the best variants to production using our proxy server without having to change your backend code. This helps improve your team's iteration velocity and removes unnecessary dependencies between Engineering, Data Science and Product teams.
+### Monitor in production
 
-### In-Production
+Once in production, HoneyHive helps you discover new insights, understand user behavior and detect anomalies across your application pipeline. Get started by instrumenting your application to **log completion requests, user sessions or traces, user feedback, custom metrics and user-specific metadata**. You can quickly visualize any custom metrics, segment or compare data slices, and discover interesting clusters in your production data with embeddings maps.
 
-Once in production, we help you discover new insights, behaviors and anomalies by logging your LLM completion requests, user feedback, custom metrics and any custom metadata. You can quickly visualize any custom metrics, compare data slices, and understand the distribution of your production data via our embeddings and clustering visualizations.
+Your team can use these insights to improve prompts with `Prompt Magic`, back-test new versions against your baseline variant and run live A/B tests in production to further validate performance improvements against user feedback or any custom metrics.
 
-Your team can use these insights to automatically improve prompts with our `Prompt Magic` feature, re-evaluate your new model-prompt configuration against your baseline variant and run live A/B tests in production to further validate performance improvements against user feedback or any custom evaluation metrics.
+### Fine-tune custom models
 
-### Fine-Tuning
-
-To further optimize your costs, latency or performance, you can use your production logs to quickly fine-tune custom models across all major LLM providers or curate and export datasets to fine-tune your own custom, open-source model via third-party services. Once you have fine-tuned a model, you can quickly run a quantitative evaluation against your baseline variant to validate performance improvements before deploying the new model to production.
+To customize and optimize your models, you can use your production logs to quickly fine-tune OpenAI models or export datasets to fine-tune your own custom, open-source model with 3rd-party products. Once you have fine-tuned a model, you can quickly run a quantitative evaluation against your baseline variant to validate performance improvements before deploying the new model to production.
 
 ### Integration
 
-Our APIs and SDKs are designed to be easy to use and integrate with your existing infrastructure and the larger LLM ecosystem (Langchain, LlamaIndex, etc.). 
+Our SDK is designed to be developer-friendly and integrate with your existing infrastructure and the larger LLM ecosystem (Langchain, LlamaIndex, Pinecone, Chroma, etc.). 
 
-<Tip>All features within the platform are programmatically via the SDK.</Tip>
+<Tip>All features within the platform are programmatically accessible via the SDK.</Tip>
 
 <br />
 
 <CardGroup>
-  <Card title="Getting Started" icon="rectangle-terminal" href="/getting-started">
-    A simple guide to quickly get up and running with HoneyHive.
+  <Card title="Log Requests & Feedback" icon="rectangle-terminal" href="/python-quickstart">
+    How to quickly set up logging with HoneyHive.
   </Card>
-  <Card title="Python Quickstart" icon="rectangle-terminal" href="/python-quickstart">
-    How to quickly get started with our Python SDK.
+  <Card title="Log Evaluation Runs" icon="rectangle-terminal" href="/programmatic-evals">
+    How to run pipeline evaluations programmatically via the SDK.
   </Card>
-  <Card title="Javascript Quickstart" icon="rectangle-terminal" href="/js-quickstart">
-    How to quickly get started with Javascript.
-  </Card>
-  <Card title="Go Quickstart" icon="rectangle-terminal" href="/go-quickstart">
-    How to quickly get started with our Go SDK.
+  <Card title="Create Evaluation Metrics" icon="rectangle-terminal" href="/metrics">
+    How to set up metrics and run evaluations in HoneyHive.
   </Card>
   <Card title="Concepts" icon="sliders" href="/concepts">
     Some key concepts behind our platform.
-  </Card>
-  <Card title="Core Capabilities" icon="ellipsis" href="/features">
-    Key features and how to get value from our platform.
   </Card>
   <Card title="API Reference Guide" icon="heading" href="/api-reference/authentication">
     Our reference guide on how to integrate the HoneyHive SDK and APIs with your application.
@@ -59,5 +51,7 @@ Our APIs and SDKs are designed to be easy to use and integrate with your existin
     Guides for prompt engineering and fine-tuning your models.
   </Card>
 </CardGroup>
+
+<br />
 
 <Note>Our documentation is a work in progress. If you have any questions, please reach out to us at [dhruv@honeyhive.ai](mailto:dhruv@honeyhive.ai).</Note>

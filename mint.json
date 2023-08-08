@@ -18,7 +18,7 @@
   },
   "topbarLinks": [
     {
-      "name": "Request Early Access",
+      "name": "Sign Up",
       "url": "https://6c7ll5kpfok.typeform.com/to/fpUt5tG9?typeform-source=honeyhive.ai"
     }
   ],
@@ -40,23 +40,23 @@
   ],
   "navigation": [
     {
-      "group": "Home",
+      "group": "Overview",
       "pages": ["introduction"]
     },
     {
-      "group": "Getting Started",
-      "pages": ["projects", "prompts", "evaluation", "deployment", "monitoring", "finetuning"]
+      "group": "Quickstart Tutorials",
+      "pages": ["python-quickstart", "programmatic-evals"]
     },
     {
-      "group": "Quickstart Guides",
-      "pages": ["python-quickstart", "js-quickstart", "go-quickstart"]
+      "group": "Guides",
+      "pages": ["projects", "prompts", "metrics", "evaluation", "monitoring", "finetuning"]
     },
     {
-      "group": "Learn More",
-      "pages": ["concepts", "features", "resources"]
+      "group": "Learn more",
+      "pages": ["concepts", "resources"]
     },
     {
-      "group": "Quickstart Guide",
+      "group": "Quickstart guide",
       "pages": [
         "api-reference/authentication",
         "api-reference/projects",

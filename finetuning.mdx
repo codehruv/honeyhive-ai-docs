@@ -1,5 +1,5 @@
 ---
-title: "Fine-Tune Custom Models"
+title: "Fine-tune custom models"
 description: "Use production logs and user feedback data to fine-tune custom models."
 ---
 
@@ -7,15 +7,15 @@ Once you have integrated our SDK to your application and started logging user fe
 
 <Note>We typically recommend a sample size of at least couple hundred examples to fine-tune a custom model effectively. In most cases, increasing the size of your dataset sample size results in linear performance improvements.</Note>
 
-## Curate a fine-tuning dataset
+### Curate a fine-tuning dataset
 
-1. Filter your model generations in [HoneyHive](https://app.honeyhive.ai/datasets/generations) using user feedback columns that indicate high data quality (eg: "Accepted", "Edit Distance < 10", etc.)
+1. Filter your model completions in [HoneyHive](https://app.honeyhive.ai/datasets/generations) using user feedback property that indicates high data quality (eg: "Accepted", "Edit Distance < 10", etc.)
 
 ![finetuning0](/images/finetuning0.png)
 
 2. Click **Create Fine-Tuning Payload** to save this data snapshot as a fine-tuning dataset. Provide the dataset a name and (optionally) a description. Once saved, this dataset can be found in `Fine-Tuning` within **Datasets** tab in the sidebar. Alternatively, you can also directly fine-tune a new model by clicking **Go to Fine-Tuning**.
 
-## Start a fine-tuning job
+### Start a fine-tuning job
 
 1. Navigate to `Fine-Tuning` within the **Datasets** tab in the sidebar to view any saved fine-tuning datasets. Here, you can select your dataset and click **Fine-Tune** to start the fine-tuning process.
 

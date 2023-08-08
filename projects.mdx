@@ -1,18 +1,18 @@
 ---
-title: "Manage Projects"
-description: "Organize and manage all your LLM deployments in separate projects."
+title: "Create a project"
+description: "Organize and manage all your LLM apps in separate projects."
 ---
 
-In the context of HoneyHive, a project refers to a collection of prompts, models, data, evaluations and metrics that work together to accomplish a specific task for which you're using an LLM. For example, a SQL code generator will be considered a seperate Project vs a SQL code interpreter.
+In the context of HoneyHive, a project refers to a collection of prompts, models, datasets, evaluation runs and metrics that work together to accomplish a specific task for which you're using an LLM. For example, a SQL code generator will be considered a seperate Project vs an email generator within the same application.
 
 <Tip>It is best to organize each project within your workspace as a separate task for which you're using large language models. This allows you to standardize data structures and schema for each individual project but allows the flexibility to store multiple prompt variants within each Project space.</Tip>
 
-## Create a new project
+### Create a new project
 
-1. Log in to [HoneyHive](https://app.honeyhive.ai) via Google SSO.
+1. Log in to [HoneyHive](https://app.honeyhive.ai) via our authentication client.
 2. Create a new project by clicking on the **Add Project** button.
-3. Give your project a name (optionally type and description as well) and click **Create Project**.
+3. Give your project a name (and optionally a type and description as well) and click **Create Project**.
 
 ![projects](/images/projects.png)
 
-<Note>In cases where you're chaining multiple LLMs together, we recommend separating each part of your chain where you use an LLM as a unique project within HoneyHive.</Note>
+<Note>In instances where you're chaining multiple LLM & tool calls together, we recommend instrumenting each component of a chain inside the same project within HoneyHive.</Note>

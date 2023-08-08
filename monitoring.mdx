@@ -1,21 +1,64 @@
 ---
-title: "Monitor Performance"
-description: "Connect your application to HoneyHive and start monitoring model performance in production."
+title: "Monitor performance"
+description: "Connect your application to HoneyHive and start monitoring your application performance in production."
 ---
 
-Once you have integrated our SDK to your application and started logging user feedback, you can start observing cost, latency and performance metrics on our Analytics dashboard in real time.
+Once you have integrated our SDK to your application and started logging requests, user feedback and metadata, you can start analyzing cost, latency and performance metrics in the Monitoring dashboard.
 
-<Note>For certain subscription tiers, we automatically embed all user inputs and model completions for quantitative analysis within HoneyHive.</Note>
+<Note>For customers on Growth and Enterprise plans, we automatically embed all user inputs and model completions for quantitative analysis within HoneyHive. Please reach out if you'd like to disable this feature.</Note>
 
-## Monitor Performance in Production
+### Why monitor
 
-1. Watch your prompt's performance in real-time in [HoneyHive](https://app.honeyhive.ai/dashboard).
-2. Slice and dice your data using `where` and `group by` filters. Any user properties or custom metadata ingested via the `feedback` endpoint will appear here.
+Given the stochastic nature of LLMs, monitoring your LLM app in production is a critical step in ensuring reliability and robustness of your LLM application. HoneyHive helps you answer mission critical questions such as:-
+
+1. **What is the distribution of response times?**
+   Understanding the distribution of response times can help identify potential bottlenecks and optimize the application's latency to ensure fast and seamless user experiences.
+
+2. **How does the LLM's performance vary across different user segments?**
+   Analyzing performance variations across different user groups can reveal if certain demographics or usage patterns are affecting the LLM's responses, enabling you to tailor the application to specific user needs.
+
+3. **What are the most common user queries?**
+   Identifying frequently asked questions or popular queries can guide content creation and help improve the LLM's ability to handle common requests effectively.
+
+4. **How often does the LLM provide incorrect or nonsensical answers?**
+   Monitoring the rate of incorrect responses can highlight potential issues with the model's training data or areas where further fine-tuning is required.
+
+5. **Are there any sudden changes in user satisfaction metrics?**
+   Tracking user satisfaction over time can alert you to unexpected changes in the LLM's performance, which may indicate an underlying problem or the impact of recent updates.
+
+6. **Which external events or user behaviors trigger spikes in LLM requests?**
+   Identifying events or user actions that cause increased LLM usage can help in capacity planning and managing resource allocation effectively.
+
+7. **How does the LLM's accuracy compare to a baseline model or previous versions?**
+   Comparing the performance of the current LLM to previous iterations or alternative models can offer insights into the effectiveness of updates or changes made to the application.
+
+8. **What are the common sentiment trends in user queries and responses?**
+   Analyzing the sentiment of user queries and the LLM's generated responses can help gauge user satisfaction and identify areas for improvement.
+
+9. **Are there any specific user feedback patterns indicating issues with the LLM?**
+   Reviewing user feedback and sentiment can provide qualitative insights into potential shortcomings or strengths of the LLM.
+
+10. **What are the resource utilization patterns during peak usage hours?**
+    Monitoring resource utilization during high traffic periods can help ensure that the application infrastructure is adequately provisioned to handle demand.
+
+11. **Are there any correlations between LLM performance and external factors (e.g., time of day, geographical location)?**
+    Identifying correlations between the LLM's performance and external variables can shed light on usage patterns and inform optimizations tailored to specific contexts.
+
+When developing and deploying an LLM application, it is crucial to recognize that its behavior can be dynamic, changing over time and under varying conditions. As a result, merely testing an LLM in a controlled environment before deployment is not sufficient to guarantee its performance in the real world. Real-world interactions can lead to unexpected scenarios and potential pitfalls that might go unnoticed during the development phase.
+
+Monitoring an LLM in production serves as a proactive measure to identify and address potential issues before they escalate into critical problems. By continuously tracking the LLM's performance, you gain valuable insights into its behavior, patterns, and user interactions. These insights can help us optimize the application's performance, ensure consistent and accurate responses, and maintain user satisfaction.
+
+### Visualizing performance metrics
+
+1. Observe your prompt's performance in real-time in [HoneyHive](https://app.honeyhive.ai/dashboard).
+2. Define the metric you'd like to visualize. Any custom metrics and AI feedback functions defined in the Metrics interface can be found here. 
+3. Define the function you'd like to aggregate this metric over. Some common functions include `Average`, `Sum`, `Percentage True` and `99th Percentile`. 
+2. Filter your data and compare data slices using `where` and `group by` filters. Any user properties or custom metadata ingested via the `feedback` endpoint can be found here.
 3. Use the [Generations](https://app.honeyhive.ai/datasets/generations) page or API endpoint to view the generated text, user feedback and any custom metadata.
 
 ![monitoring1](/images/monitoring1.png)
 
-## Observe Data Distribution with t-SNE Embeddings Visualization
+### Analyze user inputs and model completions with embeddings
 
 Since we automatically embed user inputs and model completions, you can visualize the distribution of your production data and behavior amongst data clusters with our embeddings visualization tool.
 

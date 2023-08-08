@@ -1,0 +1,47 @@
+---
+title: "Create metrics & guardrails"
+description: "Define custom metrics, AI feedback functions and guardrails for your unique use-case"
+---
+
+When building LLM apps, performance evaluation is a critical aspect of the development process. Metrics play a vital role in assessing the effectiveness of your apps and ensuring they meet the desired cost, safety, and performance criteria. HoneyHive provides the capability to define custom metrics and set up guardrails tailored to your unique use-case, which can be used to evaluate performance in an offline setting, or when monitoring live data from production. 
+
+This tutorial will guide you through the process of defining custom metrics and guardrails in HoneyHive, covering how metrics work within the platform and how they can be used to evaluate end-to-end LLM pipelines.
+
+### Why define custom metrics and guardrails
+
+1. **Tailored Evaluation:** Every LLM app is unique, and standard metrics may not fully capture the specific requirements of your use-case. Custom metrics allow you to design evaluations that are aligned with your app's objectives, enabling more relevant and meaningful assessments.
+2. **Holistic Assessment:** LLM apps often involve complex pipelines, and evaluating the end-to-end performance is crucial. Custom metrics enable you to assess the entire pipeline, considering various stages of data processing and model interactions.
+3. **Cost and Safety Considerations:** In production environments, monitoring the cost of LLM app usage and ensuring safety are paramount. Custom metrics and guardrails can help you keep track of resource consumption and set up safety mechanisms to prevent undesirable outcomes.
+
+### Metric types
+
+We provide the core infrastructure to compute two types of metrics within HoneyHive:-
+
+1. **Custom Metric:** Custom metrics allow you to define your own Python functions using external libraries such as NumPy, Pandas, Scikit Learn or Requests.
+2. **AI Feedback Functions:** AI feedback functions allow you to prompt LLMs to grade your model completions (and optionally any input features) on a scale of 1 to 10. Common metrics include detecting traits such as **Truthfulness**, **Coherence**, **Relevance** or **Hallucination**.
+
+### Create your first metric
+
+1. **Accessing the Metrics Section:** Navigate to the [**Metrics**](https://app.honeyhive.ai/metrics) tab in the left sidebar.
+2. **Creating a New Metric:** Click `Add Metric` and select the type of metric you'd like to define.
+3. **Custom Metric Example:** Let's start by defining and testing our metric. In this example, we'll define a custom metric that counts the number of sentences in a given model completion. See below.
+
+![metriccode](/images/metriccode.png)
+
+<Tip>**Testing Metrics:** You can quickly retrieve the most recent datapoint from your project to test your metric against real-world app completions.</Tip>
+
+### Define guardrails
+
+Once you have defined your custom metric, you can set up guardrails or passing ranges to monitor and control your model's performance. Guardrails help you enforce certain criteria that your model must meet, and they can be configured based on your specific requirements.
+
+For instance, let's consider the example of an email generation model. We may want to set up a guardrail to ensure that the number of sentences in the generated email is less than 10. Here's how you can configure the guardrail:
+
+1. **Metric Configuration:** Define the passing range for the custom metric. In this case, we want the number of sentences to be less than 10. This means that if the metric returns a value greater than or equal to 10, the completion will not pass the guardrail.
+2. **Production Computation:** Choose whether to enable this metric to be computed in production. In some cases, you may only want to compute this metric offline during model development and testing.
+3. **Backfilling Data:** You may also have the option to backfill all logged data in your project with this metric. This helps ensure consistent evaluation across your entire dataset.
+
+![metricconfig](/images/metricconfig.png)
+
+### Offline evaluations vs. production monitoring
+
+It's important to note that some NLP metrics may require ground truth labels (i.e., ideal model responses or outputs) to compute. For this reason, they are better suited for offline evaluations during model development and testing rather than production monitoring for generative tasks.

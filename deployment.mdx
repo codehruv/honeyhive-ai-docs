@@ -1,6 +1,6 @@
 ---
-title: "Deploy New Variants"
-description: "Deploy your new model-prompt configurations to production without changing code."
+title: "Set up CI/CD integration"
+description: "Deploy your new model-prompt configurations to production using the proxy implementation (optional)."
 ---
 
 ## Deploy your variant
@@ -17,14 +17,14 @@ description: "Deploy your new model-prompt configurations to production without 
 ## Integrate the SDK/API
 
 1. Install the SDK via `pip install honeyhive` or connect via your favorite web client.
-2. Replace your model provider requests with our **Generations** endpoint. More details on this can be found in the [API documentation](/api-reference/generations).
+2. Log your completions requests with our **Generations** endpoint. More details on this can be found in the [API documentation](/api-reference/generations).
 3. Instrument your application to collect user feedback using our feedback API. More details on this can be found in the [API documentation](/api-reference/feedback).
 
 <CardGroup>
   <Card title="Python Quickstart" icon="rectangle-terminal" href="/python-quickstart">
-    How to quickly get started with our Python SDK
+    How to quickly get started using Python
   </Card>
   <Card title="Javascript Quickstart" icon="rectangle-terminal" href="/js-quickstart">
-    How to quickly get started with Javascript
+    How to quickly get started using Javascript
   </Card>
 </CardGroup>
