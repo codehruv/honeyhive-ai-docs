@@ -130,5 +130,10 @@
         "method": "bearer",
         "name": "api_key"
      }
- }
+  },
+  "analytics": {
+    "amplitude": {
+        "apiKey": "9f47778dd825a6e6fd17ae5b4c5ca6b0"
+    }
+  }
 }
