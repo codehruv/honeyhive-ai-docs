@@ -1,0 +1,61 @@
+---
+title: "Run offline evaluations"
+description: "Quantitatively evaluate and compare your app variants with human feedback, custom metrics and AI feedback functions."
+---
+### Why evaluate
+
+Developing production LLM apps comes with its own unique set of challenges. Here are some key challenges to consider:
+
+1. **Unpredictable Outputs:** LLMs can produce different outputs for the same prompt, even when using the same temperature setting. Additionally, periodic changes in the underlying data and APIs can contribute to unpredictable results.
+2. **Security:** It is important to protect against prompt injection attacks and PII leakage. Safeguarding the integrity and security of your application requires precautions to prevent unauthorized manipulation of prompts.
+3. **Bias:** LLMs may contain inherent biases that can lead to unfair user experiences. It is crucial to identify and address these biases to ensure equitable outcomes for all users.
+4. **Cost:** Using state-of-the-art models can be expensive, particularly at scale. Evaluations help you select the right-sized model that meets your specific cost vs performance tradeoff.
+5. **Latency:** Real-time user experiences require fast response times. Evaluations help you strike a balance between latency and performance, enabling you to make informed decisions to help improve user experience.
+
+To address these challenges, testing and evaluation processes are crucial when shipping LLM apps to production. Evaluations help uncover issues related to LLMs and provide valuable insights for making informed decisions. These insights can lead to alternative design choices, improved models or prompts, and other appropriate measures.
+
+To get ourselves familiar, let’s try running an evaluation with HoneyHive.
+
+### Run your first evaluation
+
+1. **Accessing the Evaluations Section:** Navigate to the [**Evaluation**](https://app.honeyhive.ai/evaluate) tab in the left sidebar and click `New Evaluation`
+2. **Selecting configs:** Select the version you'd like to evaluate. For this tutorial, let's evaluate two variants using two different models - claude-instant-v1.1 vs text-davinci-003.
+
+![selectprompts](/images/selectprompts.png)
+
+3. **Defining test cases:** Select a pre-existing dataset or upload test cases. Alternatively, you can synthetically generate test cases by providing few-shot examples. In this example, we'll only use a single test case with our input variables (tone and topic) and our expected output (ground truth).
+
+![selecttestcases](/images/selecttestcases.png)
+
+4. **Selecting evaluation metrics:** Next, let's select some metrics to evaluate our prompt templates against. The custom metric that we defined earlier can be found here.
+
+![selectmetrics](/images/selectmetrics.png)
+
+5. **Running the evaluation:** Click `Run Comparison` to run your evaluation and analyze the evaluation report.
+
+![evaluation1](/images/evaluation1.png)
+
+### Collaborate and analyze
+
+Once you have completed the evaluation and obtained the evaluation report, sharing the results is crucial for collaboration and decision-making.
+
+1. **Interpret the Evaluation Report:** Analyze the report for patterns, trends, and insights in the app variants and models.
+2. **Save the Evaluation Run:** Ensure you save the evaluation run within HoneyHive for future reference.
+3. **Add comments:** Quickly add comments highlighting key findings, strengths, and weaknesses across app versions.
+4. **Share the Evaluation Report:** Share results with the development team, product managers, AI experts, security and privacy specialists, domain experts, and end users, as appropriate.
+5. **Ask for Feedback:** Encourage domain experts to provide their own feedback on each completion (using 👍 or 👎) to help you better understand performance and correlation with your pre-defined metrics.
+6. **Iterate and Reevaluate:** Use the insights to refine app variants, models, and evaluation methodologies for continuous improvement.
+
+![evaluationshare](/images/evaluationshare.png)
+
+By sharing evaluation results and collaborating with stakeholders, you can make informed decisions to enhance your LLM app's performance, security, and user experience.
+
+### Running evaluations programmatically via the SDK
+
+Evaluating simple prompt variants along with external tools like Pinecone can be done via the UX, as described in this tutorial. That said, production LLM pipelines often involve multiple steps, LLM chains and external tools working together to deliver the final output. 
+
+To support complex pipelines, we allow developers to log evaluation runs programmatically via the SDK.
+
+<Card title="Run pipeline evaluations" icon="rectangle-terminal" href="/programmatic-evals">
+Track, version and log your LLM pipeline evaluation runs with the Python SDK
+</Card>
