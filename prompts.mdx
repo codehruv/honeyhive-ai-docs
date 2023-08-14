@@ -1,0 +1,41 @@
+---
+title: "Playground"
+description: "Add, manage and version your prompt-model configurations."
+---
+
+HoneyHive allows you to define, version and manage your prompt templates and model configurations within each project. To manage your configs, navigate to the **Prompts** tab in the left sidebar.
+
+<Note>A prompt-model configuration refers to a combination of prompt, model and hyperparameter settings unique to a particular version. Throughout our docs, we may use the term "version" or "prompt template" to refer to a prompt-model configuration.</Note>
+
+![promptmanagement](/images/promptmanagement.png)
+
+### Define your first prompt template
+
+1. You can access the [**Playground**](https://app.honeyhive.ai/playground) within the **Prompts** tab in the left sidebar.
+2. Add a version name for your prompt.
+3. Choose your application type (Chat or Completions), model provider and hyperparameter settings. We currently offer OpenAI & Anthropic models natively via the Playground, but you can still use your own models to run evaluations and log requests programmatically via the SDK.
+
+<Note>Currently, only OpenAI's GPT 3.5 Turbo and GPT-4 models support the chat completions format.</Note>
+
+3. Insert dynamic input variables in your prompt template using curly brackets `{{` and `}}`. You'll be using these variables when logging requests and running evaluations with HoneyHive.
+
+<Tip>Dynamic variables are typically useful when inserting inputs from end-users or external context from tools such as vector databases.</Tip>
+
+4. Click **Save** to save your changes.
+
+![playground2](/images/playground2.png)
+
+### Optimize your prompts with 🪄 Prompt Magic
+
+<Note>Prompt Magic is currently in beta and only available to select customers. Please reach out if you'd like access to this feature.</Note>
+
+**Prompt Magic** helps you automatically improve your prompt based on feedback provided by you for a given completion. Let's get started by forking a new prompt template:-
+
+1. Click **Fork** to start editing a new variant.
+2. Make some changes to your prompt template and run a request.
+3. Click 🪄 **Prompt Magic**.
+4. Provide feedback in natural language critiquing the response (eg: "Response is too short, uses a lot of jargon").
+
+<Tip>To get the best responses using **Prompt Magic**, provide highly detailed feedback. This helps provide GPT-4 more context to suggest potential improvements to your prompt.</Tip>
+
+6. **Accept** your new prompt or quickly undo any changes.

@@ -1,13 +1,13 @@
 ---
 title: "Getting Started"
-description: "Connect your servers to HoneyHive and start monitoring your foundation models."
+description: "Connect your application to HoneyHive and start optimizing your prompts and models."
 ---
 
-## Getting Started
+Our APIs and SDKs are designed to be easy to use and integrate with your existing infrastructure and the larger LLMOps ecosystem (Langchain, LlamaIndex, etc.). 
 
-Our API and SDK are designed to be easy to use and integrate with your existing infrastructure.
+<Tip>Everything you can do via the platform can be done programmatically via the SDK.</Tip>
 
-Everything you can do via the platform can be done via the API.
+<br />
 
 ## Create a new project
 
@@ -15,30 +15,54 @@ Everything you can do via the platform can be done via the API.
 2. Create a new project by clicking on the **New Project** button.
 3. Give your project a name (optionally type and description as well) and click **Create Project**.
 
+![projects](/images/projects.png)
+
+It is best to organize each project within your workspace as a separate task for which you're using large language models. For example, a SQL code generate will be concidered a seperate Project vs a SQL code interpreter. This allows you to standardize data structures and schema for each individual project but allows the flexibility to store multiple prompt variants within each Project space.
+
+<br />
+
 ## Add your first prompt
 
-1. Click on the [**Playground**](https://app.honeyhive.ai/playground) tab in the left sidebar.
-2. Add a new version name for the prompt (e.g. `v1`, `davinci-basic`, etc.)
-3. Type in your prompt with `{{` and `}}` around the variable you want to dynamically insert.
-4. Click **Save Prompt**.
+1. You can access the [**Playground**](https://app.honeyhive.ai/playground) within the **Prompts** tab in the left sidebar.
+2. Add a version name for your prompt (e.g. `v1`, `davinci-basic`, etc.). We typically recommend using a serialized format such as v1.x.x to better organize your prompts.
+3. Type in your prompt with `{{` and `}}` around the variable you want to dynamically insert. You'll be using these variable names when sending requests to HoneyHive.
+4. Click **Save** to save your changes.
+
+![playground2](/images/playground2.png)
+
+<br />
 
 ## Evaluate your prompt
 
 1. Click on the [**Evaluation**](https://app.honeyhive.ai/evaluate) tab in the left sidebar.
-2. Click `Add Dataset` to upload a dataset to evaluate your prompt.
-3. Click `Add Metrics` to add a metric to evaluate your prompt.
+2. Click `Add Dataset` to upload a dataset to evaluate your prompt. Alternatively, you also have the option to generate a synthetic evaluation dataset.
+3. Click `Add Metrics` to add a metric to evaluate your prompt. We provide a few out-of-the-box metrics and allow users to add their own custom metrics in Python via an in-built code editor within the platform.
 4. Click `Run Comparison` to run your evaluation.
 5. Wait for the evaluation to complete and view the results.
 6. Rate the results to begin collecting labelled data.
+
+![evaluation1](/images/evaluation1.png)
+
+<br />
 
 ## Deploy your prompt
 
 1. Click on the [**Prompts**](https://app.honeyhive.ai/prompts) tab in the left sidebar.
 2. Select the prompt you want to deploy.
 3. Click on the **Deploy** button.
-4. Copy the deployment code snippet (which contains your API keys) and paste it into your application.
+4. Copy the deployment code snippet (which contains your API keys) and paste it into your codebase.
+
+![promptmanagement](/images/promptmanagement.png)
+
+<br />
 
 ## Integrate the SDK/API
+
+1. Install the SDK via `pip install honeyhive` or connect via your favorite web client.
+2. Replace your model provider requests with our **Generations** endpoint. More details on this can be found in the [API documentation](/api-reference/generations).
+3. Instrument your application to collect user feedback using our feedback API. More details on this can be found in the [API documentation](/api-reference/feedback).
+
+![deploymentcode](/images/deploymentcode.png)
 
 <CardGroup>
   <Card title="Python Quickstart" icon="rectangle-terminal" href="/python-quickstart">
@@ -49,11 +73,12 @@ Everything you can do via the platform can be done via the API.
   </Card>
 </CardGroup>
 
-1. Install the SDK via `pip install honeyhive` or connect via your favorite web client.
-2. Replace your model provider requests with our **Generations** endpoint. More details on this can be found in the [API documentation](/api-reference/generations).
-3. Instrument your application to collect user feedback using our feedback API. More details on this can be found in the [API documentation](/api-reference/feedback).
+<br />
 
 ## Monitor your prompt
 
-1. Watch your prompt's performance in real-time on the [HoneyHive platform](https://app.honeyhive.ai/dashboard).
-2. Use the [Generations](https://app.honeyhive.ai/datasets/generations) page or API to view the generated text and feedback.
+1. Watch your prompt's performance in real-time on [HoneyHive](https://app.honeyhive.ai/dashboard).
+2. Slice and dice your data using `where` and `group by` filters.
+3. Use the [Generations](https://app.honeyhive.ai/datasets/generations) page or API to view the generated text, feedback and any custom metadata.
+
+![monitoring1](/images/monitoring1.png)

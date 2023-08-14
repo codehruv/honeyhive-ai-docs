@@ -1,0 +1,51 @@
+---
+title: "Segmentation Chart"
+description: "Connect your application to HoneyHive and start monitoring your application performance in production."
+---
+### Visualizing Performance Metrics in HoneyHive
+HoneyHive provides a powerful platform for monitoring your LLM application's performance in real-time. Here's how you can effectively utilize segmentation charts to gain insights:
+
+1. **Real-time Observation:** Log in to HoneyHive to observe your LLM application's performance metrics in real-time. The dashboard provides an intuitive interface to visualize various metrics and their trends.
+2. **Metric Definition:** Define the specific metric you want to visualize. HoneyHive supports standard out-of-the-box metrics, custom metrics and user feedback. Standard metrics could include `Request Volume`, `Cost`, and `Latency`. Any custom metrics that you previously defined and enabled in production can also be visualized here. User feedback will be aggregated based on it's return type. For example, you can select `Accepted` to track percentage of requests that were accepted by end-users.
+3. **Aggregation Functions:** Choose the aggregation function that best suits your analysis. Common functions include Average, Sum, Percentage True, and 99th Percentile. Selecting the right aggregation function helps you distill complex data into meaningful insights. HoneyHive automatically provides different aggregation functions for `boolean` and `float` return-type metrics.
+4. **Data Filtering and Comparison:** Utilize the power of segmentation by using `filter` and `group by`. This allows you to focus on specific data slices based on user properties, custom metadata, or other relevant criteria. For example, you can filter by `user_country` or `subscription_tier` to perform cohort-level analysis. Any user properties or custom metadata can be found here.
+
+![monitoring1](/images/monitoring1.png)
+
+### Metric Types
+
+HoneyHive supports various metric types for monitoring your LLM application's performance:
+
+1. **Standard Metrics:** These include Request Volume, which measures the number of requests your application receives; Cost, which evaluates the expenses associated with running the application; and Latency, which assesses the time taken to respond to requests.
+2. **Custom Metrics:** You can define and enable custom metrics tailored to your application's specific needs. These metrics could be related to content quality, or any other relevant aspect.
+3. **AI Feedback Functions:** You can define and enabled AI feedback functions to be computed at ingestion-time tailored to your application's specific needs. 
+4. **User Feedback:** You can visualize any user feedback fields (as long as the return type is `Float` or `Boolean`) to analyze performance in production.
+
+<Note>**Potential costs of AI feedback functions:** Enabling AI feedback functions in production can significantly increase inference costs. We highly recommend only enabling these metrics in `Development` or `Staging` environments</Note>
+<Note>**Return Types:** A custom metric or AI feedback function will only be available to analyze under `Metric` if the return type is set as `float` or `boolean`. Any metrics with `string` return type can only be used to group or filter charts.</Note>
+
+<CardGroup cols={1}>
+  <Card title="Set up custom metrics and AI feedback functions" icon="rectangle-terminal" href="/metrics-custom">
+    How to quickly set up custom metrics and AI feedback functions.
+  </Card>
+</CardGroup>
+
+### User Properties
+
+User properties provide valuable insights into user behavior and preferences. Common examples include:
+
+1. `user_ID`: A unique identifier for each user, helping you track individual user interactions.
+2. `user_country`: Allows you to analyze how different regions interact with your application.
+3. `subscription_tier`: Helps you understand the behavior of different user segments based on their subscription level.
+
+Utilize these properties to perform cohort-level analysis, identifying trends and patterns among specific user groups.
+
+### Metadata
+
+Metadata offers flexibility in capturing additional information about user interactions. This arbitrary data can be passed with logged requests. Common examples include:
+
+1. Custom Tags: Tag requests with identifiers that hold significance within your application.
+2. Session Duration: Track how long users engage with your LLM application.
+3. Content Type: Categorize requests based on the type of content users are interacting with.
+
+Leverage metadata to gain deeper insights into user interactions and tailor your LLM application accordingly.

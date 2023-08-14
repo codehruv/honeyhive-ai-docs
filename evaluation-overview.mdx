@@ -1,0 +1,41 @@
+---
+title: "Overview"
+description: "Ensure optimal performance and user experience through rigorous evaluation before deploying new versions to production."
+---
+### Why Evaluate
+
+Developing production LLM apps comes with its own unique set of challenges. Here are some key challenges to consider:
+
+1. **Unpredictable Outputs:** LLMs can produce different outputs for the same prompt, even when using the same temperature setting. Additionally, periodic changes in the underlying data and APIs can contribute to unpredictable results.
+2. **Security:** It is important to protect against prompt injection attacks and PII leakage. Safeguarding the integrity and security of your application requires precautions to prevent unauthorized manipulation of prompts.
+3. **Bias:** LLMs may contain inherent biases that can lead to unfair user experiences. It is crucial to identify and address these biases to ensure equitable outcomes for all users.
+4. **Cost:** Using state-of-the-art models can be expensive, particularly at scale. Evaluations help you select the right-sized model that meets your specific cost vs performance tradeoff.
+5. **Latency:** Real-time user experiences require fast response times. Evaluations help you strike a balance between latency and performance, enabling you to make informed decisions to help improve user experience.
+
+To address these challenges, testing and evaluation processes are crucial when shipping LLM apps to production. Evaluations help uncover issues related to LLMs and provide valuable insights for making informed decisions. These insights can lead to alternative design choices, improved models or prompts, and other appropriate measures.
+
+### HoneyHive: A Structured Evaluation Framework
+
+HoneyHive introduces a structured evaluation framework that applies software engineering principles to LLM app development. We do this by facilitating structured evaluations similar to unit tests and regression tests in software engineering. You define input prompts, expected outputs, and evaluate model responses against your own custom metrics and AI feedback functions, therefore allowing you to curate your own test suites specific to each use-case.
+
+### Collaborative Learning and Knowledge Sharing
+
+HoneyHive fosters collaborative learning among development teams. You can easily share evaluation results, insights, and learnings, promoting collective improvement of LLM apps.
+
+### Getting Started
+
+To start using HoneyHive for evaluating your LLM apps, refer to the following resources:
+
+<CardGroup>
+  <Card title="Running Evaluations in HoneyHive" icon="flask-vial" href="/metrics-custom">
+    How to run evaluations using the HoneyHive app.
+  </Card>
+  <Card title="Logging Evaluation Runs via the SDK" icon="rectangle-terminal" href="/metrics-guardrails">
+    How to programmatically run evaluations and log runs in HoneyHive.
+  </Card>
+</CardGroup>
+<CardGroup cols={1}>
+  <Card title="Sharing and Collaboration" icon="share" href="/metrics-guardrails">
+    How to collaborate and share learnings with your team.
+  </Card>
+</CardGroup>

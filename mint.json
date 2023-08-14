@@ -18,13 +18,13 @@
   },
   "topbarLinks": [
     {
-      "name": "Documentation",
-      "url": "https://docs.honeyhive.ai"
+      "name": "Sign Up",
+      "url": "https://6c7ll5kpfok.typeform.com/to/fpUt5tG9?typeform-source=honeyhive.ai"
     }
   ],
   "topbarCtaButton": {
-    "name": "Get Started",
-    "url": "https://honeyhive.ai"
+    "name": "Log In",
+    "url": "https://app.honeyhive.ai"
   },
   "anchors": [
     {
@@ -36,24 +36,36 @@
       "name": "Community",
       "icon": "discord",
       "url": "https://discord.gg/vqctGpqA97"
-    },
-    {
-      "name": "About Us",
-      "icon": "circle-info",
-      "url": "https://honeyhiveai.notion.site/HoneyHive-AI-684f42a078a34c7e8f6d96e1dd75c9cc"
     }
   ],
   "navigation": [
     {
-      "group": "Home",
-      "pages": ["introduction", "getting-started", "python-quickstart", "js-quickstart", "go-quickstart"]
+      "group": "Overview",
+      "pages": ["introduction", "python-quickstart"]
     },
     {
-      "group": "Learn More",
-      "pages": ["features", "resources"]
+      "group": "Guides",
+      "pages": ["projects", "prompts",
+      {
+        "group": "Metrics and Guardrails",
+        "pages": ["metrics-overview", "metrics-custom", "metrics-guardrails"]
+      }, 
+      {
+        "group": "Evaluation",
+        "pages": ["evaluation-overview", "evaluation-ux", "programmatic-evals", "evaluation-collaboration"]
+      },
+      {
+        "group": "Monitoring",
+        "pages": ["monitoring", "monitoring-segmentation", "monitoring-embeddings"]
+      },
+      "finetuning"]
     },
     {
-      "group": "Quickstart Guide",
+      "group": "Learn more",
+      "pages": ["concepts", "resources"]
+    },
+    {
+      "group": "Quickstart guide",
       "pages": [
         "api-reference/authentication",
         "api-reference/projects",
@@ -127,5 +139,10 @@
         "method": "bearer",
         "name": "api_key"
      }
- }
+  },
+  "analytics": {
+    "amplitude": {
+        "apiKey": "9f47778dd825a6e6fd17ae5b4c5ca6b0"
+    }
+  }
 }

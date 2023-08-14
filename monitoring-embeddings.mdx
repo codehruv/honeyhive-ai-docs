@@ -1,0 +1,36 @@
+---
+title: "Embeddings Map"
+description: "Explore User Inputs and Model Completions with T-SNE Embeddings Plot."
+---
+In this guide, we will explore how you can leverage the power of embeddings to visualize the distribution of your production data and behavior, providing valuable insights into your application's performance.
+
+<Note>For customers on Growth and Enterprise plans, we automatically embed all user inputs and model completions for quantitative analysis within HoneyHive. Please reach out if you'd like to disable this feature.</Note>
+
+### Understanding T-SNE Embeddings Plots
+
+T-SNE (t-Distributed Stochastic Neighbor Embedding) is a dimensionality reduction technique that can be incredibly useful for visualizing high-dimensional data in a lower-dimensional space. HoneyHive automatically embeds user inputs and model completions for customers on Growth and Enterprise plans, enabling you to gain a deeper understanding of your application's behavior.
+
+### Visualizing Data Clusters
+
+1. **Distribution Analysis:** By plotting the embedded data points on a 2D plane, you can visualize the distribution of your production data and identify clusters of similar behavior. Each point represents a user input and its corresponding model completion.
+2. **Color-Coding:** The chart is color-coded by default based on different prompt variants. This default color scheme provides a quick overview of different types of interactions. However, you can take your analysis further by applying `group by` filters to the chart. This lets you group the chart by various features associated with each generation within your project. These features could include user properties, metadata, metrics, or user feedback fields.
+
+### Utilizing the Embeddings Visualization Tool
+
+To effectively use the T-SNE embeddings visualization tool in HoneyHive:
+
+1. **Access the Tool:** Log in to your HoneyHive account and navigate to the embeddings visualization section.
+2. **Explore Data Clusters:** Start by observing the distribution of data points on the plot. Identify clusters of similar behavior or patterns.
+3. **Apply Filters:** To gain deeper insights, apply filters to the chart using the group by feature. This allows you to segment the data based on specific attributes or features, providing a more detailed analysis.
+4. **Interact with Data Points:** You can interact with individual data points to retrieve more information about the corresponding user input and model completion. This helps you understand the context behind each interaction.
+
+![embeddings](/images/embeddings.png)
+
+### Enhancing Insights and Decision-Making
+
+The T-SNE embeddings plots in HoneyHive offer a powerful way to analyze and understand your LLM application's performance. By visualizing data clusters and utilizing filters, you can:
+
+1. Identify patterns and trends in user interactions.
+2. Detect anomalies or outliers in the data.
+3. Tailor your LLM application based on specific user groups or segments.
+4. Validate the effectiveness of model improvements or updates.

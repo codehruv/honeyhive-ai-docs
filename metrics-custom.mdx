@@ -1,0 +1,41 @@
+---
+title: "Defining Metrics"
+description: "Define custom metrics and AI feedback functions"
+---
+
+### Metric types
+
+HoneyHive provides the core infrastructure to compute two types of metrics:-
+
+1. **Custom Metric:** Custom metrics allow you to define your own Python functions using external libraries such as `NumPy`, `Pandas`, `Scikit Learn` or `Requests`.
+2. **AI Feedback Functions:** AI feedback functions allow you to prompt LLMs to grade your model completions (and optionally any input features) on a scale of 1 to 10. Common metrics include detecting traits such as **Truthfulness**, **Coherence**, **Relevance** or **Hallucination**.
+
+<Note>**Potential Bias with AI Feedback Functions:** While AI feedback functions can be good quantitative heuristic to measure performance, they're prone to occasional bias and can be misleading across certain scenerios. We recommend users to test their AI feedback functions in the metric editor against recent production data and try to rely on human feedback when evaluating variants.</Note>
+
+### Define a custom metric
+
+1. **Accessing the Metrics Section:** Navigate to the [**Metrics**](https://app.honeyhive.ai/metrics) tab in the left sidebar.
+2. **Creating a New Metric:** Click `Add Metric` to create a new metric and select `Custom Metric`.
+3. **Custom Metric Example:** Let's start by defining and testing our metric. In this example, we'll define a custom metric that counts the number of sentences in a given model completion. See below.
+
+![metriccode](/images/metriccode.png)
+
+4. **Testing a Custom Metric:** You can quickly test your metric with the built-in IDE. To test a metric, define your datapoint in a JSON format and click `Run` to compute the metric.
+
+<Tip>**Testing Metrics:** You can quickly retrieve the most recent datapoint from your project to test your metric against real-world app completions.</Tip>
+
+### Define an AI feedback function
+
+1. **Accessing the Metrics Section:** Navigate to the [**Metrics**](https://app.honeyhive.ai/metrics) tab in the left sidebar.
+2. **Creating a New Metric:** Click `Add Metric` and select `AI Feedback Function`.
+3. **AI Feedback Function Example:** Let's start by defining and testing our metric. In this example, we'll define an AI feedback function that prompts GPT-4 rate whether a given model completion is concise on a scale of 1-10. See below.
+
+![metricconfig](/images/metricAI.png)
+
+4. **Testing an AI Feedback Function:** You can quickly test your feedback function with the built-in prompt editor. To test a metric, define your datapoint in a JSON format and click `Run` to compute the metric.
+
+<Tip>**Using datapoint schema in prompt template:** Some feedback functions such as `Hallucination` require the model to not only analyze the completion, but also take the user input and retrieval chunks into account. HoneyHive allows you to edit the prompt template and use the datapoint schema to insert any property associated with a datapoint into the prompt template. Simply wrap the property name around curly brackets `{{` `}}` in the prompt template. Example: `{{inputs}}`.</Tip>
+
+### Offline evaluations vs. production monitoring
+
+It's important to note that some NLP metrics may require ground truth labels (i.e., ideal model responses or outputs) to compute. For this reason, they are better suited for offline evaluations during model development and testing rather than production monitoring for generative tasks.

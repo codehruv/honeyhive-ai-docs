@@ -1,0 +1,195 @@
+---
+title: "Programmatic Evaluations"
+description: "Logging evaluation runs programmatically with the Python SDK"
+---
+
+
+### Get API key
+
+After signing up on the app, you can find your API key in the [Settings](https://app.honeyhive.ai/settings/account) page under Account.
+
+### Install the SDK
+
+<CodeGroup>
+```bash Python
+pip install honeyhive
+```
+</CodeGroup>
+
+### Initialize your evaluation run
+
+Let's start by running a quick experiment to test whether a including certain instructions in the prompt actually affects outputs across two different prompt variants. For this particular example, we'll compare a prompt with explicit instructions to output concise sales emails vs another prompt with no such instructions. We'll be evaluating the results using the `Conciseness` metric defined out-of-the-box in HoneyHive. 
+
+To get started, initialize your evaluation run.
+
+<CodeGroup>
+```python Python
+# Your HoneyHive project and name are required fields in this function.
+
+eval = hh.evaluations.init(
+    project="Sandbox - Email Writer",
+    name="Does saying concise improve conciseness",
+    description="Tests whether prompt engineering can help make outputs more concise.",
+    dataset_name="Test cases for sales emails",
+    # Let's evaluate these prompts against HoneyHive's Conciseness and Hallucination score metrics
+    metrics=["Conciseness", "Hallucination"]
+)
+```
+</CodeGroup>
+
+### Define test cases and pipeline configuration
+
+Now that you've initialized the evaluation run, define your test cases and prompt-model configurations for this evaluation.
+
+<Tip>HoneyHive allows you to log arbitrary metadata properties like `chunk_size`, `chunk_overlap`, `vectorDB_index_name`, etc. to your configs when running evaluations via the SDK. This can help you compare different vector databases, indexes, chunking sizes, and other variations in your LLM pipeline when running evaluations.</Tip>
+
+<CodeGroup>
+```python Python
+#Defining test cases
+
+dataset = [
+    {
+        "topic": "HoneyHive's developer platform for evaluating and monitoring LLM apps",
+        "tone": "Informative"
+    },
+    {
+        "topic": "Using LLMOps tools to help Acme improve it's Q&A chatbot",
+        "tone": "Friendly"
+    }
+]
+
+
+# Configs help you track different parameters across the versions you're evaluating.
+# Required properties include model, provider, version, hyperparameters, and chat (for GPT 3.5 Turbo or 4) or prompt (for all other models)
+
+configs = [
+    {
+        "model": "gpt-3.5-turbo",
+        "provider": "openai",
+        "version": "simple",
+        "hyperparameters": {
+            "temperature": 0.5,
+            "max_tokens": 200
+        },
+        "chat": [
+            {
+                "role": "system",
+                "content": "You are a helpful assistant who helps SDRs write sales emails."
+            },
+            {
+                "role": "user",
+                "content": "Topic: {{topic}}\n\nTone: {{tone}}."
+            }
+        ],
+        # You can also add arbitrary config fields to include any metadata from your LLM pipeline. Let's include a few examples.
+        "vector_db": "pinecone",
+        "chunk_size": "250 tokens",
+        "chunk_overlap": "10%"
+    },
+    {
+        "model": "gpt-3.5-turbo",
+        "provider": "openai",
+        "version": "concise-instructions",
+        "hyperparameters": {
+            "temperature": 0.5,
+            "max_tokens": 200
+        },
+        "chat": [
+            {
+                "role": "system",
+                "content": "You are a helpful assistant who helps SDRs write sales emails. Write concise and personalized sales emails with a clear value proposition and one call-to-action. Avoid jargon, use power words sparingly, and have a well-defined follow-up strategy in place."
+            },
+            {
+                "role": "user",
+                "content": "Topic: {{topic}}\n\nTone: {{tone}}."
+            }
+        ],
+        # You can also add arbitrary config fields to include any metadata from your LLM pipeline. Let's include a few examples.
+        "vector_db": "pinecone",
+        "chunk_size": "500 tokens",
+        "chunk_overlap": "15%"
+    }
+]
+```
+</CodeGroup>
+
+### Run your LLM pipelines
+
+Now that define your test cases, run your LLM pipelines to start logging evaluation results.
+
+<Note>We've provided a simple OpenAI Chat Completions example below; you can also run complex pipelines that use external tools and frameworks like Llamaindex, Langchain, Pinecone, Chroma, etc.</Note>
+
+<CodeGroup>
+```python Python
+import time
+import copy
+
+runs = []
+
+# Run the pipeline configs against the test cases
+for data in dataset:
+    data_run = []
+
+    for config in configs:
+        copy_chat = copy.deepcopy(config['chat'])
+        for chat in copy_chat:
+            chat['content'] = hh.utils.fill_template(
+                chat['content'],
+                data
+            )
+
+        start = time.time()
+
+        openai_response = openai.ChatCompletion.create(
+            model=config["model"],
+            messages=copy_chat,
+            **config["hyperparameters"]
+        )
+
+        end = time.time()
+
+        latency = (end - start) * 1000
+        data_run.append({
+            "completion": openai_response.choices[0].message.content,
+            "cost": hh.utils.calculate_openai_cost(config["model"], openai_response.usage),
+            "latency": latency,
+            "response_length": openai_response.usage["completion_tokens"]
+        })
+
+    runs.append(data_run)
+```
+</CodeGroup>
+
+### Log evaluation results in HoneyHive
+
+Now that you've run your test cases across our two different configs, let's log your evaluation run in HoneyHive.
+
+<CodeGroup>
+```python Python
+hh.evaluations.log(
+    evaluation=eval,
+    configs=configs,
+    inputs=dataset,
+    run=runs,
+    comments=[
+        "Using only two test cases in this example. We should assemble a larger dataset for the next run."
+    ]
+)
+```
+</CodeGroup>
+
+### Analyze results and share learnings
+
+Congrats! You've successfully run your first evaluation with HoneyHive! You can now view and start analyzing your evaluation results.
+
+From the results, it looks like adding instructions for making the outputs more concise doesn't only make the outputs more concise, but also reduces hallucination. 
+
+![evaluationsummary](/images/evaluationsummary.png)
+
+<Note>While automated, LLM-based evaluation metrics can be helpful indicators, you should always try to review completions manually to validate outputs. With HoneyHive, you can easily invite domain experts to rate model completions and share relevant learnings with your entire team.</Note>
+
+<CardGroup cols={1}>
+  <Card title="Sharing and Collaboration" icon="share" href="/metrics-guardrails">
+    How to collaborate and share learnings with your team.
+  </Card>
+</CardGroup>

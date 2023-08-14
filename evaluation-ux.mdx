@@ -1,0 +1,37 @@
+---
+title: "Running Basic Evaluations"
+description: "Quantitatively evaluate and compare your app variants with human feedback, custom metrics and AI feedback functions."
+---
+
+Evaluations can be run from both within the UX or logged programmatically via the SDK. To get ourselves familiar, let’s try running an evaluation within HoneyHive's webapp.
+
+<Tip>**UX vs Programmatic:** We recommend users to run programmatic evaluations in the case of chains, agents and complex pipelines, that contain multiple steps. Learn more about running programmatic evaluations [here](/programmatic-evals).</Tip>
+
+### Running evaluations in the UX
+
+1. **Accessing the Evaluations Section:** Navigate to the [**Evaluation**](https://app.honeyhive.ai/evaluate) tab in the left sidebar and click `New Evaluation`
+2. **Selecting configs:** Select the version you'd like to evaluate. For this tutorial, let's evaluate two variants using two different models - claude-instant-v1.1 vs text-davinci-003.
+
+![selectprompts](/images/selectprompts.png)
+
+3. **Defining test cases:** Select a pre-existing dataset or upload test cases. Alternatively, you can synthetically generate test cases by providing few-shot examples. In this example, we'll only use a single test case with our input variables (tone and topic) and our expected output (ground truth).
+
+![selecttestcases](/images/selecttestcases.png)
+
+4. **Selecting evaluation metrics:** Next, let's select some metrics to evaluate our prompt templates against. The custom metric that we defined earlier can be found here.
+
+![selectmetrics](/images/selectmetrics.png)
+
+5. **Running the evaluation:** Click `Run Comparison` to run your evaluation and analyze the evaluation report.
+
+![evaluation1](/images/evaluation1.png)
+
+### Running evaluations programmatically
+
+Evaluating simple prompt variants along with external tools like Pinecone can be done via the UX, as described in this tutorial. That said, production LLM pipelines often involve multiple steps, LLM chains and external tools working together to deliver the final output. 
+
+To support complex pipelines, we allow developers to log evaluation runs programmatically via the SDK.
+
+<Card title="Logging Evaluation Runs via the SDK" icon="rectangle-terminal" href="/programmatic-evals">
+How to programmatically run evaluations and log runs in HoneyHive.
+</Card>

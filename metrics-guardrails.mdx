@@ -1,0 +1,39 @@
+---
+title: "Configuring Guardrails"
+description: "Set up guardrails for your unique use-case"
+---
+
+### Overview
+
+Once you have defined your custom metric, you can set up guardrails or passing ranges to monitor and control your model's performance. Guardrails help you detect when your apps go out-of-bounds and fail to meet your predefined criteria. This can be particularly useful when unit testing and defining certain "assertions" your model must satisfy.
+
+### Define your guardrails
+
+Let's consider define guardrails for an email generation prompt. We may want to set up a guardrail to ensure that the number of sentences in the generated email is always less than 10. 
+
+Here's how you can configure the guardrail:
+
+1. **Defining Return Type:** Define the return type for your metric. This helps HoneyHive provide different passing ranges and aggregation functions for different types of metrics. Choose between `Float` and `Boolean`.
+2. **Guardrail Configuration:** Define the passing range for the custom metric. In this case, we want the number of sentences to be less than 10. This means that if the metric returns a value greater than or equal to 10, the completion will not pass the guardrail.
+3. **Production Computation:** Choose whether to enable this metric to be computed in production. In some cases, you may only want to compute this metric offline during model development and testing.
+4. **Backfilling Data:** You may also have the option to backfill all logged data in your project with this metric. This helps ensure consistent evaluation across your entire dataset.
+
+![metricconfig](/images/metricconfig.png)
+
+### What's next
+
+Now that you've defined some metrics and guardrails within HoneyHive, learn more about how to use the metrics to run offline evaluations and monitor performance in production:
+
+<CardGroup>
+  <Card title="Running Evaluations in HoneyHive" icon="flask-vial" href="/metrics-custom">
+    How to run evaluations using the HoneyHive app.
+  </Card>
+  <Card title="Logging Evaluation Runs via the SDK" icon="rectangle-terminal" href="/metrics-guardrails">
+    How to programmatically run evaluations and log runs in HoneyHive.
+  </Card>
+</CardGroup>
+<CardGroup cols={1}>
+  <Card title="Monitoring custom metrics in production" icon="chart-mixed" href="/monitoring">
+    How to use custom metrics and AI feedback functions to analyze production data and improve your app.
+  </Card>
+</CardGroup>

@@ -6,7 +6,7 @@ description: "Getting started with HoneyHive via the Go SDK"
 
 ### Get API Key
 
-After signing up on the app, you can find your API key in the [Settings](https://app.honeyhive.ai/settings/account) page.
+After signing up on the app, you can find your API key in the [Settings](https://app.honeyhive.ai/settings/account) page under Account.
 
 ### Install the Go SDK
 
@@ -14,11 +14,32 @@ After signing up on the app, you can find your API key in the [Settings](https:/
 go get github.com/honeyhive-ai/honeyhive-go-sdk
 ```
 
-### Feeding OpenAI's inference to HoneyHive
+### HoneyHive Proxy Method
 
-The below example shows how you can ingest the OpenAI input/outputs with additional parameters for `task` and `source` into HoneyHive.
+You can leverage our prompt CI/CD capabilities and automatically call the current deployed prompt within a specified project without specifying all the parameters. Using this method, we automatically route your requests to the model-prompt configuration that you choose to deploy within the platform.
 
-This way you can run the OpenAI call on your side and ingest the response later. Please do track latency on your end if you choose this option.
+More documentation can be found on our [saved prompt generations API page](/api-reference/generations/post_saved).
+
+```go
+req := operations.TaskCreateGenerationRequest{
+    Request: shared.TaskGenerationInput{
+        Task: &projectName,
+        Inputs: inputs,
+    },
+}
+
+res, err := honeyhiveClient.Generation.TaskCreateGeneration(ctx, req)
+
+if res.TaskGenerationOutput != nil {
+    generationID := res.TaskGenerationOutput.GenerationID
+}
+```
+
+### Ingest Model Completions
+
+Alternatively, we provide you the option to run model completion requests within your own servers and ingest the response later without using HoneyHive's proxy server via our [logging api](/api-reference/generations/post_log). We take in all the typical model provider parameters along with `task`, `source`, `latency` as HoneyHive specific parameters. We recommend tracking request latency on your end if you choose to deploy using this method.
+
+<Note>Using this method, you will not be able to use our Prompt CI/CD capabilities within the platform and will need to manually update your prompt, model provider and hyperparamater settings when deploying new variants to production.</Note>
 
 ```go
 package main
@@ -76,30 +97,11 @@ func main() {
 }
 ```
 
-### HoneyHive Prompt CI/CD alternative
+### Log User Feedback and Metadata
 
-Alternatively, you can leverage our prompt CI/CD capabilities and just call generation for a project without specifying all the parameters.
+Using the `generation_id` that is returned, you can then send arbitrary feedback to HoneyHive using the `feedback` endpoint. 
 
-More documentation can be found on our [saved prompt generations API page](/api-reference/generations/post_saved).
-
-```go
-req := operations.TaskCreateGenerationRequest{
-    Request: shared.TaskGenerationInput{
-        Task: &projectName,
-        Inputs: inputs,
-    },
-}
-
-res, err := honeyhiveClient.Generation.TaskCreateGeneration(ctx, req)
-
-if res.TaskGenerationOutput != nil {
-    generationID := res.TaskGenerationOutput.GenerationID
-}
-```
-
-### Provide feedback
-
-Using the generation id that is returned, you can then send arbitrary feedback to HoneyHive using the `feedback` method.
+<Tip>We recommend providing a unique user identifier along with each request as production best-practice when deploying models to production.</Tip>
 
 ```go
 taskName := "PROJECT_NAME"
