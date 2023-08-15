@@ -1,5 +1,5 @@
 ---
-title: "Monitor performance"
+title: "Overview"
 description: "Connect your application to HoneyHive and start monitoring your application performance in production."
 ---
 
@@ -48,18 +48,15 @@ When developing and deploying an LLM application, it is crucial to recognize tha
 
 Monitoring an LLM in production serves as a proactive measure to identify and address potential issues before they escalate into critical problems. By continuously tracking the LLM's performance, you gain valuable insights into its behavior, patterns, and user interactions. These insights can help us optimize the application's performance, ensure consistent and accurate responses, and maintain user satisfaction.
 
-### Visualizing performance metrics
+### Getting Started
 
-1. Observe your prompt's performance in real-time in [HoneyHive](https://app.honeyhive.ai/dashboard).
-2. Define the metric you'd like to visualize. Any custom metrics and AI feedback functions defined in the Metrics interface can be found here. 
-3. Define the function you'd like to aggregate this metric over. Some common functions include `Average`, `Sum`, `Percentage True` and `99th Percentile`. 
-2. Filter your data and compare data slices using `where` and `group by` filters. Any user properties or custom metadata ingested via the `feedback` endpoint can be found here.
-3. Use the [Generations](https://app.honeyhive.ai/datasets/generations) page or API endpoint to view the generated text, user feedback and any custom metadata.
+To start analyzing your production data in HoneyHive, refer to the following resources:
 
-![monitoring1](/images/monitoring1.png)
-
-### Analyze user inputs and model completions with embeddings
-
-Since we automatically embed user inputs and model completions, you can visualize the distribution of your production data and behavior amongst data clusters with our embeddings visualization tool.
-
-<Tip>The chart is by default color-coded by different prompt variants. You can use `group by` filters to group the chart by various features associated with each generation within your project (such as any user metadata, custom metrics or user feedback fields.)</Tip>
+<CardGroup>
+  <Card title="Segmentation Charts" icon="chart-mixed" href="/monitoring-Segmentation">
+    How to quickly slice and dice your production data to discover trends and anomalies.
+  </Card>
+  <Card title="Embeddings Maps" icon="chart-scatter-bubble" href="/monitoring-embeddings">
+    How to use the T-SNE embeddings map to analyze clusters in your production data.
+  </Card>
+</CardGroup>

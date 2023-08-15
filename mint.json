@@ -41,15 +41,24 @@
   "navigation": [
     {
       "group": "Overview",
-      "pages": ["introduction"]
-    },
-    {
-      "group": "Quickstart Tutorials",
-      "pages": ["python-quickstart", "programmatic-evals"]
+      "pages": ["introduction", "python-quickstart"]
     },
     {
       "group": "Guides",
-      "pages": ["projects", "prompts", "metrics", "evaluation", "monitoring", "finetuning"]
+      "pages": ["projects", "prompts",
+      {
+        "group": "Metrics and Guardrails",
+        "pages": ["metrics-overview", "metrics-custom", "metrics-guardrails"]
+      }, 
+      {
+        "group": "Evaluation",
+        "pages": ["evaluation-overview", "evaluation-ux", "programmatic-evals", "evaluation-collaboration"]
+      },
+      {
+        "group": "Monitoring",
+        "pages": ["monitoring", "monitoring-segmentation", "monitoring-embeddings"]
+      },
+      "finetuning"]
     },
     {
       "group": "Learn more",
