@@ -46,8 +46,8 @@
     {
       "group": "Quickstart",
       "pages": [
-        "quickstart/completions-quickstart",
-        "quickstart/evaluations-quickstart"
+        "quickstart/completions",
+        "quickstart/evaluations"
       ]
     },
     {
