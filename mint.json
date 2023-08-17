@@ -41,7 +41,14 @@
   "navigation": [
     {
       "group": "Overview",
-      "pages": ["introduction", "python-quickstart"]
+      "pages": ["introduction"]
+    },
+    {
+      "group": "Quickstart",
+      "pages": [
+        "quickstart/completions-quickstart",
+        "quickstart/evaluations-quickstart"
+      ]
     },
     {
       "group": "Guides",

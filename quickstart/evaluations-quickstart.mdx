@@ -1,0 +1,229 @@
+---
+title: "Logging Pipeline Evaluations"
+description: "Start logging your pipeline comparisons to HoneyHive for benchmarking and sharing"
+---
+
+
+### Get API key
+
+After signing up on the app, you can find your API key in the [Settings](https://app.honeyhive.ai/settings/account) page under Account.
+
+### Install the SDK
+
+We currently support a native Python SDK. For other languages, we encourage using HTTP request libraries to send requests.
+
+<CodeGroup>
+```bash Python
+pip install honeyhive
+```
+</CodeGroup>
+
+### Authenticate Tools
+Authenticate `honeyhive` and all the packages required to execute your pipeline. Make sure to import `time` for tracking latency.
+
+For this quickstart tutorial, we will do a simple evaluation comparing 2 different `gpt-3.5-turbo` variants.
+
+<CodeGroup>
+```python OpenAI
+import honeyhive
+import openai
+import time
+
+# import any other vector databases, APIs and other model providers you might need
+honeyhive.api_key = "HONEYHIVE_API_KEY"
+openai.api_key = "OPENAI_API_KEY"
+```
+</CodeGroup>
+
+### Create Project
+Create a new project in HoneyHive if you don't have one already setup.
+
+<CodeGroup>
+```python Python
+new_project = honeyhive.projects.create(
+    name="Email Writer App",
+    type="chat"
+)
+
+print(new_project.name)
+```
+</CodeGroup>
+
+<Card title="Projects" icon="rectangle-terminal" href="/projects">
+How to create a project in HoneyHive via the UI
+</Card>
+
+### Initialize Evaluation
+
+Configure your evaluation by pointing it to the project you have in HoneyHive. `HoneyHiveEvaluation` accepts the following parameters:
+
+1. `project`: a necessary field which decides which project to log the evaluation to
+2. `name`: a necessary field which sets the name for the evaluation
+3. `description`: an optional field to describe what kind of evaluation you are attempting
+4. `dataset_name`: an optional field to set a name for the dataset you ran the evaluation over
+5. `metrics`: an optional field to specify which HoneyHive configured metrics you want to run
+
+This tutorial's evaluation is set to try different `max_tokens` settings and compute an AI feedback function `Conciseness` and a custom metric `Number of Characters`.
+
+<CodeGroup>
+```python OpenAI
+honeyhive_eval = HoneyHiveEvaluation(
+    project="Email Writer App",
+    name="Max Tokens Comparison",
+    description="Finding best max tokens for OpenAI chat models",
+    dataset_name="Test",
+    metrics=["Conciseness", "Number of Characters"] 
+)
+```
+</CodeGroup>
+
+<Card title="Metrics" icon="rectangle-terminal" href="/metrics-custom">
+How to create a metric in HoneyHive via the UI
+</Card>
+
+<br/>
+
+### Prepare A Dataset
+
+Now that the evaluation is configured, we can set up our offline evaluation. Begin by preparing a golden dataset to evaluate over.
+
+<Note>Try to pick data as close to your production distribution as possible</Note>
+
+<CodeGroup>
+```python Python
+dataset = [
+    {"topic": "Test", "tone": "test"},
+    {"topic": "AI", "tone": "neutral"}
+]
+```
+</CodeGroup>
+
+### Prepare Configurations
+
+For evaluation configurations, we can optionally set any arbitrary field. However, there are some reserved fields for the platform:
+
+1. `name`, `version`: these are the reserved fields to render the display name for this configuration
+2. `model`, `provider`, `hyperparameters`: these are reserved to render the correct model in the UI to allow others to fork their variants
+3. `prompt_template`, `chat`: similar to the previous fields, these are needed as well for consistent forking logic
+
+<CodeGroup>
+```python Python
+config =  {
+      "name": "max_tokens_100",
+      "model": "gpt-3.5-turbo",
+      "provider": "openai",
+      "hyperparameters": {"temperature": 0.5, "max_tokens": 100},
+      "chat": [
+          {
+              "role": "system",
+              "content": "You are a helpful assistant who helps people write emails.",
+          },
+          {"role": "user", "content": "Topic: {{topic}}\n\nTone: {{tone}}."},
+      ]
+}
+```
+</CodeGroup>
+
+### Run and Log Evaluation
+
+We log our evaluation runs via the `log_run` function on the `HoneyHiveEvaluation` object.
+
+`log_run` accepts 4 parameters:
+
+1. `config`: a necessary field specifying the configuration dictionary for that run
+2. `input`: a necessary field specifying the datapoint dictionary for that run
+3. `completion`: a necessary field specifying the final string response at the end of the pipeline
+4. `metrics`: an optional field specifying any recorded metrics of interest for the run (ex. cost, latency, etc)
+
+<CodeGroup>
+```python Evaluation Run
+for data in dataset:
+    data_run = []
+    messages = honeyhive.utils.fill_chat_template(config["chat"], data)
+
+    start = time.time()
+    openai_response = openai.ChatCompletion.create(
+        model=config["model"],
+        messages=messages,
+        **config["hyperparameters"]
+    )
+    end = time.time()
+
+    # log a particular run via log_run
+    honeyhive_eval.log_run(
+        config=config, 
+        input=data,
+        completion=openai_response.choices[0].message.content,
+        metrics={
+            "cost": honeyhive.utils.calculate_openai_cost(
+                config["model"], openai_response.usage
+            ),
+            "latency": (end - start) * 1000,
+            "response_length": openai_response.usage["completion_tokens"]
+        }
+    )
+```
+</CodeGroup>
+
+At the end of this loop, we will have logged our first set of runs for 1 configuration.
+
+
+### Change Configuration & Re-Run Pipeline
+
+Now we can tweak the config and re-run our pipeline while logging the new runs via `log_run`.
+<CodeGroup>
+```python Python
+config =  {
+      # same configuration as above here
+      "hyperparameters": {"temperature": 0.5, "max_tokens": 400},
+}
+
+# identical Evaluation Run code as above
+for data in dataset:
+...
+```
+</CodeGroup>
+
+
+### Log Comments & Publish
+
+Finally, we can log any comments from what we have seen in the logs or while iterating on the pipeline and publish the evaluation.
+
+<CodeGroup>
+```python Python
+honeyhive_eval.log_comment("Results are decent")
+honeyhive_eval.finish()
+```
+</CodeGroup>
+
+### Share & Collaborate
+
+After running the evaluation, you will receive a url taking you to the evaluation interface in the HoneyHive platform.
+
+From there, you can share it with other members of your team via email or by directly sharing the link.
+
+![evaluationshare](/images/evaluationshare.png)
+
+<Card title="Sharing Evaluations" icon="rectangle-terminal" href="/evaluation-collboration">
+How to create collaborate over an evaluation in HoneyHive
+</Card>
+
+
+From discussions, we can garner more insights and then run more evaluations iteratively till we are ready to go to production!
+
+### Up Next 
+
+<CardGroup>
+  <Card title="Log Requests & Feedback" icon="rectangle-terminal" href="/quickstart/completions-quickstart">
+    How to quickly set up logging with HoneyHive.
+  </Card>
+  <Card title="Create Evaluation Metrics" icon="rectangle-terminal" href="/metrics-overview">
+    How to set up metrics and run evaluations in HoneyHive.
+  </Card>
+  <Card title="API Reference Guide" icon="heading" href="/api-reference/authentication">
+    Our reference guide on how to integrate the HoneyHive SDK and APIs with your application.
+  </Card>
+  <Card title="Prompt Engineering and Fine-Tuning Guides" icon="heading" href="/resources">
+    Guides for prompt engineering and fine-tuning your models.
+  </Card>
+</CardGroup>
