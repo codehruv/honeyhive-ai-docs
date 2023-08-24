@@ -1,6 +1,6 @@
 ---
-title: "Tracing LangChain Chains"
-description: "Get started by tracing your LangChain chains with HoneyHive."
+title: "Tracing LangChain Pipelines"
+description: "Get started by tracing your LangChain chains and agents with HoneyHive."
 ---
 
 
@@ -18,20 +18,20 @@ pip install honeyhive
 ```
 </CodeGroup>
 
-### Trace your LangChain chains
+### Trace your LangChain chains and agents
 
 If you haven't already done so, then the first thing you will need to do is <a href="/projects#create-a-new-project">create a HoneyHive project</a>.
 
-Once you have created a HoneyHive project, you can now instrument tracing in your LangChain chain as so: 
+Once you have created a HoneyHive project, you can now start tracing your LangChain chain or agent.
+
+1. **Initializing HoneyHive tracer:** First, let's start by initializing the HoneyHive tracer. See below.
 
 <CodeGroup>
-```python
-from langchain import LLMMathChain, OpenAI, SerpAPIWrapper, Wikipedia
-from langchain.agents import Tool, initialize_agent
-from langchain.tools import StructuredTool
-from langchain.agents.react.base import DocstoreExplorer
-from langchain.callbacks import StdOutCallbackHandler
+```bash Python
+import os
 from honeyhive.sdk.langchain_tracer import HoneyHiveLangChainTracer
+
+os.environ["HONEYHIVE_API_KEY"] = "YOUR_HONEYHIVE_API_KEY"
 
 tracer = HoneyHiveLangChainTracer(
     project="Sandbox - Email Writer",  # necessary field: specify which project within HoneyHive
@@ -39,10 +39,21 @@ tracer = HoneyHiveLangChainTracer(
     source="testing",  # optional field: source (to separate production & testing in monitoring)
     user_properties={  # optional field: specify user properties for whom this was ran
         "user_id": "1234",
-        "user_country": "US",
-    },
-   api_key="YOUR_HONEYHIVE_API_KEY",
+        "user_country": "US"
+    }
 )
+```
+</CodeGroup>
+
+2. **Define Langchain chain or agent:** Next, let's initialize the OpenAI LLM and define tools for our Langchain agent. See below.
+
+<CodeGroup>
+```bash Python
+from langchain import LLMMathChain, OpenAI, SerpAPIWrapper, Wikipedia
+from langchain.agents import Tool, initialize_agent
+from langchain.tools import StructuredTool
+from langchain.agents.react.base import DocstoreExplorer
+from langchain.callbacks import StdOutCallbackHandler
 
 # Initialise the OpenAI LLM and required callables for our tools
 llm = OpenAI(
@@ -70,17 +81,43 @@ tools = [
         name="Calculator",
         func=llm_math_chain.run,
         description="Useful for when you need to answer questions about math.",
-    ),
+    )
 ]
+```
+</CodeGroup>
 
+3. **Running LangChain agent with HoneyHive callback handler:** Lastly, let's run the Langchain agent. Here, you will need to define `honeyhive_tracer` as the callback handler.
+
+<CodeGroup>
+```bash Python
 # Initialise the agent
 agent = initialize_agent(tools=tools, llm=llm)
 agent(
     "Which city is closest to London as the crow flies, Berlin or Munich?",
-    callbacks=[tracer],
+    callbacks=[honeyhive_tracer]
 )
 ```
 </CodeGroup>
 
 You can now view this trace from within the HoneyHive platform by clicking on **Datasets** in the sidebar and then **Traces**.
 ![Trace](/images/trace_screenshot2.png)
+
+### Log user feedback for this session
+
+Now that you’ve logged a request in HoneyHive, let’s try logging user feedback and ground truth labels associated with this session.
+
+Using the `session_id` that is returned, you can send arbitrary feedback to HoneyHive using the feedback endpoint.
+
+<CodeGroup>
+```bash Python
+import honeyhive
+
+honeyhive.sessions.feedback(
+    session_id = honeyhive_tracer.session_id,
+    feedback = {
+       "accepted": True,
+       "edited": False
+    }
+)
+```
+</CodeGroup>

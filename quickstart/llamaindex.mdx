@@ -1,5 +1,5 @@
 ---
-title: "Tracing LlamaIndex Queries"
+title: "Tracing LlamaIndex Pipelines"
 description: "Get started by tracing your LlamaIndex queries with HoneyHive."
 ---
 
@@ -22,17 +22,17 @@ pip install honeyhive
 
 If you haven't already done so, then the first thing you will need to do is <a href="/projects#create-a-new-project">create a HoneyHive project</a>.
 
-Once you have created a HoneyHive project, you can now instrument tracing in your LlamaIndex query as so: 
+Once you have created a HoneyHive project, you can now start tracing your LlamaIndex pipeline.
+
+1. **Initializing HoneyHive tracer:** First, let's start by initializing the HoneyHive tracer. See below.
 
 <CodeGroup>
 ```python
-from llama_index import VectorStoreIndex, SimpleWebPageReader, ServiceContext
-from llama_index.callbacks import CallbackManager, LlamaDebugHandler
 import honeyhive
+import os
 from honeyhive.sdk.llamaindex_tracer import HoneyHiveLlamaIndexTracer
-import openai
 
-openai.api_key = "YOUR_OPENAI_API_KEY"
+os.environ["HONEYHIVE_API_KEY"] = "YOUR_HONEYHIVE_API_KEY"
 
 tracer = HoneyHiveLlamaIndexTracer(
     project="Sandbox - Email Writer",  # necessary field: specify which project within HoneyHive
@@ -40,20 +40,34 @@ tracer = HoneyHiveLlamaIndexTracer(
     source="testing",  # optional field: source (to separate production & testing in monitoring)
     user_properties={  # optional field: specify user properties for whom this was ran
         "user_id": "1234",
-        "user_country": "US",
-    },
-    api_key="YOUR_HONEYHIVE_API_KEY",
+        "user_country": "US"
+    }
 )
+```
+</CodeGroup>
+
+2. **Defining LlamaIndex pipeline:** Next, let's define our LlamaIndex pipeline and initialize the service context with the HoneyHive tracer. See below.
+
+<CodeGroup>
+```python
+from llama_index import VectorStoreIndex, SimpleWebPageReader, ServiceContext
+from llama_index.callbacks import CallbackManager, LlamaDebugHandler
+import openai
+
+openai.api_key = "YOUR_OPENAI_API_KEY"
+
+# Initialize the service context with the HoneyHive tracer
 callback_manager = CallbackManager([tracer])
 service_context = ServiceContext.from_defaults(callback_manager=callback_manager)
 
-#
 documents = SimpleWebPageReader(html_to_text=True).load_data(
     ["http://paulgraham.com/worked.html"]
 )
+
+# Pass the service_context to the index that you will query
 index = VectorStoreIndex.from_documents(
     documents, service_context=service_context
-)  # pass the service_context to the index
+)
 
 query_engine = index.as_query_engine()
 response = query_engine.query("What did the author do growing up?")
@@ -62,3 +76,21 @@ response = query_engine.query("What did the author do growing up?")
 
 You can now view this trace from within the HoneyHive platform by clicking on **Datasets** in the sidebar and then **Traces**.
 ![Trace](/images/trace_screenshot.png)
+
+### Log user feedback for this session
+
+Now that you’ve logged a request in HoneyHive, let’s try logging user feedback and ground truth labels associated with this session.
+
+Using the `session_id` that is returned, you can send arbitrary feedback to HoneyHive using the feedback endpoint.
+
+<CodeGroup>
+```bash Python
+honeyhive.sessions.feedback(
+    session_id = honeyhive_tracer.session_id,
+    feedback = {
+       "accepted": True,
+       "edited": False
+    }
+)
+```
+</CodeGroup>
