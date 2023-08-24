@@ -46,6 +46,8 @@
     {
       "group": "Quickstart",
       "pages": [
+	"quickstart/llamaindex",
+	"quickstart/langchain",
         "quickstart/completions",
         "quickstart/evaluations"
       ]

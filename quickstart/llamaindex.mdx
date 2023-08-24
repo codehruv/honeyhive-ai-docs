@@ -1,0 +1,64 @@
+---
+title: "Tracing LlamaIndex Queries"
+description: "Get started by tracing your LlamaIndex queries with HoneyHive."
+---
+
+
+### Get API key
+
+After signing up on the app, you can find your API key in the [Settings](https://app.honeyhive.ai/settings/account) page under Account.
+
+### Install the SDK
+
+We currently support a native Python SDK. For other languages, we encourage using HTTP request libraries to send requests.
+
+<CodeGroup>
+```bash Python
+pip install honeyhive
+```
+</CodeGroup>
+
+### Trace your LlamaIndex queries
+
+If you haven't already done so, then the first thing you will need to do is <a href="/projects#create-a-new-project">create a HoneyHive project</a>.
+
+Once you have created a HoneyHive project, you can now instrument tracing in your LlamaIndex query as so: 
+
+<CodeGroup>
+```python
+from llama_index import VectorStoreIndex, SimpleWebPageReader, ServiceContext
+from llama_index.callbacks import CallbackManager, LlamaDebugHandler
+import honeyhive
+from honeyhive.sdk.llamaindex_tracer import HoneyHiveLlamaIndexTracer
+import openai
+
+openai.api_key = "YOUR_OPENAI_API_KEY"
+
+tracer = HoneyHiveLlamaIndexTracer(
+    project="Sandbox - Email Writer",  # necessary field: specify which project within HoneyHive
+    name="Paul Graham Q&A",  # optional field: name of the chain/agent you are running
+    source="testing",  # optional field: source (to separate production & testing in monitoring)
+    user_properties={  # optional field: specify user properties for whom this was ran
+        "user_id": "1234",
+        "user_country": "US",
+    },
+    api_key="YOUR_HONEYHIVE_API_KEY",
+)
+callback_manager = CallbackManager([tracer])
+service_context = ServiceContext.from_defaults(callback_manager=callback_manager)
+
+#
+documents = SimpleWebPageReader(html_to_text=True).load_data(
+    ["http://paulgraham.com/worked.html"]
+)
+index = VectorStoreIndex.from_documents(
+    documents, service_context=service_context
+)  # pass the service_context to the index
+
+query_engine = index.as_query_engine()
+response = query_engine.query("What did the author do growing up?")
+```
+</CodeGroup>
+
+You can now view this trace from within the HoneyHive platform by clicking on **Datasets** in the sidebar and then **Traces**.
+![Trace](/images/trace_screenshot.png)
