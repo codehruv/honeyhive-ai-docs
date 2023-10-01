@@ -1,0 +1,176 @@
+---
+title: "Tracing Pipelines via API"
+description: "Get started by tracing your custom pipeline with HoneyHive."
+---
+
+### Quick introduction
+
+Tracing a session with HoneyHive is as simple as initializing a session, logging events for that session, and then ending the session.
+
+We provide the ability to set custom configuration, event metadata, user metadata, inputs, outputs, and user feedback for each event.
+
+### Setup HoneyHive and get your API key
+
+If you haven't already done so, then the first thing you will need to do is <a href="/projects#create-a-new-project">create a HoneyHive project</a>.
+
+After creating the project, you can find your API key in the [Settings](https://app.honeyhive.ai/settings/account) page under Account.
+
+Once you have created a HoneyHive project and got your API keys, you can now start tracing your custom pipeline.
+
+### Authenticate the API
+
+To authenticate the API, you need to pass it as Bearer token in the Authorization header.
+
+```bash
+'Authorization': 'Bearer <YOUR_API_KEY>'
+```
+
+### Start a session
+
+First, let's start by initializing the session.
+
+To initialize the session, we need to provide 2 necessary parameters:
+1. `project` - the name of the HoneyHive project you want to log to
+2. `session_name` - the name of the pipeline you are tracing
+
+We also provide 3 optional parameters:
+1. `session_id` - the ID of the session you are tracing (if not provided, a random ID will be generated)
+2. `source` - the source of the pipeline (e.g. "production" or "testing")
+3. `user_properties` - a dictionary of user properties for whom this pipeline was ran
+
+<CodeGroup>
+```cURL
+curl \
+    --request POST \
+    --url 'https://api.honeyhive.ai/session/start' \
+    --header 'Authorization: Bearer YOUR_API_KEY' \
+    --header 'Content-Type: application/json' \
+    --data '{
+        "project": "YOUR_PROJECT_NAME",
+        "session_name": "YOUR_PIPELINE_NAME",
+        "session_id": "SESSION_GUID",
+        "source": "production",
+        "user_properties": {
+            "user_id": "USER_ID",
+            "user_org": "USER_ORG"
+        }
+    }'
+```
+</CodeGroup>
+
+### Log an event to the session
+
+Next, let's log an event to the session.
+
+There are 3 types of events you can log to a session:
+- `model` - a model completion call
+- `tool` - a vector database query, API call, or other arbitrary event
+- `chain` - a chain of events
+
+At the minimum, we would like to send latency, metadata, inputs and outputs for each event type.
+
+To log an event, we need to provide 3 necessary parameters:
+- `session_id` - the ID of the session you are tracing
+- `event_type` - the type of event you are tracing (e.g. "model", "tool", or "chain")
+- `event_name` - the name of the event you are tracing
+
+On top of these, we also provide 11 optional parameters:
+- `source` - the source of the event (e.g. "production" or "testing")
+- `event_id` - the ID of the event you are tracing (if not provided, a random ID will be generated)
+- `parent_id` - the ID of the parent chain event (if not provided, the event will be logged as a child of the overall session)
+- `config` - a dictionary of configuration parameters for the event (e.g. model name, vector database index name, etc.)
+- `description` - a description of what the event is doing
+- `metadata` - a dictionary of metadata for the event (e.g. token counts, etc.)
+- `inputs` - a dictionary of inputs for the event (e.g. query parameters, etc.)
+- `output` - a dictionary of outputs for the event (e.g. model response, etc.)
+- `metrics` - a dictionary of metrics for the event (e.g. similarity score, etc.)
+- `duration` - the duration of the event in milliseconds
+- `error` - a string describing the error that occurred (if any)
+
+<CodeGroup>
+```cURL
+curl \
+    --request POST \
+    --url 'https://api.honeyhive.ai/session/:session_id:/event' \
+    --header 'Authorization: Bearer YOUR_API_KEY' \
+    --header 'Content-Type: application/json' \
+    --data '{
+        "source": "docs",
+        "event_type": "model",
+        "event_name": "EVENT_NAME",
+        "event_id": "EVENT_GUID",
+        "parent_id": "PARENT_EVENT_GUID",
+        "config": {
+            "name": "YOUR_CONFIG_NAME",
+            "model": "YOUR_MODEL_NAME",
+        },
+        "description": "Get response for the email",
+        "metadata": {
+            # helpful metadata like token counts, etc.
+        },
+        "inputs": {
+            # input provided to the pipeline step
+        },
+        "output": {
+            # output provided by the pipeline step
+        },
+        "metrics": {
+            # metrics computed on the output
+        },
+        "duration": 1000,
+        "error": "ERROR_MESSAGE_HERE",
+    }'
+```
+</CodeGroup>
+
+### Log user feedback
+
+Now that you’ve logged a trace in HoneyHive, let’s try logging user feedback and ground truth labels associated with this session.
+
+Using the `session_id`, you can send arbitrary feedback to HoneyHive using the feedback endpoint.
+
+Note: the `ground_truth` label is optional and can be used to provide the ground truth label for the session or a particular event.
+
+<CodeGroup>
+```curl
+curl \
+    --request POST \
+    --url 'https://api.honeyhive.ai/session/:session_id:/feedback' \
+    --header 'Authorization: Bearer YOUR_API_KEY' \
+    --header 'Content-Type: application/json' \
+    --data '{
+        "ground_truth": "GROUND_TRUTH_LABEL",
+        "feedback": {
+            # arbitrary feedback with type number, string, or boolean
+        }
+    }'
+```
+</CodeGroup>
+
+If `event_id` is not specified, feedback is set for the entire session. 
+
+In case you need to provide feedback for a specific event, you can do so by specifying the `event_id` as follows:
+
+<CodeGroup>
+```curl
+curl \
+    --request POST \
+    --url 'https://api.honeyhive.ai/session/:session_id:/feedback' \
+    --header 'Authorization: Bearer YOUR_API_KEY' \
+    --header 'Content-Type: application/json' \
+    --data '{
+        "event_id": "EVENT_GUID",
+        "ground_truth": "GROUND_TRUTH_LABEL",
+        "feedback": {
+            # arbitrary feedback with type number, string, or boolean
+        }
+    }'
+```
+</CodeGroup>
+
+### Finish and view trace
+
+You can use the `session_id` to get a link to a session in HoneyHive, where you can view the traces and user feedback.
+
+You can now view this trace from within the HoneyHive platform by clicking on **Datasets** in the sidebar and then **Traces**.
+![Trace](/images/trace_screenshot.png)

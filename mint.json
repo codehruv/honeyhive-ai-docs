@@ -47,9 +47,11 @@
       "group": "Quickstart",
       "pages": [
         "quickstart/completions",
-        "quickstart/langchain",
+        "quickstart/evaluations",
+        "quickstart/session_instrument",
+        "quickstart/custom_python",
         "quickstart/llamaindex",
-        "quickstart/evaluations"
+        "quickstart/langchain"
       ]
     },
     {

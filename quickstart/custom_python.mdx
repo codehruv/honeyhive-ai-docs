@@ -1,0 +1,165 @@
+---
+title: "Tracing DIY Pipelines (Python)"
+description: "Get started by tracing your custom python pipeline with HoneyHive."
+---
+
+### Introduction
+
+Our Python SDK allows you to trace your custom pipelines with per-event visibility. This allows you to monitor your pipeline's performance and log user feedback and ground truth labels associated with each step.
+
+In case you are using a different language, please refer to [our quickstart guide](quickstart/session_instrument) to instrumenting via API.
+
+More details on everything we track can be found in the [tracing guide](). 
+
+### Setup HoneyHive and get your API key
+
+If you haven't already done so, then the first thing you will need to do is <a href="/projects#create-a-new-project">create a HoneyHive project</a>.
+
+After creating the project, you can find your API key in the [Settings](https://app.honeyhive.ai/settings/account) page under Account.
+
+Once you have created a HoneyHive project and got your API keys, you can now start tracing your custom pipeline.
+
+### Install the SDK
+
+<CodeGroup>
+```bash Python
+pip install -U honeyhive
+```
+</CodeGroup>
+
+### Initializing HoneyHive tracer
+
+First, let's start by initializing the HoneyHive tracer.
+
+To initialize the tracer, we need to provide 2 necessary parameters:
+1. `project` - the name of the HoneyHive project you want to log to
+2. `name` - the name of the pipeline you are tracing
+
+We also provide 2 optional parameters:
+1. `source` - the source of the pipeline (e.g. "production" or "testing")
+2. `user_properties` - a dictionary of user properties for whom this pipeline was ran
+
+<CodeGroup>
+```python
+import os
+from honeyhive.sdk.tracer import HoneyHiveTracer
+
+os.environ["HONEYHIVE_API_KEY"] = "YOUR_HONEYHIVE_API_KEY"
+
+tracer = HoneyHiveTracer(
+    project="Sandbox - Email Writer",  # necessary field: specify which project within HoneyHive
+    name="Paul Graham Q&A",            # optional field: name of the chain/agent you are running
+    source="testing",                  # optional field: source (to separate production & testing in monitoring)
+    user_properties={                  # optional field: specify user properties for whom this was ran
+        "user_id": "1234",
+        "user_country": "US"
+    }
+)
+```
+</CodeGroup>
+
+### Tracing a model completion call
+
+Next, let's trace a model completion call.
+
+We place the code we want to trace within a `with` block. This automatically calculates latency, metadata, inputs and outputs of the call.
+
+To trace the model completion call via `tracer.model`, we need to provide 2 necessary parameters:
+- `event_name` - the name of the event you are tracing
+- `input` - the input to the event
+
+On top of these, we also provide 2 optional parameters:
+- `config` - a dictionary of configuration parameters for the model
+- `description` - a description of what the model is doing
+
+<CodeGroup>
+```python
+with tracer.model(
+    event_name="Email Writer",
+    description="Generate an email response based on context provided",
+    config={
+        "model": "gpt-3.5-turbo",
+        "chat_template": YOUR_TEMPLATE_HERE
+    }
+) as model_call:
+    openai_response = openai.ChatCompletion.create(...)
+```
+</CodeGroup>
+
+You can access the `event_id` for this model completion call via `model_call.event_id`.
+
+### Tracing other arbitrary events
+
+Tracing vector database queries, API calls, and other arbitrary events is very similar to tracing model completion calls.
+
+To trace the vector database query via `tracer.tool`, we need to provide 1 necessary parameter:
+- `event_name` - the name of the event you are tracing
+
+On top of these, we also provide 2 optional parameters:
+- `config` - a dictionary of configuration parameters for the tool
+- `description` - a description of what the tool is doing
+
+<CodeGroup>
+```python
+with tracer.tool(
+    event_name="Context Provider",
+    description="Get context for the email response",
+    config={
+        "index": "quickstart",
+        "provider": "pinecone",
+        "chunk_size": 512
+    }
+) as pinecone_call:
+    pinecone_response = pinecone.query(...)
+```
+</CodeGroup>
+
+### Logging user feedback
+
+Now that you’ve logged a trace in HoneyHive, let’s try logging user feedback and ground truth labels associated with this session.
+
+Using the `session_id` that is specified on the tracer, you can send arbitrary feedback to HoneyHive using the feedback endpoint.
+
+<CodeGroup>
+```bash Python
+honeyhive.sessions.feedback(
+    session_id = tracer.session_id,
+    feedback = {
+       "accepted": True,
+       "edited": False
+    }
+)
+```
+</CodeGroup>
+
+If `event_id` is not specified, feedback is set for the entire session. 
+
+In case you need to provide feedback for a specific event, you can do so by specifying the `event_id` as follows:
+
+<CodeGroup>
+```bash Python
+honeyhive.sessions.feedback(
+    session_id = tracer.session_id,
+    event_id = model_call.event_id,
+    ground_truth = INSERT_GROUND_TRUTH_LABEL,
+    feedback = {
+       "accepted": False
+    }
+)
+```
+</CodeGroup>
+
+### Finish and view trace
+
+Finally, we need to finish tracing the pipeline. This will send the trace to HoneyHive.
+
+<CodeGroup>
+```bash Python
+tracer.end_session()
+```
+</CodeGroup>
+
+The response will provide a link to the session in HoneyHive, where you can view the traces and user feedback.
+
+You can now view this trace from within the HoneyHive platform by clicking on **Datasets** in the sidebar and then **Traces**.
+![Trace](/images/trace_screenshot.png)

@@ -128,12 +128,14 @@ config =  {
 
 We log our evaluation runs via the `log_run` function on the `HoneyHiveEvaluation` object.
 
-`log_run` accepts 4 parameters:
+`log_run` accepts 3 necessary parameters:
 
 1. `config`: a necessary field specifying the configuration dictionary for that run
 2. `input`: a necessary field specifying the datapoint dictionary for that run
 3. `completion`: a necessary field specifying the final string response at the end of the pipeline
-4. `metrics`: an optional field specifying any recorded metrics of interest for the run (ex. cost, latency, etc)
+
+`log_run` also accepts 1 optional parameter:
+1. `metrics`: an optional field specifying any recorded metrics of interest for the run (ex. cost, latency, etc)
 
 <CodeGroup>
 ```python Evaluation Run
